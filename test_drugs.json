@@ -1,0 +1,92 @@
+[
+  {
+    "rxnorm_id": "1000001",
+    "drug_name": "Amlodipine 5 MG / Hydrochlorothiazide 25 MG / Olmesartan medoxomil 40 MG Oral Tablet",
+    "plans": [
+      {
+        "plan_id_type": "HIOS-PLAN-ID",
+        "plan_id": "40308VA0240007",
+        "drug_tier": "GENERIC",
+        "prior_authorization": false,
+        "step_therapy": false,
+        "quantity_limit": false,
+        "years": [
+          2018,
+          2019
+        ]
+      },
+      {
+        "plan_id_type": "HIOS-PLAN-ID",
+        "plan_id": "40308VA0240008",
+        "drug_tier": "GENERIC",
+        "prior_authorization": false,
+        "step_therapy": false,
+        "quantity_limit": false,
+        "years": [
+          2018,
+          2019
+        ]
+      }
+    ]
+  },
+  {
+    "rxnorm_id": "1000048",
+    "drug_name": "Doxepin Hydrochloride 10 MG Oral Capsule",
+    "plans": [
+      {
+        "plan_id_type": "HIOS-PLAN-ID",
+        "plan_id": "40308VA0240007",
+        "drug_tier": "GENERIC",
+        "prior_authorization": false,
+        "step_therapy": false,
+        "quantity_limit": true,
+        "years": [
+          2018,
+          2019
+        ]
+      },
+      {
+        "plan_id_type": "HIOS-PLAN-ID",
+        "plan_id": "40308VA0240008",
+        "drug_tier": "GENERIC",
+        "prior_authorization": false,
+        "step_therapy": false,
+        "quantity_limit": true,
+        "years": [
+          2018,
+          2019
+        ]
+      }
+    ]
+  },
+  {
+    "rxnorm_id": "1000054",
+    "drug_name": "Doxepin Hydrochloride 10 MG/ML Oral Solution",
+    "plans": [
+      {
+        "plan_id_type": "HIOS-PLAN-ID",
+        "plan_id": "40308VA0240007",
+        "drug_tier": "GENERIC",
+        "prior_authorization": false,
+        "step_therapy": false,
+        "quantity_limit": true,
+        "years": [
+          2018,
+          2019
+        ]
+      },
+      {
+        "plan_id_type": "HIOS-PLAN-ID",
+        "plan_id": "40308VA0240008",
+        "drug_tier": "GENERIC",
+        "prior_authorization": false,
+        "step_therapy": false,
+        "quantity_limit": true,
+        "years": [
+          2018,
+          2019
+        ]
+      }
+    ]
+  }
+]
