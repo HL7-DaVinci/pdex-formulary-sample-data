@@ -17,8 +17,8 @@ class QHPDrugRepo
     end
   end
 
-  def drugs_for_plan(plan_id)
-    repo[plan_id]
+  def drugs_for_plan(plan)
+    repo[plan.id]
   end
 
   def plans
