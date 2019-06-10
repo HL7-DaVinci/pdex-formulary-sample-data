@@ -9,35 +9,29 @@ RSpec.describe Formulary::QHPDrugRepo do
   end
 
   let(:repo) do
-    Formulary::QHPDrugRepo.new
+    Formulary::QHPDrugRepo
+  end
+
+  after(:each) do
+    repo.reset!
   end
 
   describe '.initialize' do
-    it 'creates a QHPDrugRepo instance' do
-      expect(repo).to be_a(Formulary::QHPDrugRepo)
-    end
-
     it 'creates an empty repo' do
-      expect(repo.repo).to be_empty
+      expect(repo.all).to be_empty
     end
   end
 
   describe '#import' do
     before(:each) { repo.import(raw_drugs) }
 
-    it 'stores drugs under their plan ids' do
-      plan_ids =
-        raw_drugs
-          .flat_map { |drug| drug[:plans].map { |plan| plan[:plan_id] } }
-          .uniq
-
-      expect(repo.repo.length).to eq(plan_ids.length)
-      plan_ids.each { |id| expect(repo.repo).to include(id) }
+    it 'stores drugs' do
+      expect(repo.all.length).to eq(raw_drugs.length)
     end
 
     it 'converts the drugs to QHPDrug' do
-      repo.repo.each do |_plan_id, plan_drugs|
-        plan_drugs.each { |drug| expect(drug).to be_a(Formulary::QHPDrug) }
+      repo.all.each do|drug|
+        expect(drug).to be_a(Formulary::QHPDrug)
       end
     end
   end

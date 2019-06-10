@@ -2,24 +2,26 @@ require_relative 'qhp_plan.rb'
 
 module Formulary
   class QHPPlanRepo
-    attr_reader :repo
-
-    def initialize
-      @repo = []
+    def self.repo
+      @repo ||= reset!
     end
 
-    def import(raw_qhp_plans)
+    def self.import(raw_qhp_plans)
       raw_qhp_plans.each do |raw_plan|
         repo << QHPPlan.new(raw_plan)
       end
     end
 
-    def all
+    def self.all
       repo
     end
 
-    def ids
+    def self.ids
       repo.map(&:id)
+    end
+
+    def self.reset!
+      @repo = []
     end
   end
 end

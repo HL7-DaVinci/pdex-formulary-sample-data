@@ -9,17 +9,11 @@ RSpec.describe Formulary::QHPPlanRepo do
   end
 
   let(:repo) do
-    Formulary::QHPPlanRepo.new
+    Formulary::QHPPlanRepo
   end
 
-  describe '.initialize' do
-    it 'creates a QHPPlanRepo instance' do
-      expect(repo).to be_a(Formulary::QHPPlanRepo)
-    end
-
-    it 'creates an empty repo' do
-      expect(repo.all).to be_empty
-    end
+  after(:each) do
+    repo.reset!
   end
 
   describe '#import' do

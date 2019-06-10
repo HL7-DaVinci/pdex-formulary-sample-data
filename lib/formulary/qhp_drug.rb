@@ -17,5 +17,9 @@ module Formulary
     def plans
       raw_data[:plans]
     end
+
+    def in_plan?(plan_id)
+      plans.any? { |plan| plan[:plan_id] == plan_id }
+    end
   end
 end

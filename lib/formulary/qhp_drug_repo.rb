@@ -2,24 +2,26 @@ require_relative 'qhp_drug'
 
 module Formulary
   class QHPDrugRepo
-    attr_reader :repo
-
-    def initialize
-      @repo = Hash.new { |hash, key| hash[key] = [] }
+    def self.repo
+      @repo ||= reset!
     end
 
-    def import(raw_qhp_drugs)
+    def self.import(raw_qhp_drugs)
       raw_qhp_drugs.each do |raw_drug|
-        drug = QHPDrug.new(raw_drug)
-        drug.plans.each do |drug_plan|
-          plan_id = drug_plan[:plan_id]
-          repo[plan_id] << drug
-        end
+        repo << QHPDrug.new(raw_drug)
       end
     end
 
-    def drugs_for_plan(plan)
-      repo[plan.id]
+    def self.drugs_for_plan(plan)
+      repo.select { |drug| drug.in_plan? plan.id }
+    end
+
+    def self.all
+      repo
+    end
+
+    def self.reset!
+      @repo = []
     end
   end
 end

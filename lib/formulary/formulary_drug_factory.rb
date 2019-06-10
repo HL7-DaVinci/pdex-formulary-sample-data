@@ -9,8 +9,9 @@ module Formulary
       @plan_drug = plan_drug
     end
 
-    def build
+    def build(id=nil)
       FHIR::MedicationKnowledge.new(
+        id: id,
         code: code,
         extension: extension,
         text: text,
