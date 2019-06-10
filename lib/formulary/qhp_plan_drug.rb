@@ -1,14 +1,10 @@
 module Formulary
   class QHPPlanDrug
-    attr_reader :drug, :plan, :drug_plan_info
+    attr_reader :drug, :plan
 
     def initialize(drug, plan)
       @drug = drug
       @plan = plan
-    end
-
-    def drug_plan_info
-      @drug_plan_info ||= drug.plans.find { |drug_plan| drug_plan[:plan_id] == plan.id }
     end
 
     def rxnorm_code
@@ -37,6 +33,12 @@ module Formulary
 
     def plan_id
       plan.id
+    end
+
+    private
+
+    def drug_plan_info
+      @drug_plan_info ||= drug.plans.find { |drug_plan| drug_plan[:plan_id] == plan.id }
     end
   end
 end

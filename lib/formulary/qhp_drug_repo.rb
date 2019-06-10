@@ -21,9 +21,5 @@ module Formulary
     def drugs_for_plan(plan)
       repo[plan.id]
     end
-
-    def plans
-      repo.keys
-    end
   end
 end

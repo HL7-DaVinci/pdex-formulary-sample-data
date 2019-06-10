@@ -1,4 +1,5 @@
 require 'fhir_models'
+require_relative '../formulary'
 
 module Formulary
   class FormularyDrugFactory
@@ -23,7 +24,7 @@ module Formulary
       {
         coding: [
           {
-            system: 'http://www.nlm.nih.gov/research/umls/rxnorm',
+            system: RXNORM_SYSTEM,
             code: plan_drug.rxnorm_code,
             display: plan_drug.name
           }
@@ -49,22 +50,18 @@ module Formulary
     end
 
     def meta
-      {
-        profile: [
-          'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-FormularyDrug'
-        ]
-      }
+      { profile: [FORMULARY_PROFILE] }
     end
 
     def tier_extension
       {
-        url: 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension',
+        url: DRUG_TIER_EXTENSION,
         valueCodeableConcept: {
           coding: [
             {
               code: plan_drug.tier,
               display: plan_drug.tier,
-              system: 'http://hl7.org/fhir/us/Davinci-drug-formulary/CodeSystem/usdf-DrugTierCS'
+              system: DRUG_TIER_SYSTEM
             }
           ]
         }
@@ -73,28 +70,28 @@ module Formulary
 
     def prior_auth_extension
       {
-        url: 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension',
+        url: PRIOR_AUTH_EXTENSION,
         valueBoolean: plan_drug.prior_auth?
       }
     end
 
     def step_therapy_extension
       {
-        url: 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension',
+        url: STEP_THERAPY_EXTENSION,
         valueBoolean: plan_drug.step_therapy_limit?
       }
     end
 
     def quantity_extension
       {
-        url: 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension',
+        url: QUANTITY_LIMIT_EXTENSION,
         valueBoolean: plan_drug.quantity_limit?
       }
     end
 
     def plan_id_extension
       {
-        url: 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-PlanID-extension',
+        url: PLAN_ID_EXTENSION,
         valueString: plan_drug.plan_id
       }
     end
