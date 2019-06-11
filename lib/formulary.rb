@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Formulary
   FORMULARY_PROFILE = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-FormularyDrug'
 

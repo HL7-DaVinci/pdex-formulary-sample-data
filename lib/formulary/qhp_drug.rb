@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module Formulary
+  # A drug as represented in QHP data
   class QHPDrug
     attr_reader :raw_data
 

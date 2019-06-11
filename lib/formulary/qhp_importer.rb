@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 require 'httparty'
 
 module Formulary
+  # This class reads QHP data from a list of urls and loads it into a repository
   class QHPImporter
     attr_reader :urls, :repo
 

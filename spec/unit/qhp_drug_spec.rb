@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'pry'
 require_relative '../../lib/formulary/qhp_drug'

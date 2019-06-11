@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'digest'
 require_relative '../../lib/formulary/drug_list_generator'
 
@@ -29,6 +31,7 @@ RSpec.describe Formulary::DrugListGenerator do
   let(:generator) { Formulary::DrugListGenerator.new(plan) }
 
   before(:each) do
+    FileUtils.rm_rf(output_directory)
     repo.import(raw_drugs)
     allow_any_instance_of(Formulary::DrugListGenerator)
       .to receive(:base_output_directory).and_return(output_directory)

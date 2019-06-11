@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 require_relative 'qhp_plan.rb'
 
 module Formulary
+  # Simple in-memory storage for instances of QHPPlan
   class QHPPlanRepo
     def self.repo
       @repo ||= reset!

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'pry'
 require_relative '../../lib/formulary/qhp_drug_repo'
@@ -30,7 +32,7 @@ RSpec.describe Formulary::QHPDrugRepo do
     end
 
     it 'converts the drugs to QHPDrug' do
-      repo.all.each do|drug|
+      repo.all.each do |drug|
         expect(drug).to be_a(Formulary::QHPDrug)
       end
     end

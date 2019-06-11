@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'digest'
 require 'json'
 require_relative 'config'
@@ -6,6 +8,7 @@ require_relative 'qhp_plan_drug'
 require_relative 'formulary_drug_factory'
 
 module Formulary
+  # This class generates FormularyDrug resources for a particular plan
   class DrugListGenerator
     attr_reader :plan
 
@@ -14,16 +17,12 @@ module Formulary
     end
 
     def generate
-      count = 1
-      plan_drugs.map do |drug|
-        plan_drug = QHPPlanDrug.new(drug, plan)
-        id = "#{id_prefix}-#{count.to_s.rjust(5, '0')}"
-        count += 1
-        resource = FormularyDrugFactory.new(plan_drug).build(id)
-        write_drug(resource)
-        add_to_list(id)
+      plan_drugs.each do |drug|
+        create_drug(drug)
+        increment_id
       end
       return if list.empty?
+
       write_list(id_prefix)
     end
 
@@ -35,6 +34,22 @@ module Formulary
 
     def base_output_directory
       'output'
+    end
+
+    def count
+      @count ||= 1
+    end
+
+    def increment_id
+      @count += 1
+    end
+
+    def create_drug(drug)
+      plan_drug = QHPPlanDrug.new(drug, plan)
+      id = "#{id_prefix}-#{count.to_s.rjust(5, '0')}"
+      resource = FormularyDrugFactory.new(plan_drug).build(id)
+      write_drug(resource)
+      add_to_list(id)
     end
 
     def write_drug(resource)
@@ -69,9 +84,9 @@ module Formulary
     def plan_drugs
       @plan_drugs ||=
         QHPDrugRepo
-          .drugs_for_plan(plan)
-          .uniq { |drug| drug.rxnorm_code }
-          .take(Config.max_drugs_per_plan)
+        .drugs_for_plan(plan)
+        .uniq(&:rxnorm_code)
+        .take(Config.max_drugs_per_plan)
     end
   end
 end

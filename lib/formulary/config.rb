@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module Formulary
+  # Handles configuration
   class Config
     def self.plan_urls
       raw_config['plan_urls']
@@ -12,11 +15,11 @@ module Formulary
       raw_config['max_drugs_per_plan']
     end
 
-    private
-
     def self.raw_config
       file_path = File.join(__dir__, '..', '..', 'config.yml')
-      @config ||= YAML.load(File.read(file_path))
+      @raw_config ||= YAML.safe_load(File.read(file_path))
     end
+
+    private_class_method :raw_config
   end
 end

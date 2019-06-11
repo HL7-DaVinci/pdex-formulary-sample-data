@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../../lib/formulary/qhp_importer'
 
 RSpec.describe Formulary::QHPImporter do

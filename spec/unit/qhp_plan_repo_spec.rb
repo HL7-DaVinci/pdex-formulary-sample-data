@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'pry'
 require_relative '../../lib/formulary/qhp_plan_repo'
@@ -23,7 +25,7 @@ RSpec.describe Formulary::QHPPlanRepo do
       plan_ids = raw_plans.map { |plan| plan[:plan_id] }
 
       expect(repo.all.length).to eq(plan_ids.length)
-      plan_ids.each { |id| expect(repo.all.one? { |plan| plan.id == id}).to be(true) }
+      plan_ids.each { |id| expect(repo.all.one? { |plan| plan.id == id }).to be(true) }
     end
 
     it 'converts the plans to QHPPlan' do

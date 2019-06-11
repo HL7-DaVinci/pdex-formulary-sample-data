@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require 'fhir_models'
 require_relative '../formulary'
 
 module Formulary
+  # Class to build FormularyDrug resources from a QHPPlanDrug
   class FormularyDrugFactory
     attr_reader :plan_drug
 
@@ -9,7 +12,7 @@ module Formulary
       @plan_drug = plan_drug
     end
 
-    def build(id=nil)
+    def build(id = nil)
       FHIR::MedicationKnowledge.new(
         id: id,
         code: code,
@@ -54,7 +57,7 @@ module Formulary
       { profile: [FORMULARY_PROFILE] }
     end
 
-    def tier_extension
+    def tier_extension # rubocop:disable Metrics/MethodLength
       {
         url: DRUG_TIER_EXTENSION,
         valueCodeableConcept: {

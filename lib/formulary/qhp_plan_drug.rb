@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module Formulary
+  # A drug with plan-specific details (tier, prior auth, limits)
   class QHPPlanDrug
     attr_reader :drug, :plan
 

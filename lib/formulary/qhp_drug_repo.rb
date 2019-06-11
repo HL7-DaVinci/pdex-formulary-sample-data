@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 require_relative 'qhp_drug'
 
 module Formulary
+  # Simple in-memory storage for instances of QHPDrug
   class QHPDrugRepo
     def self.repo
       @repo ||= reset!

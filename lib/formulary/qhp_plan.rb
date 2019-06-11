@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module Formulary
+  # A health plan as represented by QHP data
   class QHPPlan
     attr_reader :raw_plan
 

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require_relative '../../lib/formulary/config'
 
 RSpec.describe Formulary::Config do
   before(:all) do
     file_path = File.join(__dir__, '..', '..', 'config.yml')
-    @config ||= YAML.load(File.read(file_path))
+    @config ||= YAML.safe_load(File.read(file_path))
   end
 
   describe '.plan_urls' do
