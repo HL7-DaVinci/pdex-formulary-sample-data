@@ -1,10 +1,12 @@
 require 'digest'
 require 'json'
+require_relative 'config'
 require_relative 'qhp_drug_repo'
+require_relative 'qhp_plan_drug'
+require_relative 'formulary_drug_factory'
 
 module Formulary
-  class DrugListFactory
-    DRUGS_PER_PLAN = 100
+  class DrugListGenerator
     attr_reader :plan
 
     def initialize(plan)
@@ -60,7 +62,7 @@ module Formulary
         QHPDrugRepo
           .drugs_for_plan(plan)
           .uniq { |drug| drug.rxnorm_code }
-          .take(DRUGS_PER_PLAN)
+          .take(Config.max_drugs_per_plan)
     end
 
     def id_prefix
