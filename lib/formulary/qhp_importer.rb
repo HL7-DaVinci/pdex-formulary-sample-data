@@ -11,15 +11,14 @@ module Formulary
 
     def import
       urls.each do |url|
-        raw_plans = HTTParty.get(url, verify: false) # FIXME
-        json_plans = JSON.parse(raw_plans, symbolize_names: true)
-        plans.concat(json_plans)
+        qhp_raw_data = HTTParty.get(url, verify: false) # FIXME
+        qhp_json.concat(JSON.parse(qhp_raw_data, symbolize_names: true))
       end
-      repo.import(plans)
+      repo.import(qhp_json)
     end
 
-    def plans
-      @plans ||= []
+    def qhp_json
+      @qhp_json ||= []
     end
   end
 end

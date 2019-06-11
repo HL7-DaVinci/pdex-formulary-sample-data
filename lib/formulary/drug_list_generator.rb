@@ -27,19 +27,28 @@ module Formulary
       write_list(id_prefix)
     end
 
+    def id_prefix
+      @id_prefix ||= ::Digest::SHA1.hexdigest(plan.id)[0..5]
+    end
+
     private
 
+    def base_output_directory
+      'output'
+    end
+
     def write_drug(resource)
-      FileUtils.mkdir_p(File.join('output', id_prefix))
-      output_path = File.join('output', id_prefix, "#{resource.id}.MedicationKnowledge.json")
+      output_directory = File.join(base_output_directory, id_prefix)
+      FileUtils.mkdir_p(output_directory)
+      output_path = File.join(output_directory, "#{resource.id}.MedicationKnowledge.json")
       File.open(output_path, 'w') do |file|
         file.write(resource.to_json)
       end
     end
 
     def write_list(name)
-      FileUtils.mkdir_p 'output'
-      list_path = File.join('output', "#{name}.List.entry.json")
+      FileUtils.mkdir_p base_output_directory
+      list_path = File.join(base_output_directory, "#{name}.List.entry.json")
       File.open(list_path, 'w') do |file|
         file.write(JSON.pretty_generate(list))
       end
@@ -63,10 +72,6 @@ module Formulary
           .drugs_for_plan(plan)
           .uniq { |drug| drug.rxnorm_code }
           .take(Config.max_drugs_per_plan)
-    end
-
-    def id_prefix
-      @id_prefix ||= ::Digest::SHA1.hexdigest(plan.id)[0..5]
     end
   end
 end
