@@ -61,14 +61,14 @@ RSpec.describe Formulary::FormularyDrugFactory do
     it 'includes the drug tier' do
       tier_codings =
         resource
-        .extension
-        .find { |extension| extension.url == Formulary::DRUG_TIER_EXTENSION }
-        .valueCodeableConcept
-        .coding
+          .extension
+          .find { |extension| extension.url == Formulary::DRUG_TIER_EXTENSION }
+          .valueCodeableConcept
+          .coding
       tier_code =
         tier_codings
-        .find { |coding| coding.system == Formulary::DRUG_TIER_SYSTEM }
-        .code
+          .find { |coding| coding.system == Formulary::DRUG_TIER_SYSTEM }
+          .code
 
       expect(tier_code).to eq(plan_drug.tier)
     end
@@ -76,9 +76,9 @@ RSpec.describe Formulary::FormularyDrugFactory do
     it 'includes the prior auth requirement' do
       prior_auth_required =
         resource
-        .extension
-        .find { |extension| extension.url == Formulary::PRIOR_AUTH_EXTENSION }
-        .valueBoolean
+          .extension
+          .find { |extension| extension.url == Formulary::PRIOR_AUTH_EXTENSION }
+          .valueBoolean
 
       expect(prior_auth_required).to eq(plan_drug.prior_auth?)
     end
@@ -86,9 +86,9 @@ RSpec.describe Formulary::FormularyDrugFactory do
     it 'includes the step therapy limit' do
       step_therapy_limit =
         resource
-        .extension
-        .find { |extension| extension.url == Formulary::STEP_THERAPY_EXTENSION }
-        .valueBoolean
+          .extension
+          .find { |extension| extension.url == Formulary::STEP_THERAPY_EXTENSION }
+          .valueBoolean
 
       expect(step_therapy_limit).to eq(plan_drug.step_therapy_limit?)
     end
@@ -96,9 +96,9 @@ RSpec.describe Formulary::FormularyDrugFactory do
     it 'includes the quantity limit' do
       quantity_limit =
         resource
-        .extension
-        .find { |extension| extension.url == Formulary::QUANTITY_LIMIT_EXTENSION }
-        .valueBoolean
+          .extension
+          .find { |extension| extension.url == Formulary::QUANTITY_LIMIT_EXTENSION }
+          .valueBoolean
 
       expect(quantity_limit).to eq(plan_drug.quantity_limit?)
     end
@@ -106,9 +106,9 @@ RSpec.describe Formulary::FormularyDrugFactory do
     it 'includes the plan id' do
       plan_id =
         resource
-        .extension
-        .find { |extension| extension.url == Formulary::PLAN_ID_EXTENSION }
-        .valueString
+          .extension
+          .find { |extension| extension.url == Formulary::PLAN_ID_EXTENSION }
+          .valueString
 
       expect(plan_id).to eq(plan_drug.plan_id)
     end

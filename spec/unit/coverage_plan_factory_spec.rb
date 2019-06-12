@@ -123,61 +123,6 @@ RSpec.describe Formulary::CoveragePlanFactory do
       it 'includes the drug tiers' do
         expect(drug_tier_definition_extension.length).to eq(plan.tiers.length)
       end
-
-      it 'includes an id for each drug tier' do
-        input_tier_ids = tiers.map(&:name)
-        output_tier_ids = drug_tier_definition_extension.map do |tier_extension|
-          id_extension = tier_extension.extension.find do |extension|
-            extension.url == Formulary::DRUG_TIER_ID_EXTENSION
-          end
-          id_extension.valueCodeableConcept.coding.first.code
-        end
-
-        expect(output_tier_ids).to match_array(input_tier_ids)
-      end
-
-      it 'includes mail order info for each drug tier' do
-        input_tier_mail_order = tiers.map(&:mail_order?)
-        output_tier_mail_order = drug_tier_definition_extension.map do |tier_extension|
-          mail_order_extension = tier_extension.extension.find do |extension|
-            extension.url == Formulary::MAIL_ORDER_EXTENSION
-          end
-          mail_order_extension.valueBoolean
-        end
-
-        expect(output_tier_mail_order).to match_array(input_tier_mail_order)
-      end
-
-      it 'includes cost sharing info for each drug tier' do
-        input_cost_sharing = tiers.map(&:cost_sharing)
-        output_cost_sharing = drug_tier_definition_extension.map do |tier_extension|
-          tier_extension.extension.select { |ext| ext.url == Formulary::COST_SHARING_EXTENSION }
-        end
-
-        expect(input_cost_sharing.length).to eq(output_cost_sharing.length)
-        input_cost_sharing.zip(output_cost_sharing).each do |cost_sharing|
-          input_length = cost_sharing.first.length
-          output_length = cost_sharing.last.length
-          expect(output_length).to eq(input_length)
-        end
-      end
-
-      it 'includes cost sharing details' do
-        output_cost_sharing =
-          drug_tier_definition_extension.first.extension
-                                        .find { |ext| ext.url == Formulary::COST_SHARING_EXTENSION }
-
-        expected_extension_urls = [
-          Formulary::PHARMACY_TYPE_EXTENSION,
-          Formulary::COPAY_AMOUNT_EXTENSION,
-          Formulary::COINSURANCE_RATE_EXTENSION,
-          Formulary::COINSURANCE_OPTION_EXTENSION,
-          Formulary::COPAY_OPTION_EXTENSION
-        ]
-
-        actual_extension_urls = output_cost_sharing.extension.map(&:url)
-        expect(actual_extension_urls).to match_array(expected_extension_urls)
-      end
     end
   end
 end

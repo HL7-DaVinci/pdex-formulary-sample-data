@@ -84,9 +84,9 @@ module Formulary
     def plan_drugs
       @plan_drugs ||=
         QHPDrugRepo
-        .drugs_for_plan(plan)
-        .uniq(&:rxnorm_code)
-        .take(Config.max_drugs_per_plan)
+          .drugs_for_plan(plan)
+          .uniq(&:rxnorm_code)
+          .take(Config.max_drugs_per_plan)
     end
   end
 end
