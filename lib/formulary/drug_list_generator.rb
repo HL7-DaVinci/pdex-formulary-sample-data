@@ -23,7 +23,7 @@ module Formulary
       end
       return if list.empty?
 
-      write_list(id_prefix)
+      write_list
     end
 
     def id_prefix
@@ -61,9 +61,9 @@ module Formulary
       end
     end
 
-    def write_list(name)
+    def write_list
       FileUtils.mkdir_p base_output_directory
-      list_path = File.join(base_output_directory, "#{name}.List.entry.json")
+      list_path = File.join(base_output_directory, "#{id_prefix}.List.entry.json")
       File.open(list_path, 'w') do |file|
         file.write(JSON.pretty_generate(list))
       end
