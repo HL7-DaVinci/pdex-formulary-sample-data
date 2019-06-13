@@ -18,7 +18,7 @@ RSpec.describe Formulary::QHPDrug do
 
   describe '.initialize' do
     it 'creates a QHPDrug instance' do
-      expect(drug).to be_a(Formulary::QHPDrug)
+      expect(drug).to be_a(described_class)
     end
   end
 

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'qhp_drug_tier_cost_sharing'
 module Formulary
   # An indivudual drug tier as represented by QHP data
   class QHPDrugTier
@@ -10,7 +11,7 @@ module Formulary
     end
 
     def name
-      tier[:drug_tier]
+      @name ||= tier[:drug_tier]
     end
 
     def mail_order?
@@ -18,7 +19,7 @@ module Formulary
     end
 
     def cost_sharing
-      tier[:cost_sharing]
+      @cost_sharing ||= tier[:cost_sharing].map { |cost| QHPDrugTierCostSharing.new(cost) }
     end
   end
 end

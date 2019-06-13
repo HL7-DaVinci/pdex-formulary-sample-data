@@ -18,12 +18,6 @@ RSpec.describe Formulary::QHPDrugRepo do
     repo.reset!
   end
 
-  describe '.initialize' do
-    it 'creates an empty repo' do
-      expect(repo.all).to be_empty
-    end
-  end
-
   describe '#import' do
     before(:each) { repo.import(raw_drugs) }
 

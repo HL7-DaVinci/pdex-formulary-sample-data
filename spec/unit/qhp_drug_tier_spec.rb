@@ -20,7 +20,7 @@ RSpec.describe Formulary::QHPDrugTier do
 
   describe '.initialize' do
     it 'creates a QHPDrugTier instance' do
-      expect(tier).to be_a(Formulary::QHPDrugTier)
+      expect(tier).to be_a(described_class)
     end
   end
 
@@ -38,7 +38,8 @@ RSpec.describe Formulary::QHPDrugTier do
 
   describe '#cost_sharing' do
     it 'returns the tier cost sharing information' do
-      expect(tier.cost_sharing).to eq(raw_tier[:cost_sharing])
+      received_cost_sharing = tier.cost_sharing.map(&:data)
+      expect(received_cost_sharing).to eq(raw_tier[:cost_sharing])
     end
   end
 end

@@ -24,7 +24,7 @@ module Formulary
     private
 
     def cost_sharing_extensions
-      tier.cost_sharing.map { |cost| cost_sharing_extension(OpenStruct.new(cost)) }
+      tier.cost_sharing.map { |cost| cost_sharing_extension(cost) }
     end
 
     def drug_tier_id_extension
@@ -106,7 +106,7 @@ module Formulary
     end
 
     def copay_option_extension(cost)
-      value = cost.copay_opt
+      value = cost.copay_option
       return if value.nil?
 
       {
@@ -124,7 +124,7 @@ module Formulary
     end
 
     def coinsurance_option_extension(cost)
-      value = cost.coinsurance_opt
+      value = cost.coinsurance_option
       return if value.nil?
 
       {

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative '../../lib/formulary/qhp_drug_tier_cost_sharing'
 require_relative '../../lib/formulary/drug_tier_extension_factory'
 
 RSpec.describe Formulary::DrugTierExtensionFactory do
@@ -7,23 +8,27 @@ RSpec.describe Formulary::DrugTierExtensionFactory do
     OpenStruct.new(
       name: 'DRUG_TIER',
       'mail_order?'.to_sym => true,
-      cost_sharing: [
-        {
-          pharmacy_type: '1-MONTH-IN-RETAIL',
-          copay_amount: 70.0,
-          copay_opt: 'AFTER-DEDUCTIBLE',
-          coinsurance_rate: 1.0,
-          coinsurance_opt: 'AFTER-DEDUCTIBLE'
-        },
-        {
-          pharmacy_type: '3-MONTH-IN-RETAIL',
-          copay_amount: 140.0,
-          copay_opt: 'AFTER-DEDUCTIBLE',
-          coinsurance_rate: 1.0,
-          coinsurance_opt: 'AFTER-DEDUCTIBLE'
-        }
-      ]
+      cost_sharing: cost_sharing
     )
+  end
+
+  let(:cost_sharing) do
+    [
+      Formulary::QHPDrugTierCostSharing.new(
+        pharmacy_type: '1-MONTH-IN-RETAIL',
+        copay_amount: 70.0,
+        copay_opt: 'AFTER-DEDUCTIBLE',
+        coinsurance_rate: 1.0,
+        coinsurance_opt: 'AFTER-DEDUCTIBLE'
+      ),
+      Formulary::QHPDrugTierCostSharing.new(
+        pharmacy_type: '3-MONTH-IN-RETAIL',
+        copay_amount: 140.0,
+        copay_opt: 'AFTER-DEDUCTIBLE',
+        coinsurance_rate: 1.0,
+        coinsurance_opt: 'AFTER-DEDUCTIBLE'
+      )
+    ]
   end
 
   let(:factory) { Formulary::DrugTierExtensionFactory.new(tier) }
@@ -38,7 +43,7 @@ RSpec.describe Formulary::DrugTierExtensionFactory do
 
   describe 'initialize' do
     it 'creates a DrugTierExtensionFactory instance' do
-      expect(factory).to be_a(Formulary::DrugTierExtensionFactory)
+      expect(factory).to be_a(described_class)
     end
   end
 
@@ -69,7 +74,7 @@ RSpec.describe Formulary::DrugTierExtensionFactory do
     end
 
     it 'includes the pharmacy type for each cost sharing extension' do
-      input_pharmacy_types = tier.cost_sharing.map { |cost| cost[:pharmacy_type] }
+      input_pharmacy_types = tier.cost_sharing.map(&:pharmacy_type)
       output_pharmacy_types =
         cost_sharing_extensions
           .flat_map(&:extension)
@@ -80,7 +85,7 @@ RSpec.describe Formulary::DrugTierExtensionFactory do
     end
 
     it 'includes the copay amount for each cost sharing extension' do
-      input_copay_amount = tier.cost_sharing.map { |cost| cost[:copay_amount] }
+      input_copay_amount = tier.cost_sharing.map(&:copay_amount)
       output_copay_amount =
         cost_sharing_extensions
           .select { |ext| ext.url == Formulary::COST_SHARING_EXTENSION }
@@ -92,7 +97,7 @@ RSpec.describe Formulary::DrugTierExtensionFactory do
     end
 
     it 'includes the copay option for each cost sharing extension' do
-      input_copay_option = tier.cost_sharing.map { |cost| cost[:copay_opt] }
+      input_copay_option = tier.cost_sharing.map(&:copay_option)
       output_copay_option =
         cost_sharing_extensions
           .select { |ext| ext.url == Formulary::COST_SHARING_EXTENSION }
@@ -104,7 +109,7 @@ RSpec.describe Formulary::DrugTierExtensionFactory do
     end
 
     it 'includes the coinsurance rate for each cost sharing extension' do
-      input_coinsurance_rate = tier.cost_sharing.map { |cost| cost[:coinsurance_rate] }
+      input_coinsurance_rate = tier.cost_sharing.map(&:coinsurance_rate)
       output_coinsurance_rate =
         cost_sharing_extensions
           .select { |ext| ext.url == Formulary::COST_SHARING_EXTENSION }
@@ -116,7 +121,7 @@ RSpec.describe Formulary::DrugTierExtensionFactory do
     end
 
     it 'includes the coinsurance option for each cost sharing extension' do
-      input_coinsurance_option = tier.cost_sharing.map { |cost| cost[:coinsurance_opt] }
+      input_coinsurance_option = tier.cost_sharing.map(&:coinsurance_option)
       output_coinsurance_option =
         cost_sharing_extensions
           .select { |ext| ext.url == Formulary::COST_SHARING_EXTENSION }

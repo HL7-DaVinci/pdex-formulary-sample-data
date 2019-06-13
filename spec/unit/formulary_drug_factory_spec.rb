@@ -37,7 +37,7 @@ RSpec.describe Formulary::FormularyDrugFactory do
 
   describe '.initialize' do
     it 'creates a FormularyDrugFactory instance' do
-      expect(factory).to be_a(Formulary::FormularyDrugFactory)
+      expect(factory).to be_a(described_class)
     end
   end
 

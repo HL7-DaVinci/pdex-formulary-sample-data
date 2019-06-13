@@ -42,7 +42,7 @@ RSpec.describe Formulary::CoveragePlanFactory do
 
   describe '.initialize' do
     it 'creates a CoveragePlanFactory instance' do
-      expect(factory).to be_a(Formulary::CoveragePlanFactory)
+      expect(factory).to be_a(described_class)
     end
   end
 

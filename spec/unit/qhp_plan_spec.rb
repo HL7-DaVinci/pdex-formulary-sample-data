@@ -18,7 +18,7 @@ RSpec.describe Formulary::QHPPlan do
 
   describe '.initialize' do
     it 'creates a QHPPlan instance' do
-      expect(plan).to be_a(Formulary::QHPPlan)
+      expect(plan).to be_a(described_class)
     end
   end
 
