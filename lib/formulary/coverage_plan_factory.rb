@@ -8,14 +8,16 @@ require_relative 'drug_tier_extension_factory'
 module Formulary
   # Class to build CoveragePlan resources from a QHPPlan
   class CoveragePlanFactory # rubocop:disable Metrics/ClassLength
-    attr_reader :plan
+    attr_reader :plan, :id
 
-    def initialize(plan)
+    def initialize(plan, id)
       @plan = plan
+      @id = id
     end
 
     def build(entries) # rubocop:disable Metrics/MethodLength
       FHIR::List.new(
+        id: id,
         meta: meta,
         identifier: identifier,
         text: text,

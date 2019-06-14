@@ -77,7 +77,7 @@ module Formulary
     def write_coverage_plan
       FileUtils.mkdir_p base_output_directory
       plan_path = File.join(base_output_directory, "#{id_prefix}.List.json")
-      coverage_plan = CoveragePlanFactory.new(plan).build(list)
+      coverage_plan = CoveragePlanFactory.new(plan, id_prefix).build(list)
       File.open(plan_path, 'w') do |file|
         file.write(coverage_plan.to_json)
       end

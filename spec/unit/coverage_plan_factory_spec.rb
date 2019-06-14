@@ -19,8 +19,10 @@ RSpec.describe Formulary::CoveragePlanFactory do
     plan.tiers.map { |tier| Formulary::QHPDrugTier.new(tier) }
   end
 
+  let(:id) { 'PLAN_ID'}
+
   let(:factory) do
-    Formulary::CoveragePlanFactory.new(plan)
+    Formulary::CoveragePlanFactory.new(plan, id)
   end
 
   let(:entries) do
@@ -49,6 +51,10 @@ RSpec.describe Formulary::CoveragePlanFactory do
   describe '#build' do
     it 'creates a FHIR List resource' do
       expect(resource).to be_a(FHIR::List)
+    end
+
+    it 'includes an id' do
+      expect(resource.id).to eq(id)
     end
 
     it 'includes the plan name' do
