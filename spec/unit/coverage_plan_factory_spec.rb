@@ -19,7 +19,7 @@ RSpec.describe Formulary::CoveragePlanFactory do
     plan.tiers.map { |tier| Formulary::QHPDrugTier.new(tier) }
   end
 
-  let(:id) { 'PLAN_ID'}
+  let(:id) { 'PLAN_ID' }
 
   let(:factory) do
     Formulary::CoveragePlanFactory.new(plan, id)

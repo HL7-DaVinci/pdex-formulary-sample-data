@@ -76,7 +76,7 @@ module Formulary
             {
               system: PHARMACY_TYPE_SYSTEM,
               code: value,
-              display: value
+              display: PHARMACY_TYPE_DISPLAY[value]
             }
           ]
         }

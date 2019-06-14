@@ -30,4 +30,15 @@ module Formulary
   COPAY_OPTION_EXTENSION = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-CopayOption-extension'
   COINSURANCE_RATE_EXTENSION = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-CoInsuranceRate-extension'
   COINSURANCE_OPTION_EXTENSION = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-CoinsuranceOption-extension'
+
+  PHARMACY_TYPE_DISPLAY = {
+    '1-MONTH-IN-RETAIL' => '1 Month Supply via in-network retail pharmacy',
+    '1-MONTH-OUT-RETAIL' => '1 Month Supply via out-of-network retail pharmacy',
+    '1-MONTH-IN-MAIL' => '1 Month Supply via in-network mail order pharmacy',
+    '1-MONTH-OUT-MAIL' => '1 Month Supply via out-of-network mail order pharmacy',
+    '3-MONTH-IN-RETAIL' => '3 Month Supply via in-network retail pharmacy',
+    '3-MONTH-OUT-RETAIL' => '3 Month Supply via out-of-network retail pharmacy',
+    '3-MONTH-IN-MAIL' => '3 Month Supply via in-network mail order pharmacy',
+    '3-MONTH-OUT-MAIL' => '3 Month Supply via out-of-network mail order pharmacy'
+  }.freeze
 end
