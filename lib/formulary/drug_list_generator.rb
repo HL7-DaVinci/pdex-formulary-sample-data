@@ -6,6 +6,7 @@ require_relative 'config'
 require_relative 'qhp_drug_repo'
 require_relative 'qhp_plan_drug'
 require_relative 'formulary_drug_factory'
+require_relative 'coverage_plan_factory'
 
 module Formulary
   # This class generates FormularyDrug resources for a particular plan
@@ -23,7 +24,7 @@ module Formulary
       end
       return if list.empty?
 
-      write_list(id_prefix)
+      write_coverage_plan
     end
 
     def id_prefix
@@ -44,6 +45,18 @@ module Formulary
       @count += 1
     end
 
+    def list
+      @list ||= []
+    end
+
+    def plan_drugs
+      @plan_drugs ||=
+        QHPDrugRepo
+          .drugs_for_plan(plan)
+          .uniq(&:rxnorm_code)
+          .take(Config.max_drugs_per_plan)
+    end
+
     def create_drug(drug)
       plan_drug = QHPPlanDrug.new(drug, plan)
       id = "#{id_prefix}-#{count.to_s.rjust(5, '0')}"
@@ -61,11 +74,12 @@ module Formulary
       end
     end
 
-    def write_list(name)
+    def write_coverage_plan
       FileUtils.mkdir_p base_output_directory
-      list_path = File.join(base_output_directory, "#{name}.List.entry.json")
-      File.open(list_path, 'w') do |file|
-        file.write(JSON.pretty_generate(list))
+      plan_path = File.join(base_output_directory, "#{id_prefix}.List.json")
+      coverage_plan = CoveragePlanFactory.new(plan, id_prefix).build(list)
+      File.open(plan_path, 'w') do |file|
+        file.write(coverage_plan.to_json)
       end
     end
 
@@ -75,18 +89,6 @@ module Formulary
           reference: "MedicationKnowledge/#{id}"
         }
       }
-    end
-
-    def list
-      @list ||= []
-    end
-
-    def plan_drugs
-      @plan_drugs ||=
-        QHPDrugRepo
-        .drugs_for_plan(plan)
-        .uniq(&:rxnorm_code)
-        .take(Config.max_drugs_per_plan)
     end
   end
 end

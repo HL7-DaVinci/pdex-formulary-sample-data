@@ -26,7 +26,7 @@ RSpec.describe Formulary::DrugListGenerator do
 
   let(:output_directory) { File.join(__dir__, '..', '..', 'tmp', 'spec_output') }
   let(:name_prefix) { generator.id_prefix }
-  let(:list_path) { File.join(output_directory, "#{name_prefix}.List.entry.json") }
+  let(:list_path) { File.join(output_directory, "#{name_prefix}.List.json") }
 
   let(:generator) { Formulary::DrugListGenerator.new(plan) }
 
@@ -44,14 +44,14 @@ RSpec.describe Formulary::DrugListGenerator do
   describe '#generate' do
     it 'creates a list of drug references' do
       generator.generate
-      output = JSON.parse(File.read(list_path))
-      expect(output.length).to eq(raw_drugs.length)
+      output = JSON.parse(File.read(list_path), symbolize_names: true)
+      expect(output[:entry].length).to eq(raw_drugs.length)
     end
 
     it 'creates MedicationKnowledge resources' do
       generator.generate
       list = JSON.parse(File.read(list_path), symbolize_names: true)
-      ids = list.map { |entry| entry[:item][:reference].split('/').last }
+      ids = list[:entry].map { |entry| entry[:item][:reference].split('/').last }
       resource_directory = File.join(output_directory, name_prefix)
       ids.each do |id|
         file_name = "#{id}.MedicationKnowledge.json"

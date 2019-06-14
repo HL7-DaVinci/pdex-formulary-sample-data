@@ -7,7 +7,9 @@
       2019
     ],
     "marketing_name": "MARKETING_NAME_1",
-    "summary_url": "http://example.com/plan1",
+    "formulary_url": "http://example.com/formulary",
+    "summary_url": "http://example.com/summary",
+    "marketing_url": "http://example.com/marketing",
     "plan_contact": "contact1@example.com",
     "network": [
       {
@@ -21,31 +23,31 @@
         "cost_sharing": [
           {
             "pharmacy_type": "1-MONTH-IN-RETAIL",
-            "copay_amount": 15,
-            "copay_opt": null,
+            "copay_amount": 20,
+            "copay_opt": "AFTER-DEDUCTIBLE",
             "coinsurance_rate": 1.0,
-            "coinsurance_opt": null
+            "coinsurance_opt": "AFTER-DEDUCTIBLE"
           },
           {
             "pharmacy_type": "1-MONTH-OUT-RETAIL",
-            "copay_amount": 15,
-            "copay_opt": null,
+            "copay_amount": 20,
+            "copay_opt": "AFTER-DEDUCTIBLE",
             "coinsurance_rate": 1.0,
-            "coinsurance_opt": null
+            "coinsurance_opt": "AFTER-DEDUCTIBLE"
           },
           {
             "pharmacy_type": "3-MONTH-IN-RETAIL",
-            "copay_amount": 30,
-            "copay_opt": null,
+            "copay_amount": 40,
+            "copay_opt": "AFTER-DEDUCTIBLE",
             "coinsurance_rate": 1.0,
-            "coinsurance_opt": null
+            "coinsurance_opt": "AFTER-DEDUCTIBLE"
           },
           {
             "pharmacy_type": "3-MONTH-OUT-RETAIL",
-            "copay_amount": 30,
-            "copay_opt": null,
+            "copay_amount": 40,
+            "copay_opt": "AFTER-DEDUCTIBLE",
             "coinsurance_rate": 1.0,
-            "coinsurance_opt": null
+            "coinsurance_opt": "AFTER-DEDUCTIBLE"
           }
         ]
       },
@@ -55,29 +57,29 @@
         "cost_sharing": [
           {
             "pharmacy_type": "1-MONTH-IN-RETAIL",
-            "copay_amount": 20,
-            "copay_opt": "AFTER-DEDUCTIBLE",
+            "copay_amount": 15,
+            "copay_opt": null,
             "coinsurance_rate": 1.0,
             "coinsurance_opt": null
           },
           {
             "pharmacy_type": "1-MONTH-OUT-RETAIL",
-            "copay_amount": 20,
-            "copay_opt": "AFTER-DEDUCTIBLE",
+            "copay_amount": 15,
+            "copay_opt": null,
             "coinsurance_rate": 1.0,
             "coinsurance_opt": null
           },
           {
             "pharmacy_type": "3-MONTH-IN-RETAIL",
-            "copay_amount": 40,
-            "copay_opt": "AFTER-DEDUCTIBLE",
+            "copay_amount": 30,
+            "copay_opt": null,
             "coinsurance_rate": 1.0,
             "coinsurance_opt": null
           },
           {
             "pharmacy_type": "3-MONTH-OUT-RETAIL",
-            "copay_amount": 40,
-            "copay_opt": "AFTER-DEDUCTIBLE",
+            "copay_amount": 30,
+            "copay_opt": null,
             "coinsurance_rate": 1.0,
             "coinsurance_opt": null
           }

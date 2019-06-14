@@ -15,7 +15,7 @@ RSpec.describe Formulary::QHPImporter do
 
   describe '.initialize' do
     it 'creates a QHPImporter instance' do
-      expect(importer).to be_a(Formulary::QHPImporter)
+      expect(importer).to be_a(described_class)
     end
   end
 
