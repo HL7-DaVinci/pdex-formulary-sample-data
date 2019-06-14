@@ -64,7 +64,7 @@ module Formulary
           coding: [
             {
               code: plan_drug.tier,
-              display: plan_drug.tier,
+              display: DRUG_TIER_DISPLAY[plan_drug.tier],
               system: DRUG_TIER_SYSTEM
             }
           ]

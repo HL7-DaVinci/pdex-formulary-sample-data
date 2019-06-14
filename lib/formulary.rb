@@ -41,4 +41,16 @@ module Formulary
     '3-MONTH-IN-MAIL' => '3 Month Supply via in-network mail order pharmacy',
     '3-MONTH-OUT-MAIL' => '3 Month Supply via out-of-network mail order pharmacy'
   }.freeze
+
+  DRUG_TIER_DISPLAY = {
+    'GENERIC' => 'Generic',
+    'PREFERRED-GENERIC' => 'Preferred generic',
+    'NON-PREFERRED-GENERIC' => 'Non-preferred generic',
+    'SPECIALTY' => 'Specialty',
+    'BRAND' => 'Brand',
+    'PREFERRED-BRAND' => 'Preferred brand',
+    'NON-PREFERRED-BRAND' => 'Non-preferred brand',
+    'ZERO-COST-SHARE-PREVENTIVE' => 'Zero-cost share preventative',
+    'MEDICAL-SERVICE' => 'Medical service'
+  }
 end

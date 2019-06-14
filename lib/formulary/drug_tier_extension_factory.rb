@@ -35,7 +35,7 @@ module Formulary
             {
               system: DRUG_TIER_SYSTEM,
               code: tier.name,
-              display: tier.name
+              display: DRUG_TIER_DISPLAY[tier.name]
             }
           ]
         }
