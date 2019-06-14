@@ -7,8 +7,8 @@ module Formulary
   DRUG_TIER_SYSTEM = 'http://hl7.org/fhir/us/Davinci-drug-formulary/CodeSystem/usdf-DrugTierCS'
   RXNORM_SYSTEM = 'http://www.nlm.nih.gov/research/umls/rxnorm'
   PHARMACY_TYPE_SYSTEM = 'http://hl7.org/fhir/us/Davinci-drug-formulary/CodeSystem/usdf-PharmacyTypeCS'
-  COPAY_OPTION_SYSTEM = 'https://api-v8-r4.hspconsortium.org/DrugFormulary2/open/CodeSystem/usdrugformulary-CopayOptionCS'
-  COINSURANCE_OPTION_SYSTEM = 'https://api-v8-r4.hspconsortium.org/DrugFormulary2/open/CodeSystem/usdrugformulary-CoinsuranceOptionCS'
+  COPAY_OPTION_SYSTEM = 'http://hl7.org/fhir/us/Davinci-drug-formulary/CodeSystem/usdf-CopayOptionCS'
+  COINSURANCE_OPTION_SYSTEM = 'http://hl7.org/fhir/us/Davinci-drug-formulary/CodeSystem/usdf-CoinsuranceOptionCS'
 
   DRUG_TIER_EXTENSION = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension'
   PLAN_ID_EXTENSION = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-PlanID-extension'
@@ -52,5 +52,5 @@ module Formulary
     'NON-PREFERRED-BRAND' => 'Non-preferred brand',
     'ZERO-COST-SHARE-PREVENTIVE' => 'Zero-cost share preventative',
     'MEDICAL-SERVICE' => 'Medical service'
-  }
+  }.freeze
 end
