@@ -116,7 +116,7 @@ module Formulary
             {
               system: COPAY_OPTION_SYSTEM,
               code: value,
-              display: value
+              display: value.split('-').map(&:capitalize).join(' ')
             }
           ]
         }
@@ -134,7 +134,7 @@ module Formulary
             {
               system: COINSURANCE_OPTION_SYSTEM,
               code: value,
-              display: value
+              display: value.split('-').map(&:capitalize).join(' ')
             }
           ]
         }
