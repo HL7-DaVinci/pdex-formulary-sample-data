@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'fhir_models'
+gem 'git'
 gem 'httparty'
 gem 'pry'
 gem 'rspec'
