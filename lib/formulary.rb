@@ -50,6 +50,7 @@ module Formulary
     'BRAND' => 'Brand',
     'PREFERRED-BRAND' => 'Preferred brand',
     'NON-PREFERRED-BRAND' => 'Non-preferred brand',
+    'NON-PREFERRED-BRAND-SPECIALTY' => 'Non-preferred brand specialty',
     'ZERO-COST-SHARE-PREVENTIVE' => 'Zero-cost share preventative',
     'MEDICAL-SERVICE' => 'Medical service'
   }.freeze

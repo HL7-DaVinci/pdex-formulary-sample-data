@@ -58,7 +58,7 @@ module Formulary
 
     def identifier
       # TODO: Is this really an identifier?
-      [{ value: id_type }]
+      [{ value: plan.id }]
     end
 
     def text
