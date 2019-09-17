@@ -5,7 +5,7 @@ require 'httparty'
 require 'tmpdir'
 require 'fileutils'
 
-FHIR_SERVER = 'http://localhost:8080/r4'
+FHIR_SERVER = 'http://localhost:8080/hapi-fhir-jpaserver/fhir/'
 
 def upload_conformance_resources_from_git
   begin
@@ -27,7 +27,7 @@ end
 
 def upload_conformance_resources
   definitions_url = 'http://build.fhir.org/ig/HL7/davinci-pdex-formulary/definitions.json.zip'
-  definitions_data = HTTParty.get(definitions_url, verify: false) # FIXME
+  definitions_data = HTTParty.get(definitions_url, verify: false)
   definitions_file = Tempfile.new
   begin
     definitions_file.write(definitions_data)
@@ -53,12 +53,16 @@ def upload_sample_resources
   file_path = File.join(__dir__, 'output', '**/*.json')
   filenames =
     Dir.glob(file_path)
-      .partition { |filename| filename.include? 'MedicationKnowledge' }
+      .partition { |filename| filename.include? 'List' }
       .flatten
-  filenames.each do |filename|
+  puts "Uploading #{filenames.length} resources"
+  filenames.each_with_index do |filename, index|
     resource = JSON.parse(File.read(filename), symbolize_names: true)
     response = upload_resource(resource)
-    binding.pry unless response.success?
+    # binding.pry unless response.success?
+    if index % 100 == 0
+      puts index
+    end
   end
 end
 
@@ -80,14 +84,17 @@ end
 def upload_resource(resource)
   resource_type = resource[:resourceType]
   id = resource[:id]
-  HTTParty.put(
-    "#{FHIR_SERVER}/#{resource_type}/#{id}",
-    body: resource.to_json,
-    headers: { 'Content-Type': 'application/json' }
-  )
+  begin
+    HTTParty.put(
+      "#{FHIR_SERVER}/#{resource_type}/#{id}",
+      body: resource.to_json,
+      headers: { 'Content-Type': 'application/json' }
+    )
+  rescue StandardError
+  end
 end
 
 
-upload_us_core_resources
+# upload_us_core_resources
 upload_conformance_resources
 upload_sample_resources
