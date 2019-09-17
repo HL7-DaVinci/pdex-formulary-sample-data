@@ -26,7 +26,7 @@ RSpec.describe Formulary::QHPDrugTier do
 
   describe '#name' do
     it 'returns the tier name' do
-      expect(tier.name).to eq('GENERIC')
+      expect(tier.name).to eq('generic')
     end
   end
 

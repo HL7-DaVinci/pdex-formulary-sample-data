@@ -51,7 +51,7 @@ RSpec.describe Formulary::QHPPlanDrug do
 
   describe '#tier' do
     it 'returns the drug tier' do
-      expect(plan_drug.tier).to eq('GENERIC')
+      expect(plan_drug.tier).to eq('generic')
     end
   end
 

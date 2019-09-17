@@ -3,11 +3,11 @@
 RSpec.describe Formulary::QHPDrugTierCostSharing do
   let(:raw_cost_sharing) do
     {
-      pharmacy_type: '1-MONTH-IN-RETAIL',
+      pharmacy_type: '1-month-in-retail',
       copay_amount: 0,
-      copay_opt: 'BEFORE-DEDUCTIBLE',
+      copay_opt: 'before-deductible',
       coinsurance_rate: 0,
-      coinsurance_opt: 'NO-CHARGE-AFTER-DEDUCTIBLE'
+      coinsurance_opt: 'no-charge-after-deductible'
     }
   end
 
@@ -48,7 +48,7 @@ RSpec.describe Formulary::QHPDrugTierCostSharing do
           copay_opt: nil
         )
 
-        expect(no_copay_option.copay_option).to eq('NO-CHARGE')
+        expect(no_copay_option.copay_option).to eq('no-charge')
       end
 
       it 'returns AFTER-DEDUCTIBLE if the copay amount is greater than zero' do
@@ -57,7 +57,7 @@ RSpec.describe Formulary::QHPDrugTierCostSharing do
           copay_opt: nil
         )
 
-        expect(no_copay_option.copay_option).to eq('AFTER-DEDUCTIBLE')
+        expect(no_copay_option.copay_option).to eq('after-deductible')
       end
     end
   end
@@ -74,7 +74,7 @@ RSpec.describe Formulary::QHPDrugTierCostSharing do
           coinsurance_opt: nil
         )
 
-        expect(no_coins_option.coinsurance_option).to eq('NO-CHARGE')
+        expect(no_coins_option.coinsurance_option).to eq('no-charge')
       end
 
       it 'returns AFTER-DEDUCTIBLE if the coinsurance amount is greater than zero' do
@@ -83,7 +83,7 @@ RSpec.describe Formulary::QHPDrugTierCostSharing do
           coinsurance_opt: nil
         )
 
-        expect(no_coins_option.coinsurance_option).to eq('AFTER-DEDUCTIBLE')
+        expect(no_coins_option.coinsurance_option).to eq('after-deductible')
       end
     end
   end

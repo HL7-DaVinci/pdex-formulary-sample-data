@@ -32,26 +32,26 @@ module Formulary
   COINSURANCE_OPTION_EXTENSION = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-CoinsuranceOption-extension'
 
   PHARMACY_TYPE_DISPLAY = {
-    '1-MONTH-IN-RETAIL' => '1 Month Supply via in-network retail pharmacy',
-    '1-MONTH-OUT-RETAIL' => '1 Month Supply via out-of-network retail pharmacy',
-    '1-MONTH-IN-MAIL' => '1 Month Supply via in-network mail order pharmacy',
-    '1-MONTH-OUT-MAIL' => '1 Month Supply via out-of-network mail order pharmacy',
-    '3-MONTH-IN-RETAIL' => '3 Month Supply via in-network retail pharmacy',
-    '3-MONTH-OUT-RETAIL' => '3 Month Supply via out-of-network retail pharmacy',
-    '3-MONTH-IN-MAIL' => '3 Month Supply via in-network mail order pharmacy',
-    '3-MONTH-OUT-MAIL' => '3 Month Supply via out-of-network mail order pharmacy'
+    '1-month-in-retail' => '1 Month Supply via in-network retail pharmacy',
+    '1-month-out-retail' => '1 Month Supply via out-of-network retail pharmacy',
+    '1-month-in-mail' => '1 Month Supply via in-network mail order pharmacy',
+    '1-month-out-mail' => '1 Month Supply via out-of-network mail order pharmacy',
+    '3-month-in-retail' => '3 Month Supply via in-network retail pharmacy',
+    '3-month-out-retail' => '3 Month Supply via out-of-network retail pharmacy',
+    '3-month-in-mail' => '3 Month Supply via in-network mail order pharmacy',
+    '3-month-out-mail' => '3 Month Supply via out-of-network mail order pharmacy'
   }.freeze
 
   DRUG_TIER_DISPLAY = {
-    'GENERIC' => 'Generic',
-    'PREFERRED-GENERIC' => 'Preferred generic',
-    'NON-PREFERRED-GENERIC' => 'Non-preferred generic',
-    'SPECIALTY' => 'Specialty',
-    'BRAND' => 'Brand',
-    'PREFERRED-BRAND' => 'Preferred brand',
-    'NON-PREFERRED-BRAND' => 'Non-preferred brand',
-    'NON-PREFERRED-BRAND-SPECIALTY' => 'Non-preferred brand specialty',
-    'ZERO-COST-SHARE-PREVENTIVE' => 'Zero-cost share preventative',
-    'MEDICAL-SERVICE' => 'Medical service'
+    'generic' => 'Generic',
+    'preferred-generic' => 'Preferred generic',
+    'non-preferred-generic' => 'Non-preferred generic',
+    'specialty' => 'Specialty',
+    'brand' => 'Brand',
+    'preferred-brand' => 'Preferred brand',
+    'non-preferred-brand' => 'Non-preferred brand',
+    'non-preferred-brand-specialty' => 'Non-preferred brand specialty',
+    'zero-cost-share-preventive' => 'Zero-cost share preventative',
+    'medical-service' => 'Medical service'
   }.freeze
 end

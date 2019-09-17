@@ -15,18 +15,18 @@ RSpec.describe Formulary::DrugTierExtensionFactory do
   let(:cost_sharing) do
     [
       Formulary::QHPDrugTierCostSharing.new(
-        pharmacy_type: '1-MONTH-IN-RETAIL',
+        pharmacy_type: '1-month-in-retail',
         copay_amount: 70.0,
-        copay_opt: 'AFTER-DEDUCTIBLE',
+        copay_opt: 'after-deductible',
         coinsurance_rate: 1.0,
-        coinsurance_opt: 'AFTER-DEDUCTIBLE'
+        coinsurance_opt: 'after-deductible'
       ),
       Formulary::QHPDrugTierCostSharing.new(
-        pharmacy_type: '3-MONTH-IN-RETAIL',
+        pharmacy_type: '3-month-in-retail',
         copay_amount: 140.0,
-        copay_opt: 'AFTER-DEDUCTIBLE',
+        copay_opt: 'after-deductible',
         coinsurance_rate: 1.0,
-        coinsurance_opt: 'AFTER-DEDUCTIBLE'
+        coinsurance_opt: 'after-deductible'
       )
     ]
   end
