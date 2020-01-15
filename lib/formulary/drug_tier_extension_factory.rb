@@ -29,12 +29,12 @@ module Formulary
 
     def drug_tier_id_extension
       {
-        url: DRUG_TIER_ID_EXTENSION,
+        url: INTERNAL_DRUG_TIER_ID_EXTENSION,
         valueCodeableConcept: {
           coding: [
             {
               system: DRUG_TIER_SYSTEM,
-              code: tier.name,
+              code: tier.name.downcase,
               display: DRUG_TIER_DISPLAY[tier.name]
             }
           ]

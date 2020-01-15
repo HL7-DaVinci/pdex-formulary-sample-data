@@ -20,6 +20,7 @@ module Formulary
 
     def tier
       drug_plan_info[:drug_tier].downcase
+ 
     end
 
     def prior_auth?

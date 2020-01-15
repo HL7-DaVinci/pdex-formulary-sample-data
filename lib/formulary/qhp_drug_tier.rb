@@ -2,7 +2,7 @@
 
 require_relative 'qhp_drug_tier_cost_sharing'
 module Formulary
-  # An indivudual drug tier as represented by QHP data
+  # An individual drug tier as represented by QHP data
   class QHPDrugTier
     attr_reader :tier
 

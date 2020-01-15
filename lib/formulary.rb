@@ -23,21 +23,22 @@ module Formulary
   EMAIL_CONTACT_EXTENSION = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-EmailPlanContact-extension'
   PLAN_ID_TYPE_EXTENSION = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-PlanIDType-extension'
   DRUG_TIER_ID_EXTENSION = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension'
-  MAIL_ORDER_EXTENSION = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-MailOrder-extension'
-  COST_SHARING_EXTENSION = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-CostSharing-extension'
-  PHARMACY_TYPE_EXTENSION = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-PharmacyType-extension'
-  COPAY_AMOUNT_EXTENSION = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-CopayAmount-extension'
-  COPAY_OPTION_EXTENSION = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-CopayOption-extension'
-  COINSURANCE_RATE_EXTENSION = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-CoInsuranceRate-extension'
-  COINSURANCE_OPTION_EXTENSION = 'http://hl7.org/fhir/us/Davinci-drug-formulary/StructureDefinition/usdf-CoinsuranceOption-extension'
+  INTERNAL_DRUG_TIER_ID_EXTENSION = 'drugTierID'
+  MAIL_ORDER_EXTENSION = 'mailOrder'
+  COST_SHARING_EXTENSION = 'costSharing'
+  PHARMACY_TYPE_EXTENSION = 'pharmacyType'
+  COPAY_AMOUNT_EXTENSION = 'copayAmount'
+  COPAY_OPTION_EXTENSION = 'copayOption'
+  COINSURANCE_RATE_EXTENSION = 'coinsuranceRate'
+  COINSURANCE_OPTION_EXTENSION = 'coinsuranceOption'
 
   PHARMACY_TYPE_DISPLAY = {
-    '1-month-in-retail' => '1 Month Supply via in-network retail pharmacy',
-    '1-month-out-retail' => '1 Month Supply via out-of-network retail pharmacy',
+    '1-month-in-retail' => '1 month in network retail',
+    '1-month-out-retail' => '1 month out of network retail',
     '1-month-in-mail' => '1 Month Supply via in-network mail order pharmacy',
     '1-month-out-mail' => '1 Month Supply via out-of-network mail order pharmacy',
-    '3-month-in-retail' => '3 Month Supply via in-network retail pharmacy',
-    '3-month-out-retail' => '3 Month Supply via out-of-network retail pharmacy',
+    '3-month-in-retail' => '3 month in network retail',
+    '3-month-out-retail' => '3 month out of network retail',
     '3-month-in-mail' => '3 Month Supply via in-network mail order pharmacy',
     '3-month-out-mail' => '3 Month Supply via out-of-network mail order pharmacy'
   }.freeze
@@ -51,7 +52,7 @@ module Formulary
     'preferred-brand' => 'Preferred brand',
     'non-preferred-brand' => 'Non-preferred brand',
     'non-preferred-brand-specialty' => 'Non-preferred brand specialty',
-    'zero-cost-share-preventive' => 'Zero-cost share preventative',
+    'zero-cost-share-preventive' => 'Zero-cost share preventive',
     'medical-service' => 'Medical service'
   }.freeze
 end
