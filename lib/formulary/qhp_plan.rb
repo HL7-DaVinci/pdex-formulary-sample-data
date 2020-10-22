@@ -6,6 +6,13 @@ module Formulary
     attr_reader :raw_plan
 
     def initialize(raw_plan)
+      raw_plan[:formulary].map  { |tier| 
+
+        if tier[:drug_tier] == "ZERO-COST-SHARE-PREVENTIVE"
+          tier[:drug_tier] = "ZERO-COST-SHARE-PREVENTATIVE"
+        end
+
+       }
       @raw_plan = raw_plan.freeze
     end
 

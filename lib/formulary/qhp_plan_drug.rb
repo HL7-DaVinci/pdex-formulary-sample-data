@@ -19,6 +19,11 @@ module Formulary
     end
 
     def tier
+
+      if drug_plan_info[:drug_tier] == "ZERO-COST-SHARE-PREVENTIVE"
+        drug_plan_info[:drug_tier] = "ZERO-COST-SHARE-PREVENTATIVE"
+      end
+
       drug_plan_info[:drug_tier].downcase
  
     end

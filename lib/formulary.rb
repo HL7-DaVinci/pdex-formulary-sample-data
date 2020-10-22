@@ -33,26 +33,28 @@ module Formulary
   COINSURANCE_OPTION_EXTENSION = 'coinsuranceOption'
 
   PHARMACY_TYPE_DISPLAY = {
-    '1-month-in-retail' => '1 month in network retail',
-    '1-month-out-retail' => '1 month out of network retail',
-    '1-month-in-mail' => '1 Month Supply via in-network mail order pharmacy',
-    '1-month-out-mail' => '1 Month Supply via out-of-network mail order pharmacy',
-    '3-month-in-retail' => '3 month in network retail',
-    '3-month-out-retail' => '3 month out of network retail',
-    '3-month-in-mail' => '3 Month Supply via in-network mail order pharmacy',
-    '3-month-out-mail' => '3 Month Supply via out-of-network mail order pharmacy'
+    '1-month-in-retail' => "1 month in network retail: 1 Month Supply via in-network retail pharmacy.",
+    '1-month-out-retail' => "1 month out of network retail: 1 Month Supply via out-of-network retail pharmacy.",
+    '1-month-in-mail' => "1 month in network mail order: 1 Month Supply via in-network mail order pharmacy.",
+    '1-month-out-mail' => "1 month out of network mail order: 1 Month Supply via out-of-network mail order pharmacy.",
+    '3-month-in-retail' => "3 month in network retail: 3 Month Supply via in-network retail pharmacy.",
+    '3-month-out-retail' => "3 month out of network retail: 3 Month Supply via out-of-network retail pharmacy.",
+    '3-month-in-mail' => "3 month in network mail order: 3 Month Supply via in-network mail order pharmacy.",
+    '3-month-out-mail' => "3 month out of network mail order: 3 Month Supply via out-of-network mail order pharmacy."
   }.freeze
 
   DRUG_TIER_DISPLAY = {
-    'generic' => 'Generic',
-    'preferred-generic' => 'Preferred generic',
-    'non-preferred-generic' => 'Non-preferred generic',
-    'specialty' => 'Specialty',
-    'brand' => 'Brand',
-    'preferred-brand' => 'Preferred brand',
-    'non-preferred-brand' => 'Non-preferred brand',
-    'non-preferred-brand-specialty' => 'Non-preferred brand specialty',
-    'zero-cost-share-preventive' => 'Zero-cost share preventive',
-    'medical-service' => 'Medical service'
+    'generic' => "Generic: Commonly prescribed generic drugs that cost more than drugs in the ‘preferred generic’ tier.",
+    'preferred-generic' => "Preferred Generic: Commonly prescribed generic drugs.",
+    'non-preferred-generic' => "Non-preferred Generic: Generic drugs that cost more than drugs in ‘generic’ tier.",
+    'specialty' => "Specialty: Drugs used to treat complex conditions like cancer and multiple sclerosis. They can be generic or brand name, and are typically the most expensive drugs on the formulary.",
+    'brand' => "Brand: Brand name drugs that cost more than ‘preferred brand’ drugs.",
+    'preferred-brand' => "Preferred Brand: Brand name drugs",
+    'non-preferred-brand' => "Non-preferred Brand: Brand name drugs that cost more than ‘brand’ drugs.",
+   # 'non-preferred-brand-specialty' => 'Non-preferred brand specialty',
+    'zero-cost-share-preventative' => "Zero cost-share preventative: Preventative medications and products available at no cost.",
+    'medical-service' => "Medical Service: Drugs that must be administered by a clinician or in a facility and may be covered under a medical benefit."
   }.freeze
 end
+
+

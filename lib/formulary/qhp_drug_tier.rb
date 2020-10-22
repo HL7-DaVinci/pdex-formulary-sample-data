@@ -8,6 +8,9 @@ module Formulary
 
     def initialize(tier)
       @tier = tier
+      if tier[:drug_tier] == "ZERO-COST-SHARE-PREVENTIVE"
+        tier[:drug_tier] = "ZERO-COST-SHARE-PREVENTATIVE"
+      end
     end
 
     def name
