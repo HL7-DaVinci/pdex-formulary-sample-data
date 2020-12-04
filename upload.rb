@@ -42,7 +42,7 @@ def upload_conformance_resources
       .each do |entry|
         resource = JSON.parse(entry.get_input_stream.read, symbolize_names: true)
         response = upload_resource(resource)
-        binding.pry unless response.success?
+        # binding.pry unless response.success?
       end
   end
 ensure
