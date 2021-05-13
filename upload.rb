@@ -5,7 +5,7 @@ require 'httparty'
 require 'tmpdir'
 require 'fileutils'
 
-FHIR_SERVER = 'http://localhost:8080/hapi-fhir-jpaserver/fhir/'
+FHIR_SERVER = 'http://localhost:8080/plan-net/fhir'
 
 def upload_conformance_resources_from_git
   begin
@@ -49,7 +49,7 @@ ensure
   definitions_file.unlink
 end
 
-def upload_sample_resources
+def upload_devoted_resources
   file_path = File.join(__dir__, 'output', '**/*.json')
   filenames =
     Dir.glob(file_path)
@@ -97,4 +97,4 @@ end
 
 # upload_us_core_resources
 upload_conformance_resources
-upload_sample_resources
+upload_devoted_resources

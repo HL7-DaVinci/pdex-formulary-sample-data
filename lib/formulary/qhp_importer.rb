@@ -14,7 +14,11 @@ module Formulary
 
     def import
       urls.each do |url|
-        qhp_raw_data = HTTParty.get(url, verify: false) # FIXME
+        if url.start_with?("http") then
+          qhp_raw_data = HTTParty.get(url, verify: false) # FIXME
+        else
+          qhp_raw_data = File.read(url)
+        end
         qhp_json.concat(JSON.parse(qhp_raw_data, symbolize_names: true))
       end
       repo.import(qhp_json)
