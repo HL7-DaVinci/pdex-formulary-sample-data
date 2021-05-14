@@ -14,7 +14,7 @@ module Formulary
     end
 
     def name
-      @name ||= tier[:drug_tier].downcase
+      @name ||= tier[:drug_tier].nil? ? nil : tier[:drug_tier].downcase
     end
 
     def mail_order?

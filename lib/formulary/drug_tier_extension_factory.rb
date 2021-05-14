@@ -28,6 +28,7 @@ module Formulary
     end
 
     def drug_tier_id_extension
+      return nil if tier.nil? || tier.name.nil?
       {
         url: INTERNAL_DRUG_TIER_ID_EXTENSION,
         valueCodeableConcept: {

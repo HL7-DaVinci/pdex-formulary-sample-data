@@ -49,7 +49,7 @@ module Formulary
     end
 
     def network
-      @network ||= raw_plan[:network].map { |network| network[:network_tier] }
+      @network ||= raw_plan[:network].nil? ? nil : raw_plan[:network].map { |network| network[:network_tier] }
     end
 
     def tiers
