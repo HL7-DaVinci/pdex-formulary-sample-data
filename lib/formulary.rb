@@ -52,9 +52,24 @@ module Formulary
     'preferred-brand' => "Preferred Brand: Brand name drugs",
     'non-preferred-brand' => "Non-preferred Brand: Brand name drugs that cost more than ‘brand’ drugs.",
    # 'non-preferred-brand-specialty' => 'Non-preferred brand specialty',
-    'zero-cost-share-preventative' => "Zero cost-share preventative: Preventative medications and products available at no cost.",
+    'zero-cost-share-preventative' => "Zero cost-share preventative: Preventive medications and products available at no cost.",
     'medical-service' => "Medical Service: Drugs that must be administered by a clinician or in a facility and may be covered under a medical benefit."
   }.freeze
+
+
+  COPAY_OPTION_DISPLAY = {
+    'after-deductible' => "After Deductible: The consumer first pays the deductible, and after the deductible is met, the consumer is responsible only for the copay (this indicates that this benefit is subject to the deductible).",
+    'before-deductible' => "Before Deductible: The consumer first pays the copay, and any net remaining allowed charges accrue to the deductible (this indicates that this benefit is subject to the deductible).",
+    'no-charge' => "No Charge: No cost sharing is charged (this indicates that this benefit is not subject to the deductible).",
+    'no-charge-after-deductible' => "No Charge After Deductible: The consumer first pays the deductible, and after the deductible is met, no copayment is charged (this indicates that this benefit is subject to the deductible)."
+}.freeze
+
+  COINSURANCE_OPTION_DISPLAY = {
+    'after-deductible' => "After Deductible: The consumer first pays the deductible, and after the deductible is met, the consumer pays the coinsurance portion of allowed charges (this indicates that this benefit is subject to the deductible).",
+    'no-charge' => "No Charge: No cost sharing is charged (this indicates that this benefit is not subject to the deductible).",
+    'no-charge-after-deductible' => "No Charge After Deductible: The consumer first pays the deductible, and after thedeductible is met, no coinsurance is charged (this indicates that this benefit is subject to the deductible)"
+}.freeze
+
 end
 
 

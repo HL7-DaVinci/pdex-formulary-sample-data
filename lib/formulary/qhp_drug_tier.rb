@@ -10,6 +10,10 @@ module Formulary
       @tier = tier
       if tier[:drug_tier] == "ZERO-COST-SHARE-PREVENTIVE"
         tier[:drug_tier] = "ZERO-COST-SHARE-PREVENTATIVE"
+      elsif tier[:drug_tier] == "MEDICAL-BENEFIT"
+          tier[:drug_tier] = "MEDICAL-SERVICE"
+      elsif tier[:drug_tier] == "NON-PREFERRED-BRAND-SPECIALTY"
+          tier[:drug_tier] = "SPECIALTY"
       end
     end
 

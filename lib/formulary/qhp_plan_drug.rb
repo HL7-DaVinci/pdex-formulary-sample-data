@@ -20,9 +20,13 @@ module Formulary
 
     def tier
 
-      if drug_plan_info[:drug_tier] == "ZERO-COST-SHARE-PREVENTIVE"
-        drug_plan_info[:drug_tier] = "ZERO-COST-SHARE-PREVENTATIVE"
-      end
+    if drug_plan_info[:drug_tier] == "ZERO-COST-SHARE-PREVENTIVE"
+      drug_plan_info[:drug_tier] = "ZERO-COST-SHARE-PREVENTATIVE"
+    elsif drug_plan_info[:drug_tier] == "MEDICAL-BENEFIT"
+      drug_plan_info[:drug_tier] = "MEDICAL-SERVICE"
+    elsif drug_plan_info[:drug_tier] == "NON-PREFERRED-BRAND-SPECIALTY"
+      drug_plan_info[:drug_tier] = "SPECIALTY"
+    end
 
       drug_plan_info[:drug_tier].downcase
  

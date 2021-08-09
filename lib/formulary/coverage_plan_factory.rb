@@ -16,6 +16,8 @@ module Formulary
     end
 
     def build(entries) # rubocop:disable Metrics/MethodLength
+      name.strip!
+
       FHIR::List.new(
         id: id,
         meta: meta,

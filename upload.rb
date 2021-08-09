@@ -5,7 +5,7 @@ require 'httparty'
 require 'tmpdir'
 require 'fileutils'
 
-FHIR_SERVER = 'http://localhost:8080/hapi-fhir-jpaserver/fhir/'
+FHIR_SERVER = 'http://localhost:8080/fhir/'
 
 def upload_conformance_resources_from_git
   begin

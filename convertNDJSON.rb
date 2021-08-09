@@ -2,7 +2,7 @@ require 'json'
 require 'pry'
 
 FHIR_SERVER_BASE = "http://davinci-plan-net-ri.logicahealth.org/plan-net"
-
+#FHIR_SERVER_BASE = "https://davinci-drug-formulary-ri.logicahealth.org/fhir"
 # First output the *List*.json, these are the CoveragePlan profile instances
 puts "working on input directory: output..."
 FileUtils.mkdir_p("export/")

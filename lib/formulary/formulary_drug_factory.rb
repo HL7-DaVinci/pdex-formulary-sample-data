@@ -49,7 +49,8 @@ module Formulary
     def text
       {
         status: 'generated',
-        div: '<div xmlns="http://www.w3.org/1999/xhtml"></div>'
+        #div: '<div xmlns="http://www.w3.org/1999/xhtml"></div>'
+        div: %(<div xmlns="http://www.w3.org/1999/xhtml">#{plan_drug.name}</div>)
       }
     end
 
