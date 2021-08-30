@@ -28,12 +28,25 @@ module Formulary
         title: name,
         date: plan.last_updated,
         entry: entries,
-        extension: extension
+        extension: extension,
+        code: code
       )
     end
 
     private
 
+    def code
+      {
+        coding: [
+          {
+            system: ACT_CODE_SYSTEM,
+            code: 'DRUGPOL',
+            display: 'drug policy'
+          }
+        ]
+      }
+    end
+    
     def name
       plan.marketing_name
     end
@@ -82,12 +95,18 @@ module Formulary
     end
 
     def network_extension(value)
-      return if value.nil?
+      if value.nil?
+        {
+          url: NETWORK_EXTENSION,
+          valueString: 'Not applicable'
+        }
+      else
+        {
+          url: NETWORK_EXTENSION,
+          valueString: value
+        }
+      end
 
-      {
-        url: NETWORK_EXTENSION,
-        valueString: value
-      }
     end
 
     def summary_url_extension
