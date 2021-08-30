@@ -96,7 +96,7 @@ module Formulary
 
       {
         url: SUMMARY_URL_EXTENSION,
-        valueString: value
+        valueUrl: value
       }
     end
 
@@ -106,7 +106,7 @@ module Formulary
 
       {
         url: FORMULARY_URL_EXTENSION,
-        valueString: value
+        valueUrl: value
       }
     end
 
@@ -116,7 +116,7 @@ module Formulary
 
       {
         url: EMAIL_CONTACT_EXTENSION,
-        valueString: value
+        valueUrl: value
       }
     end
 
@@ -126,7 +126,7 @@ module Formulary
 
       {
         url: MARKETING_URL_EXTENSION,
-        valueString: value
+        valueUrl: value
       }
     end
 
