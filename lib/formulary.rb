@@ -25,6 +25,7 @@ module Formulary
   DRUG_TIER_ID_EXTENSION = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension'
   INTERNAL_DRUG_TIER_ID_EXTENSION = 'drugTierID'
   MAIL_ORDER_EXTENSION = 'mailOrder'
+  OPTIONAL_MAIL_ORDER_EXTENTION = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-MailOrder-extension' #for FormularyDrug profile
   COST_SHARING_EXTENSION = 'costSharing'
   PHARMACY_TYPE_EXTENSION = 'pharmacyType'
   COPAY_AMOUNT_EXTENSION = 'copayAmount'
@@ -61,7 +62,9 @@ module Formulary
     'after-deductible' => "After Deductible: The consumer first pays the deductible, and after the deductible is met, the consumer is responsible only for the copay (this indicates that this benefit is subject to the deductible).",
     'before-deductible' => "Before Deductible: The consumer first pays the copay, and any net remaining allowed charges accrue to the deductible (this indicates that this benefit is subject to the deductible).",
     'no-charge' => "No Charge: No cost sharing is charged (this indicates that this benefit is not subject to the deductible).",
-    'no-charge-after-deductible' => "No Charge After Deductible: The consumer first pays the deductible, and after the deductible is met, no copayment is charged (this indicates that this benefit is subject to the deductible)."
+    'no-charge-after-deductible' => "No Charge After Deductible: The consumer first pays the deductible, and after the deductible is met, no copayment is charged (this indicates that this benefit is subject to the deductible).",
+    'charge' => "Charge: The consumer always pays just the copay and the issuer pays the remainder of allowed charges (this indicates that this benefit is not subject to the deductible).",
+    'not-applicable' => "Deductible is not applicable: Zero-deductible cost sharing represented by a co-pay value of 'Not applicable' and co-insurance value of 'No charge'."
 }.freeze
 
   COINSURANCE_OPTION_DISPLAY = {
