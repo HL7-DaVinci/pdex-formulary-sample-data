@@ -71,7 +71,9 @@ module Formulary
   COINSURANCE_OPTION_DISPLAY = {
     'after-deductible' => "After Deductible: The consumer first pays the deductible, and after the deductible is met, the consumer pays the coinsurance portion of allowed charges (this indicates that this benefit is subject to the deductible).",
     'no-charge' => "No Charge: No cost sharing is charged (this indicates that this benefit is not subject to the deductible).",
-    'no-charge-after-deductible' => "No Charge After Deductible: The consumer first pays the deductible, and after thedeductible is met, no coinsurance is charged (this indicates that this benefit is subject to the deductible)"
+    'no-charge-after-deductible' => "No Charge After Deductible: The consumer first pays the deductible, and after thedeductible is met, no coinsurance is charged (this indicates that this benefit is subject to the deductible)",
+    'charge' => "Charge: The consumer always pays just the coinsurance and the issuer pays the remainder of allowed charges (this indicates that this benefit is not subject to the deductible).",
+    'not-applicable' => "The consumer pays only a copay. Note: When using Not Applicable for coinsurance, Not Applicable cannot also be used for copay (unless the drug tier type is Medical Service Drugs)."
 }.freeze
 
 end
