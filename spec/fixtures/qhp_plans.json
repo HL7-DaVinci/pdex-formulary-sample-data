@@ -3,8 +3,8 @@
     "plan_id_type": "HIOS-PLAN-ID",
     "plan_id": "PLAN_ID_1",
     "years": [
-      2018,
-      2019
+      2021,
+      2022
     ],
     "marketing_name": "MARKETING_NAME_1",
     "formulary_url": "http://example.com/formulary",
@@ -120,6 +120,6 @@
         ]
       }
     ],
-    "last_updated_on": "2019-06-10"
+    "last_updated_on": "2022-06-10"
   }
 ]

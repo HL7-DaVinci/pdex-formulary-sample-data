@@ -25,9 +25,10 @@ module Formulary
         text: text,
         status: 'current',
         mode: 'snapshot',
+        code: code,
         title: name,
         date: plan.last_updated,
-        entry: entries,
+        #entry: entries,
         extension: extension
       )
     end
@@ -69,6 +70,19 @@ module Formulary
         div: %(<div xmlns="http://www.w3.org/1999/xhtml">#{name}</div>)
       }
     end
+
+    def code
+      {
+        coding: [
+          {
+            system: COVERAGE_PLAN_LIST_CODE_SYSTEM,
+            code: COVERAGE_PLAN_LIST_CODE_CODE,
+            display: COVERAGE_PLAN_LIST_CODE_DISPLAY
+          }
+        ]
+      }
+    end
+
 
     def drug_tier_extensions
       plan.tiers.map { |tier| DrugTierExtensionFactory.new(QHPDrugTier.new(tier)).build }

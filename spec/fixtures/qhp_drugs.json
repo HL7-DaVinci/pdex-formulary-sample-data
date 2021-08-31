@@ -11,20 +11,20 @@
         "step_therapy": true,
         "quantity_limit": true,
         "years": [
-          2018,
-          2019
+          2021,
+          2022
         ]
       },
       {
-        "plan_id_type": "HIOS-PLAN-ID",
+        "plan_id_type": "OTHER-PLAN-ID",
         "plan_id": "PLAN_ID_2",
         "drug_tier": "GENERIC",
         "prior_authorization": false,
         "step_therapy": false,
         "quantity_limit": false,
         "years": [
-          2018,
-          2019
+          2021,
+          2022
         ]
       }
     ]
@@ -41,8 +41,8 @@
         "step_therapy": true,
         "quantity_limit": true,
         "years": [
-          2018,
-          2019
+          2021,
+          2022
         ]
       },
       {
@@ -53,8 +53,8 @@
         "step_therapy": false,
         "quantity_limit": false,
         "years": [
-          2018,
-          2019
+          2021,
+          2022
         ]
       }
     ]
@@ -64,15 +64,15 @@
     "drug_name": "DRUG_NAME_3",
     "plans": [
       {
-        "plan_id_type": "HIOS-PLAN-ID",
+        "plan_id_type": "OTHER-PLAN-ID",
         "plan_id": "PLAN_ID_1",
         "drug_tier": "GENERIC",
         "prior_authorization": true,
         "step_therapy": true,
         "quantity_limit": true,
         "years": [
-          2018,
-          2019
+          2021,
+          2022
         ]
       },
       {
@@ -83,8 +83,8 @@
         "step_therapy": false,
         "quantity_limit": false,
         "years": [
-          2018,
-          2019
+          2021,
+          2022
         ]
       }
     ]

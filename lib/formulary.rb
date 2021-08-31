@@ -9,6 +9,7 @@ module Formulary
   PHARMACY_TYPE_SYSTEM = 'http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PharmacyTypeCS'
   COPAY_OPTION_SYSTEM = 'http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-CopayOptionCS'
   COINSURANCE_OPTION_SYSTEM = 'http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-CoinsuranceOptionCS'
+  COVERAGE_PLAN_LIST_CODE_SYSTEM = "http://terminology.hl7.org/CodeSystem/v3-ActCode"
 
   DRUG_TIER_EXTENSION = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension'
   PLAN_ID_EXTENSION = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanID-extension'
@@ -31,43 +32,45 @@ module Formulary
   COPAY_OPTION_EXTENSION = 'copayOption'
   COINSURANCE_RATE_EXTENSION = 'coinsuranceRate'
   COINSURANCE_OPTION_EXTENSION = 'coinsuranceOption'
+  COVERAGE_PLAN_LIST_CODE_CODE = "DRUGPOL"
+  COVERAGE_PLAN_LIST_CODE_DISPLAY = "drug policy"
 
   PHARMACY_TYPE_DISPLAY = {
-    '1-month-in-retail' => "1 month in network retail: 1 Month Supply via in-network retail pharmacy.",
-    '1-month-out-retail' => "1 month out of network retail: 1 Month Supply via out-of-network retail pharmacy.",
-    '1-month-in-mail' => "1 month in network mail order: 1 Month Supply via in-network mail order pharmacy.",
-    '1-month-out-mail' => "1 month out of network mail order: 1 Month Supply via out-of-network mail order pharmacy.",
-    '3-month-in-retail' => "3 month in network retail: 3 Month Supply via in-network retail pharmacy.",
-    '3-month-out-retail' => "3 month out of network retail: 3 Month Supply via out-of-network retail pharmacy.",
-    '3-month-in-mail' => "3 month in network mail order: 3 Month Supply via in-network mail order pharmacy.",
-    '3-month-out-mail' => "3 month out of network mail order: 3 Month Supply via out-of-network mail order pharmacy."
+    '1-month-in-retail' => "1 month in network retail",
+    '1-month-out-retail' => "1 month out of network retail",
+    '1-month-in-mail' => "1 month in network mail order",
+    '1-month-out-mail' => "1 month out of network mail order",
+    '3-month-in-retail' => "3 month in network retail",
+    '3-month-out-retail' => "3 month out of network retail",
+    '3-month-in-mail' => "3 month in network mail order",
+    '3-month-out-mail' => "3 month out of network mail order"
   }.freeze
 
   DRUG_TIER_DISPLAY = {
-    'generic' => "Generic: Commonly prescribed generic drugs that cost more than drugs in the ‘preferred generic’ tier.",
-    'preferred-generic' => "Preferred Generic: Commonly prescribed generic drugs.",
-    'non-preferred-generic' => "Non-preferred Generic: Generic drugs that cost more than drugs in ‘generic’ tier.",
-    'specialty' => "Specialty: Drugs used to treat complex conditions like cancer and multiple sclerosis. They can be generic or brand name, and are typically the most expensive drugs on the formulary.",
-    'brand' => "Brand: Brand name drugs that cost more than ‘preferred brand’ drugs.",
-    'preferred-brand' => "Preferred Brand: Brand name drugs",
-    'non-preferred-brand' => "Non-preferred Brand: Brand name drugs that cost more than ‘brand’ drugs.",
+    'generic' => "Generic",
+    'preferred-generic' => "Preferred Generic",
+    'non-preferred-generic' => "Non-preferred Generic",
+    'specialty' => "Specialty",
+    'brand' => "Brand",
+    'preferred-brand' => "Preferred Brand",
+    'non-preferred-brand' => "Non-preferred Brand",
    # 'non-preferred-brand-specialty' => 'Non-preferred brand specialty',
-    'zero-cost-share-preventative' => "Zero cost-share preventative: Preventive medications and products available at no cost.",
-    'medical-service' => "Medical Service: Drugs that must be administered by a clinician or in a facility and may be covered under a medical benefit."
+    'zero-cost-share-preventative' => "Zero cost-share preventative",
+    'medical-service' => "Medical Service"
   }.freeze
 
 
   COPAY_OPTION_DISPLAY = {
-    'after-deductible' => "After Deductible: The consumer first pays the deductible, and after the deductible is met, the consumer is responsible only for the copay (this indicates that this benefit is subject to the deductible).",
-    'before-deductible' => "Before Deductible: The consumer first pays the copay, and any net remaining allowed charges accrue to the deductible (this indicates that this benefit is subject to the deductible).",
-    'no-charge' => "No Charge: No cost sharing is charged (this indicates that this benefit is not subject to the deductible).",
-    'no-charge-after-deductible' => "No Charge After Deductible: The consumer first pays the deductible, and after the deductible is met, no copayment is charged (this indicates that this benefit is subject to the deductible)."
+    'after-deductible' => "After Deductible",
+    'before-deductible' => "Before Deductible",
+    'no-charge' => "No Charge",
+    'no-charge-after-deductible' => "No Charge After Deductible"
 }.freeze
 
   COINSURANCE_OPTION_DISPLAY = {
-    'after-deductible' => "After Deductible: The consumer first pays the deductible, and after the deductible is met, the consumer pays the coinsurance portion of allowed charges (this indicates that this benefit is subject to the deductible).",
-    'no-charge' => "No Charge: No cost sharing is charged (this indicates that this benefit is not subject to the deductible).",
-    'no-charge-after-deductible' => "No Charge After Deductible: The consumer first pays the deductible, and after thedeductible is met, no coinsurance is charged (this indicates that this benefit is subject to the deductible)"
+    'after-deductible' => "After Deductible",
+    'no-charge' => "No Charge",
+    'no-charge-after-deductible' => "No Charge After Deductible"
 }.freeze
 
 end
