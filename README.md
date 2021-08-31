@@ -1,9 +1,21 @@
 # QHP to FHIR
 
-This project uses QHP data to create FHIR resources based on the [DaVinci US Drug Formulary Implementation Guide](http://build.fhir.org/ig/HL7/davinci-pdex-formulary/). Currently, the following are created:
+This project uses QHP data to create FHIR resources based on the [DaVinci US Drug Formulary Implementation Guide Draft STU2](https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/stu2-draft/). Currently, the following are created:
 
-- [MedicationKnowledge](http://hl7.org/fhir/R4/medicationknowledge.html) resources (based on the [FormularyDrug](http://build.fhir.org/ig/HL7/davinci-pdex-formulary/StructureDefinition-usdf-FormularyDrug.html) profile)
-- The `entry` field for a [List](http://hl7.org/fhir/R4/list.html) (based on the [CoveragePlan](http://build.fhir.org/ig/HL7/davinci-pdex-formulary/StructureDefinition-usdf-CoveragePlan.html) profile) containing references for the created MedicationKnowledge resources
+<ul>
+  <li>
+    <strong><a href="https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/stu2-draft/StructureDefinition-usdf-PayerInsurancePlan.html">PayerInsurancePlan</a></strong>: The PayerInsurancePlan profile of the FHIR R4 <a href="http://hl7.org/fhir/R4/insuranceplan.html">InsurancePlan</a> resource defines the top level package of health insurance coverage benefits that a payer offers.
+  </li>
+  <li>
+    <strong><a href="https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/stu2-draft/StructureDefinition-usdf-InsuranceDrugPlan.html">InsuranceDrugPlan</a></strong>: The InsuranceDrugPlan profile of the FHIR R4 <a href="http://hl7.org/fhir/R4/insuranceplan.html">InsurancePlan</a> describes a prescription drug insurance offering comprised of drug benefits including a definition of drug tiers and their associated cost-sharing models and additional information about the plan, such as networks, a coverage area, contact information, etc.
+  </li>
+  <li>
+    <strong><a href="https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/stu2-draft/StructureDefinition-usdf-FormularyItem.html">FormularyItem</a></strong>: The FormularyItem profile of the FHIR R4 <a href="http://hl7.org/fhir/R4/basic.html">Basic</a> describes a drug's relationship to a drug plan, including drug tier, prior authorization requirements, and more. The set of FormuaryItem resrouces associated with a particular drug plan represents the drug plans formulary.
+  </li>
+  <li>
+    <strong><a href="https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/stu2-draft/StructureDefinition-usdf-FormularyDrug.html">FormularyDrug</a></strong>: The FormularyDrug profile of the FHIR R4 <a href="http://hl7.org/fhir/medicationknowledge.html">MedicationKnowledge</a> resource provides information about a prescribable drug which may be part of a formulary including its RxNorm code, synonyms, and optionally drug classification and alternatives.
+  </li>
+
 
 ## Instructions
 
