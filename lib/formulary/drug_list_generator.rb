@@ -9,7 +9,6 @@ require_relative 'formulary_drug_factory'
 require_relative 'formulary_item_factory'
 require_relative 'payer_insurance_plan_factory'
 require_relative 'insurance_drug_plan_factory'
-#require_relative 'coverage_plan_factory'
 
 module Formulary
   # This class generates FormularyDrug resources for a particular plan
@@ -27,7 +26,6 @@ module Formulary
       end
       return if list.empty?
 
-      #write_coverage_plan
       write_payer_insurance_plan
       write_insurance_drug_plan
     end
@@ -64,68 +62,28 @@ module Formulary
 
     def create_drug(drug)
       plan_drug = QHPPlanDrug.new(drug, plan)
-      id = "#{id_prefix}-#{count.to_s.rjust(5, '0')}" # not sure what this does, but if the right of the = is not called, it causes the program to crash
+      id = "#{id_prefix}-#{count.to_s.rjust(5, '0')}" # if the right of the = is not called, it causes the program to crash
       id = plan_drug.rxnorm_code       
       write_resource(FormularyDrugFactory.new(plan_drug).build(plan_drug.rxnorm_code))
-      #FormularyDrugFactory.new(plan_drug).build(plan_drug.rxnorm_code)
       
       add_to_list(id)
-      #if plan_drug.step_therapy_limit?
-        write_resource(FormularyItemFactory.new(plan, plan_drug).build()) 
-      #end
+
+      write_resource(FormularyItemFactory.new(plan, plan_drug).build()) 
+   
     end
-
-
-    #def write_drug(resource)
-      #output_directory = File.join(base_output_directory, id_prefix)
-      #FileUtils.mkdir_p(output_directory)
-      #output_path = File.join(output_directory, "#{resource.id}.MedicationKnowledge.json")
-      
-    #  FileUtils.mkdir_p base_output_directory
-    #  drug_path = File.join(base_output_directory, "#{resource.id}.MedicationKnowledge.json")
-      
-    #  File.open(drug_path, 'w') do |file|
-    #    file.write(resource.to_json)
-    #  end
-    #end
-
-    
-
-    #def write_coverage_plan
-    #  FileUtils.mkdir_p base_output_directory
-    #  plan_path = File.join(base_output_directory, "#{id_prefix}.List.json")
-    #  coverage_plan = CoveragePlanFactory.new(plan, id_prefix).build(list)
-    #  File.open(plan_path, 'w') do |file|
-    #    file.write(coverage_plan.to_json)
-    #  end
-    #end
 
     
     def write_payer_insurance_plan
-      #FileUtils.mkdir_p base_output_directory
-      #plan_path = File.join(base_output_directory, "#{id_prefix}.Payer.InsurancePlan.json")
-      #plan_path = File.join(base_output_directory, "#{plan.id}.Payer.InsurancePlan.json")
       write_resource(PayerInsurancePlanFactory.new(plan, id_prefix).build(list))
-
-      #File.open(plan_path, 'w') do |file|
-      #  file.write(payer_insurance_plan.to_json)
-      #end
     end
 
     def write_insurance_drug_plan
-      #FileUtils.mkdir_p base_output_directory
-      #plan_path = File.join(base_output_directory, "#{plan.id}.Drug.InsurancePlan.json")
       write_resource(InsuranceDrugPlanFactory.new(plan, id_prefix).build(list))
-      #File.open(plan_path, 'w') do |file|
-      #  file.write(insurance_drug_plan.to_json)
-      #end
     end
 
 
     def write_resource(resource)
       output_directory = File.join(base_output_directory, resource.resourceType)
-      #FileUtils.mkdir_p(output_directory)
-      #output_path = File.join(output_directory, "#{resource.id}.MedicationKnowledge.json")
       
       FileUtils.mkdir_p output_directory
       file_path = File.join(output_directory, "#{resource.id}.#{resource.resourceType}.json")
