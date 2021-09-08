@@ -14,10 +14,12 @@ module Formulary
 
     def build(id = nil)
       FHIR::MedicationKnowledge.new(
-        id: id,
+        id: "Drug-" + id, 
         code: code,
-        extension: extension,
-        text: text,
+        status: 'active',
+        #dose_form: dose_form,
+        # TODO Need to do related Medication Knowledge (possibly optional based on testing outcomes)
+        # Can we add classigfication for testing? Will need to build out source data more.
         meta: meta
       )
     end
@@ -36,15 +38,16 @@ module Formulary
       }
     end
 
-    def extension
-      [
-        tier_extension,
-        prior_auth_extension,
-        step_therapy_extension,
-        quantity_extension,
-        plan_id_extension
-      ]
-    end
+    # Extensions moved to FormularyItem
+    #def extension
+    #  [
+    #    tier_extension,
+    #    prior_auth_extension,
+    #    step_therapy_extension,
+    #    quantity_extension,
+    #    plan_id_extension
+    #  ]
+    #end
 
     def text
       {
@@ -55,50 +58,54 @@ module Formulary
     end
 
     def meta
-      { profile: [FORMULARY_PROFILE] }
-    end
-
-    def tier_extension # rubocop:disable Metrics/MethodLength
       {
-        url: DRUG_TIER_EXTENSION,
-        valueCodeableConcept: {
-          coding: [
-            {
-              code: plan_drug.tier,
-              display: DRUG_TIER_DISPLAY[plan_drug.tier],
-              system: DRUG_TIER_SYSTEM
-            }
-          ]
-        }
+        profile: [FORMULARY_PROFILE],
+        lastUpdated: '2021-08-31T10:03:10Z'
       }
     end
+    
+    # Extensions moved to FormularyItem
+    #def tier_extension # rubocop:disable Metrics/MethodLength
+    #  {
+    #    url: DRUG_TIER_EXTENSION,
+    #    valueCodeableConcept: {
+    #      coding: [
+    #        {
+    #          code: plan_drug.tier,
+    #          display: DRUG_TIER_DISPLAY[plan_drug.tier],
+    #          system: DRUG_TIER_SYSTEM
+    #        }
+    #      ]
+    #    }
+    #  }
+    #end
 
-    def prior_auth_extension
-      {
-        url: PRIOR_AUTH_EXTENSION,
-        valueBoolean: plan_drug.prior_auth?
-      }
-    end
+    #def prior_auth_extension
+    #  {
+    #    url: PRIOR_AUTH_EXTENSION,
+    #    valueBoolean: plan_drug.prior_auth?
+    #  }
+    #end
 
-    def step_therapy_extension
-      {
-        url: STEP_THERAPY_EXTENSION,
-        valueBoolean: plan_drug.step_therapy_limit?
-      }
-    end
+    #def step_therapy_extension
+    #  {
+    #    url: STEP_THERAPY_EXTENSION,
+    #    valueBoolean: plan_drug.step_therapy_limit?
+    #  }
+    #end
 
-    def quantity_extension
-      {
-        url: QUANTITY_LIMIT_EXTENSION,
-        valueBoolean: plan_drug.quantity_limit?
-      }
-    end
+    #def quantity_extension
+    #  {
+    #    url: QUANTITY_LIMIT_EXTENSION,
+    #    valueBoolean: plan_drug.quantity_limit?
+    #  }
+    #end
 
-    def plan_id_extension
-      {
-        url: PLAN_ID_EXTENSION,
-        valueString: plan_drug.plan_id
-      }
-    end
+    #def plan_id_extension
+    #  {
+    #    url: PLAN_ID_EXTENSION,
+    #    valueString: plan_drug.plan_id
+    #  }
+    #end
   end
 end
