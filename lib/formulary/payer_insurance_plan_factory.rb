@@ -93,7 +93,7 @@ module Formulary
       {
         url: DRUG_PLAN_REFERENCE_EXTENSION,
         valueReference: {
-            reference: 'InsurancePlan/Drug-' + plan.id,
+            reference: 'InsurancePlan/' + DRUG_PLAN_ID_PREFIX + plan.id,
             type: 'InsurancePlan'
         }
       }

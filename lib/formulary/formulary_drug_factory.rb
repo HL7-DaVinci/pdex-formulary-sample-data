@@ -14,7 +14,7 @@ module Formulary
 
     def build(id = nil)
       FHIR::MedicationKnowledge.new(
-        id: "Drug-" + id, 
+        id: DRUG_ID_PREFIX + id, 
         code: code,
         status: 'active',
         #dose_form: dose_form,
