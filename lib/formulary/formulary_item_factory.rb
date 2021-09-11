@@ -45,11 +45,24 @@ module Formulary
 
     
     def extension
+      pharmacy_list = Array.new  
+        # Put all pharmacy types into an array
+      plan.tiers.each do |tier|
+        qhp_drug = QHPDrugTier.new(tier)
+        qhp_drug.cost_sharing.each do |cost_sharing|
+            if(pharmacy_list.include?(cost_sharing.pharmacy_type) == false)
+                pharmacy_list.push(cost_sharing.pharmacy_type)            
+            end
+        end
+      end
       [
         drug_plan_reference_extension,
         availability_status_extension,
         availability_period_extension,
-        pharmacy_type_extension,  # HOW TO ADDRESS Pharmacy Type. It is not part of the QHP Drugs
+        pharmacy_type_extensions,
+       # pharmacy_list.each do |pharmacy_type|
+       #   pharmacy_type_extension
+       # end
         drug_tier_extension,
         prior_auth_extension,
         prior_auth_new_start_extension,
@@ -58,7 +71,7 @@ module Formulary
         quantity_limit_extension
         # TODO Qunatity limit details
         #quantity_limit_detail_extension
-      ]
+      ].flatten.compact
     end
 
     
@@ -125,18 +138,56 @@ module Formulary
     #QUANTITY_LIMIT_DETAIL_MAXIMUM_DAILY_EXTENSION = 'MaximumDaily'
     #QUANTITY_LIMIT_DETAIL_DAYS_SUPPLY_EXTENSION = 'DaysSupply'
 
+    #def network_extensions
+    #  networks = plan.network
+    #  return if networks.nil? || networks.empty?
+
+    #  networks.map { |network| network_extension(network) }
+    #end
+
+    #def network_extension(value)
+    #  return if value.nil?
+
+    #  {
+    #    url: NETWORK_EXTENSION,
+    #    valueString: value
+    #  }
+    #end
 
 
+    def pharmacy_type_extensions
+      pharmacy_list = Array.new  
+        # Put all pharmacy types into an array
+      plan.tiers.each do |tier|
+        qhp_drug = QHPDrugTier.new(tier)
+        qhp_drug.cost_sharing.each do |cost_sharing|
+            if(pharmacy_list.include?(cost_sharing.pharmacy_type) == false)
+                pharmacy_list.push(cost_sharing.pharmacy_type)            
+            end
+        end
+      end
+      pharmacy_list.map { |pharmacy_type| pharmacy_type_extension(pharmacy_type)}
+      #pharmacy_list.each do |pharmacy_type|
+      #  {
+      #    url: PHARMACY_TYPE_EXTENSION
+      #  }
+      #end
+    end
 
-    def pharmacy_type_extension
-      value = '1-month-in-retail'
+    def pharmacy_type_extension(pharmacy_type)
+        return if pharmacy_type.nil?
+  
+        #{
+        #  url: PHARMACY_TYPE_EXTENSION,
+        #  valueString: value
+        #}
       {
         url: PHARMACY_TYPE_EXTENSION,
         valueCodeableConcept: {
           coding: [
             {
-              code: value,
-              display: PHARMACY_TYPE_DISPLAY[value],
+              code: pharmacy_type,
+              display: PHARMACY_TYPE_DISPLAY[pharmacy_type],
               system: PHARMACY_TYPE_SYSTEM
             }
           ]
@@ -144,7 +195,36 @@ module Formulary
       }
     end
 
+    #def network_extension(value)
+      #  return if value.nil?
+  
+      #  {
+      #    url: NETWORK_EXTENSION,
+      #    valueString: value
+      #  }
+      #end
+    #def pharmacy_type_extension(pharmacy_type)
+      #print pharmacy_type
+      #print "----------"
+     # return if pharmacy_type.nil?
 
+     # {
+      #      url: NETWORK_EXTENSION,
+      #      valueString: pharmacy_type
+      #  
+      #{
+      #  url: PHARMACY_TYPE_EXTENSION,
+      #  valueCodeableConcept: {
+      #    coding: [
+      #      {
+      #        code: pharmacy_type,
+      #        display: PHARMACY_TYPE_DISPLAY[pharmacy_type],
+      #        system: PHARMACY_TYPE_SYSTEM
+      #      }
+      #    ]
+      #  }
+      #}
+    #end
     
     def drug_tier_extension # rubocop:disable Metrics/MethodLength
       {

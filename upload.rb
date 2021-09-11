@@ -26,7 +26,8 @@ def upload_conformance_resources_from_git
 end
 
 def upload_conformance_resources
-  definitions_url = 'http://build.fhir.org/ig/HL7/davinci-pdex-formulary/definitions.json.zip'
+  #definitions_url = 'http://build.fhir.org/ig/HL7/davinci-pdex-formulary/definitions.json.zip'
+  definitions_url = 'http://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/stu2-draft/definitions.json.zip'
   definitions_data = HTTParty.get(definitions_url, verify: false)
   definitions_file = Tempfile.new
   begin
@@ -96,5 +97,5 @@ end
 
 
 # upload_us_core_resources
-upload_conformance_resources
+#upload_conformance_resources
 upload_sample_resources

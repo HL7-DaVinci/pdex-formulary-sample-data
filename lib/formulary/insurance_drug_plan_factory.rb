@@ -53,7 +53,7 @@ module Formulary
     end
 
     def identifier
-      [{ value: DRUG_ID_PREFIX + plan.id }]
+      [{ value: DRUG_PLAN_ID_PREFIX + plan.id }]
     end
 
     def name
@@ -132,25 +132,36 @@ module Formulary
     end
 
     def plans
-        [
-            {
-                # TODO currently only one. Need to support all pharmacy types
-                type: pharmacy_type,
-                network: networks,
-                specificCost: specific_costs
-            }
-        ]
+        pharmacy_list = Array.new
+
+        # Put all pharmacy types into an array
+        plan.tiers.each do |tier|
+            qhp_drug = QHPDrugTier.new(tier)
+            qhp_drug.cost_sharing.each do |cost_sharing|
+                if(pharmacy_list.include?(cost_sharing.pharmacy_type) == false)
+                    pharmacy_list.push(cost_sharing.pharmacy_type)            
+                end
+            end
+        end
+
+        pharmacy_list.map { |pharmacy_type| single_plan(pharmacy_type ) }
     end
 
-    def pharmacy_type
-        #temporarily hard coded
-        value = '1-month-in-retail'
+    def single_plan(pharmacy_type)
+        {
+            type: pharmacy_network_type(pharmacy_type),
+            network: networks,
+            specificCost: specific_costs(pharmacy_type)
+        }
+    end
+
+    def pharmacy_network_type(pharmacy_type_code)
         {
             coding: [
                 {
                     system: PHARMACY_TYPE_SYSTEM,
-                    code: value,
-                    display: PHARMACY_TYPE_DISPLAY[value]
+                    code: pharmacy_type_code,
+                    display: PHARMACY_TYPE_DISPLAY[pharmacy_type_code]
                 }
             ]
         }
@@ -171,19 +182,19 @@ module Formulary
         }
     end
 
-    def specific_costs
+    def specific_costs(pharmacy_type)
 
-        plan.tiers.map { |tier| specific_cost(QHPDrugTier.new(tier))}
+        plan.tiers.map { |tier| specific_cost(QHPDrugTier.new(tier), pharmacy_type)}
         
     end
 
  
 
-    def specific_cost(tier)
+    def specific_cost(tier, pharmacy_type)
         return if tier.nil?
         {
             category: specific_cost_category(tier.name),
-            benefit: specific_cost_benefits(tier.cost_sharing)
+            benefit: specific_cost_benefits(tier.cost_sharing, pharmacy_type)
         }
     end
 
@@ -216,15 +227,16 @@ module Formulary
         }
     end
 
-    def specific_cost_benefits(cost_sharing)
+    def specific_cost_benefits(cost_sharing, pharmacy_type)
         return if cost_sharing.nil?
         
-        cost_sharing.map { |cost| specific_cost_benefit(cost)}
+        cost_sharing.map { |cost| specific_cost_benefit(cost, pharmacy_type)}
 
     end
 
-    def specific_cost_benefit(cost)
+    def specific_cost_benefit(cost, pharmacy_type)
         return if cost.nil?
+        return if cost.pharmacy_type != pharmacy_type # Check to see if the current cost benefit is of the current pharmacy type
         {
             type: benefit_type,
             cost: [

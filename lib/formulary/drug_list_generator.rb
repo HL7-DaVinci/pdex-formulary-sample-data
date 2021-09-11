@@ -64,11 +64,12 @@ module Formulary
       plan_drug = QHPPlanDrug.new(drug, plan)
       id = "#{id_prefix}-#{count.to_s.rjust(5, '0')}" # if the right of the = is not called, it causes the program to crash
       id = plan_drug.rxnorm_code       
-      write_resource(FormularyDrugFactory.new(plan_drug).build(plan_drug.rxnorm_code))
-      
+      #write_resource(FormularyDrugFactory.new(plan_drug).build(plan_drug.rxnorm_code))
+      FormularyDrugFactory.new(plan_drug).build(plan_drug.rxnorm_code)
+
       add_to_list(id)
 
-      write_resource(FormularyItemFactory.new(plan, plan_drug).build()) 
+      #write_resource(FormularyItemFactory.new(plan, plan_drug).build()) 
    
     end
 
@@ -100,5 +101,6 @@ module Formulary
         }
       }
     end
+
   end
 end
