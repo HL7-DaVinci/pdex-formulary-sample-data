@@ -72,7 +72,7 @@ RSpec.describe Formulary::PayerInsurancePlanFactory do
 
       it 'includes the drug plan reference' do
         expect(marketing_url_extension.length).to eq(1)
-        expect(drug_plan_extension.valueReference.reference).to eq('InsurancePlan/Drug' + plan.id)
+        expect(formulary_extension.valueReference.reference).to eq('InsurancePlan/Formulary-' + plan.id)
       end
 
       

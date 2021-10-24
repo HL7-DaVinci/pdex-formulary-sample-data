@@ -8,7 +8,7 @@ require_relative 'qhp_plan_drug'
 require_relative 'formulary_drug_factory'
 require_relative 'formulary_item_factory'
 require_relative 'payer_insurance_plan_factory'
-require_relative 'insurance_drug_plan_factory'
+require_relative 'formulary_factory'
 
 module Formulary
   # This class generates FormularyDrug resources for a particular plan
@@ -27,7 +27,7 @@ module Formulary
       return if list.empty?
 
       write_payer_insurance_plan
-      write_insurance_drug_plan
+      write_formulary
     end
 
     def id_prefix
@@ -64,12 +64,12 @@ module Formulary
       plan_drug = QHPPlanDrug.new(drug, plan)
       id = "#{id_prefix}-#{count.to_s.rjust(5, '0')}" # if the right of the = is not called, it causes the program to crash
       id = plan_drug.rxnorm_code       
-      #write_resource(FormularyDrugFactory.new(plan_drug).build(plan_drug.rxnorm_code))
-      FormularyDrugFactory.new(plan_drug).build(plan_drug.rxnorm_code)
+      write_resource(FormularyDrugFactory.new(plan_drug).build(plan_drug.rxnorm_code))
+      #FormularyDrugFactory.new(plan_drug).build(plan_drug.rxnorm_code)
 
       add_to_list(id)
 
-      #write_resource(FormularyItemFactory.new(plan, plan_drug).build()) 
+      write_resource(FormularyItemFactory.new(plan, plan_drug).build()) 
    
     end
 
@@ -78,8 +78,8 @@ module Formulary
       write_resource(PayerInsurancePlanFactory.new(plan, id_prefix).build(list))
     end
 
-    def write_insurance_drug_plan
-      write_resource(InsuranceDrugPlanFactory.new(plan, id_prefix).build(list))
+    def write_formulary
+      write_resource(FormularyFactory.new(plan, id_prefix).build(list))
     end
 
 

@@ -2,9 +2,9 @@
 
 module Formulary
   PAYER_INSURANCE_PLAN_PROFILE = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PayerInsurancePlan'
-  INSURANCE_DRUG_PLAN_PROFILE = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-InsuranceDrugPlan'
+  FORMULARY_PROFILE = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Formulary'
   FORMULARY_ITEM_PROFILE = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyItem'
-  FORMULARY_PROFILE = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyDrug'
+  FORMULARY_DRUG_PROFILE = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyDrug'
   #COVERAGE_PLAN_PROFILE = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-CoveragePlan'
 
   DRUG_TIER_SYSTEM = 'http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS'
@@ -13,19 +13,20 @@ module Formulary
   COPAY_OPTION_SYSTEM = 'http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-CopayOptionCS'
   COINSURANCE_OPTION_SYSTEM = 'http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-CoinsuranceOptionCS'
   PAYER_PLAN_LIST_CODE_SYSTEM = "http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/InsuranceProductTypeCS"
-  DRUG_PLAN_LIST_CODE_SYSTEM = "http://terminology.hl7.org/CodeSystem/v3-ActCode"
+  FORMULARY_LIST_CODE_SYSTEM = "http://terminology.hl7.org/CodeSystem/v3-ActCode"
   FORMULARY_ITEM_SYSTEM = 'http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-InsuranceItemTypeCS'
   INSURANCE_PRODUCT_TYPE_SYSTEM = 'http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/InsuranceProductTypeCS'
-  DRUG_PLAN_TYPE_SYSTEM = 'http://terminology.hl7.org/CodeSystem/v3-ActCode'
+  FORMULARY_TYPE_SYSTEM = 'http://terminology.hl7.org/CodeSystem/v3-ActCode'
   CONTACT_ENTITY_SYSTEM = 'http://terminology.hl7.org/CodeSystem/contactentity-type'
-  BENEFIT_TYPE_SYSTEM = 'http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-BenefitTypeCS'
+  CONTACT_ENTITY_URL_SYSTEM = 'http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PlanContactTypeCS'
+  PLAN_TYPE_SYSTEM = 'http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PlanTypeCS'
   BENEFIT_COST_TYPE_SYSTEM = 'http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-BenefitCostTypeCS'
   UCUM_SYSTEM = 'http://unitsofmeasure.org'
   RELATED_MEDICATION_TYPE_SYSTEM = 'http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-RelatedMedicationTypeCS'
 
   
   #PLAN_ID_EXTENSION = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanID-extension'
-  DRUG_PLAN_REFERENCE_EXTENSION = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugPlanReference-extension'
+  FORMULARY_REFERENCE_EXTENSION = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyReference-extension'
   AVAILABILITY_STATUS_EXTENSION = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityStatus-extension'
   AVAILABILITY_PERIOD_EXTENSION = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityPeriod-extension'
   PHARMACY_TYPE_EXTENSION = 'http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PharmacyType-extension'
@@ -42,7 +43,7 @@ module Formulary
 
 
   PAYER_PLAN_ID_PREFIX = "PayerPlan-"
-  DRUG_PLAN_ID_PREFIX = "DrugPlan-"
+  FORMULARY_ID_PREFIX = "Formulary-"
   FORMULARY_ITEM_ID_PREFIX = "FormularyItem-"
   DRUG_ID_PREFIX = "Drug-"
 
@@ -64,13 +65,24 @@ module Formulary
   #COINSURANCE_RATE_EXTENSION = 'coinsuranceRate'
   #COINSURANCE_OPTION_EXTENSION = 'coinsuranceOption'
   PAYER_PLAN_LIST_CODE_CODE = "mediadv"
-  PAYER_PLAN_LIST_CODE_DISPLAY = "Medicare Advantage"
-  DRUG_PLAN_LIST_CODE_CODE = "DRUGPOL"
-  DRUG_PLAN_LIST_CODE_DISPLAY = "drug policy"
-  CONTACT_ENTITY_CODE = 'PATINF'
-  CONTACT_ENTITY_DISPLAY = "Patient"
-  BENEFIT_TYPE_CODE = "drug"
-  BENEFIT_TYPE_DISPLAY = "Drug"
+  #PAYER_PLAN_LIST_CODE_DISPLAY = "Medicare Advantage"
+  FORMULARY_LIST_CODE_CODE = "DRUGPOL"
+  FORMULARY_LIST_CODE_DISPLAY = "drug policy"
+  CONTACT_EMAIL_CODE = 'PATINF'
+  CONTACT_EMAIL_DISPLAY = "Patient"
+  CONTACT_MARKETING_CODE = 'MARKETING'
+  CONTACT_MARKETING_DISPLAY = "Plan Marketing Information"
+  CONTACT_SUMMARY_CODE = 'SUMMARY'
+  CONTACT_SUMMARY_DISPLAY = "Plan Summary Information"
+  CONTACT_FORMULARY_CODE = 'FORMULARY'
+  CONTACT_FORMULARY_DISPLAY = "Plan Formulary Information"
+
+
+  PLAN_TYPE_CODE = "drug"
+  PLAN_TYPE_DISPLAY = "Drug"
+
+  COPAY_AMOUNT_CODE = 'USD'
+  COPAY_AMOUNT_SYSTEM = 'urn:iso:std:iso:4217'
 
   PHARMACY_TYPE_DISPLAY = {
     '1-month-in-retail' => "1 month in network retail",

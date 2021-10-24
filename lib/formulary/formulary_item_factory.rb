@@ -56,7 +56,7 @@ module Formulary
         end
       end
       [
-        drug_plan_reference_extension,
+        formulary_reference_extension,
         availability_status_extension,
         availability_period_extension,
         pharmacy_type_extensions,
@@ -95,11 +95,11 @@ module Formulary
     end
     
 
-    def drug_plan_reference_extension
+    def formulary_reference_extension
       {
-        url: DRUG_PLAN_REFERENCE_EXTENSION,
+        url: FORMULARY_REFERENCE_EXTENSION,
         valueReference: {
-            reference: 'InsurancePlan/' + DRUG_PLAN_ID_PREFIX + plan.id,
+            reference: 'InsurancePlan/' + FORMULARY_ID_PREFIX + plan.id,
             type: 'InsurancePlan'   
         }
       }

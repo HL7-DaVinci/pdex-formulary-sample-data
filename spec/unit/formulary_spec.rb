@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative '../../lib/formulary/insurance_drug_plan_factory'
+require_relative '../../lib/formulary/formulary_factory'
 require_relative '../../lib/formulary/qhp_drug_tier'
 
-RSpec.describe Formulary::InsuranceDrugPlanFactory do
+RSpec.describe Formulary::FormularyFactory do
   let(:raw_plans) do
     fixture_path = File.join(__dir__, '..', 'fixtures', 'qhp_plans.json')
     JSON.parse(File.read(fixture_path), symbolize_names: true)
@@ -22,11 +22,11 @@ RSpec.describe Formulary::InsuranceDrugPlanFactory do
   let(:id) { 'PLAN_ID' }
 
   let(:factory) do
-    Formulary::InsuranceDrugPlanFactory.new(plan, id)
+    Formulary::FormularyFactory.new(plan, id)
   end
 
   describe '.initialize' do
-    it 'creates a InsuranceDrugPlanFactory instance' do
+    it 'creates a FormularyFactory instance' do
       expect(factory).to be_a(described_class)
     end
   end
@@ -50,7 +50,7 @@ RSpec.describe Formulary::InsuranceDrugPlanFactory do
     end
 
     it 'includes the Payer Insurance Plan profile' do
-      expect(resource.meta.profile.first).to eq(Formulary::INSURANCE_DRUG_PLAN_PROFILE)
+      expect(resource.meta.profile.first).to eq(Formulary::FORMULARY_PROFILE)
     end
 
     it 'includes the marketing url' do
@@ -64,7 +64,7 @@ RSpec.describe Formulary::InsuranceDrugPlanFactory do
     describe 'extensions' do
 
       %w[
-        drug_plan_extension
+        formulary_extension
       ].each do |base_name|
         let("#{base_name}_extension".to_sym) do
           extension_url = Object.const_get("Formulary::#{base_name.upcase}_EXTENSION")

@@ -55,7 +55,7 @@ RSpec.describe Formulary::FormularyDrugFactory do
     end
 
     it 'includes the formulary profile' do
-      expect(resource.meta.profile.first).to eq(Formulary::FORMULARY_PROFILE)
+      expect(resource.meta.profile.first).to eq(Formulary::FORMULARY_DRUG_PROFILE)
     end
 
 #    it 'includes the drug tier' do

@@ -59,7 +59,7 @@ module Formulary
 
     def meta
       {
-        profile: [FORMULARY_PROFILE],
+        profile: [FORMULARY_DRUG_PROFILE],
         lastUpdated: '2021-08-31T10:03:10Z'
       }
     end
