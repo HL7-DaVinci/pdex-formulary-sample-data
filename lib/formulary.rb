@@ -18,7 +18,7 @@ module Formulary
   INSURANCE_PRODUCT_TYPE_SYSTEM = 'http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/InsuranceProductTypeCS'
   FORMULARY_TYPE_SYSTEM = 'http://terminology.hl7.org/CodeSystem/v3-ActCode'
   CONTACT_ENTITY_SYSTEM = 'http://terminology.hl7.org/CodeSystem/contactentity-type'
-  CONTACT_ENTITY_URL_SYSTEM = 'http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PlanContactTypeCS'
+  CONTACT_ENTITY_TYPE_SYSTEM = 'http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PlanContactTypeCS'
   PLAN_TYPE_SYSTEM = 'http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PlanTypeCS'
   BENEFIT_COST_TYPE_SYSTEM = 'http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-BenefitCostTypeCS'
   UCUM_SYSTEM = 'http://unitsofmeasure.org'
@@ -68,8 +68,8 @@ module Formulary
   #PAYER_PLAN_LIST_CODE_DISPLAY = "Medicare Advantage"
   FORMULARY_LIST_CODE_CODE = "DRUGPOL"
   FORMULARY_LIST_CODE_DISPLAY = "drug policy"
-  CONTACT_EMAIL_CODE = 'PATINF'
-  CONTACT_EMAIL_DISPLAY = "Patient"
+  CONTACT_PATINF_CODE = 'PATINF'
+  CONTACT_PATINF_DISPLAY = "Patient"
   CONTACT_MARKETING_CODE = 'MARKETING'
   CONTACT_MARKETING_DISPLAY = "Plan Marketing Information"
   CONTACT_SUMMARY_CODE = 'SUMMARY'

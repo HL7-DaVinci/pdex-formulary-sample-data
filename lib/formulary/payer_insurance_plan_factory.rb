@@ -116,11 +116,16 @@ module Formulary
 
         purpose: {
         coding: [
-            {
-                system: CONTACT_ENTITY_URL_SYSTEM,
-                code: CONTACT_MARKETING_CODE,
-                display: CONTACT_MARKETING_DISPLAY
-            }
+          {
+            system: CONTACT_ENTITY_SYSTEM,
+            code: CONTACT_PATINF_CODE,
+            display: CONTACT_PATINF_DISPLAY
+          }, 
+          {
+            system: CONTACT_ENTITY_TYPE_SYSTEM,
+            code: CONTACT_MARKETING_CODE,
+            display: CONTACT_MARKETING_DISPLAY
+          }
         ]
         },
         telecom: [
@@ -142,11 +147,16 @@ module Formulary
 
         purpose: {
           coding: [
-              {
-                  system: CONTACT_ENTITY_URL_SYSTEM,
-                  code: CONTACT_SUMMARY_CODE,
-                  display: CONTACT_SUMMARY_DISPLAY
-              }
+            {
+              system: CONTACT_ENTITY_SYSTEM,
+              code: CONTACT_PATINF_CODE,
+              display: CONTACT_PATINF_DISPLAY
+            }, 
+            {
+              system: CONTACT_ENTITY_TYPE_SYSTEM,
+              code: CONTACT_SUMMARY_CODE,
+              display: CONTACT_SUMMARY_DISPLAY
+            }
           ]
         },
         telecom: [
@@ -167,12 +177,17 @@ module Formulary
       {
 
         purpose: {
-          coding: [
-              {
-                  system: CONTACT_ENTITY_URL_SYSTEM,
-                  code: CONTACT_FORMULARY_CODE,
-                  display: CONTACT_FORMULARY_DISPLAY
-              }
+          coding: [    
+            {
+              system: CONTACT_ENTITY_SYSTEM,
+              code: CONTACT_PATINF_CODE,
+              display: CONTACT_PATINF_DISPLAY
+            }, 
+            {
+              system: CONTACT_ENTITY_TYPE_SYSTEM,
+              code: CONTACT_FORMULARY_CODE,
+              display: CONTACT_FORMULARY_DISPLAY
+            },
           ]
         },
         telecom: [
@@ -194,11 +209,11 @@ module Formulary
 
         purpose: {
           coding: [
-              {
-                  system: CONTACT_ENTITY_SYSTEM,
-                  code: CONTACT_EMAIL_CODE,
-                  display: CONTACT_EMAIL_DISPLAY
-              }
+            {
+              system: CONTACT_ENTITY_SYSTEM,
+              code: CONTACT_PATINF_CODE,
+              display: CONTACT_PATINF_DISPLAY
+            }
           ]
         },
         telecom: [
@@ -515,7 +530,7 @@ module Formulary
             type: cost_type('coinsurance'),
             qualifiers: coinsurance_option(cost.coinsurance_option),
             value: {    
-                value: cost.coinsurance_rate,
+                value: cost.coinsurance_rate * 100,
                 system: 'http://unitsofmeasure.org', 
                 code: '%'
 
