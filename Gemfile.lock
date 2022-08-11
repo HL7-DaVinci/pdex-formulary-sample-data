@@ -25,6 +25,7 @@ GEM
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.2)
+    language_server-protocol (3.16.0.3)
     method_source (0.9.2)
     mime-types (3.2.2)
       mime-types-data (~> 3.2015)
@@ -61,6 +62,8 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
+    ruby-lsp (0.0.1)
+      language_server-protocol
     ruby-progressbar (1.10.1)
     rubyzip (1.2.3)
     safe_yaml (1.0.5)
@@ -80,8 +83,9 @@ DEPENDENCIES
   pry
   rspec
   rubocop
+  ruby-lsp (~> 0.0.1)
   rubyzip
   webmock
 
 BUNDLED WITH
-   2.0.1
+   2.2.28

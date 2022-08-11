@@ -10,3 +10,5 @@ gem 'rspec'
 gem 'rubocop'
 gem 'rubyzip'
 gem 'webmock'
+
+gem "ruby-lsp", "~> 0.0.1", :group => :development
