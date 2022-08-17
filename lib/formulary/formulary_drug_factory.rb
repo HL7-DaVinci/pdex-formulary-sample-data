@@ -39,10 +39,10 @@ module Formulary
     end
 
     def dose_form
-      json_data = File.read("/doseform.json")
+      json_data = File.read("doseform.json")
       dose_forms = JSON.parse(json_data, :symbolize_names => true)
       coding = dose_forms.find { |coding| plan_drug.name.downcase.include?(coding[:display].downcase) }
-      return if coding
+      return if coding.nil?
       {
         coding: [coding],
       }

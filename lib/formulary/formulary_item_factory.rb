@@ -105,7 +105,7 @@ module Formulary
     end
 
     def availability_period_extension
-      current_year = Date.to.year
+      current_year = Date.today.year
       {
         url: AVAILABILITY_PERIOD_EXTENSION,
         valuePeriod: {

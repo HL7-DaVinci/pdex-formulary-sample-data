@@ -235,8 +235,8 @@
     },
     {
         "system": "http://www.snomed.org/",
-        "code": 385055001,
-        "display": "Tablet"
+        "code": 421026006,
+        "display": "Oral tablet"
     },
     {
         "system": "http://www.snomed.org/",
@@ -1300,11 +1300,6 @@
     },
     {
         "system": "http://www.snomed.org/",
-        "code": 421026006,
-        "display": "Oral tablet"
-    },
-    {
-        "system": "http://www.snomed.org/",
         "code": 421027002,
         "display": "Delayed-release capsule"
     },
@@ -1757,5 +1752,10 @@
         "system": "http://www.snomed.org/",
         "code": 447079001,
         "display": "Orodispersible tablet"
+    },
+    {
+        "system": "http://www.snomed.org/",
+        "code": 385055001,
+        "display": "Tablet"
     }
 ]

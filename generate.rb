@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
 require 'pry'
+require 'fileutils'
 require_relative 'lib/formulary/config'
 require_relative 'lib/formulary/drug_list_generator'
 require_relative 'lib/formulary/qhp_drug_repo'
 require_relative 'lib/formulary/qhp_importer'
 require_relative 'lib/formulary/qhp_plan_repo'
+
+# Delete the output directory if it exists.
+FileUtils.rm_rf("output")
+puts "Starting Formulary data generation..."
 
 config = Formulary::Config
 drug_repo = Formulary::QHPDrugRepo
@@ -21,3 +26,5 @@ Formulary::QHPImporter
 plan_repo.all.each do |plan|
   Formulary::DrugListGenerator.new(plan).generate
 end
+
+puts "Data Generation completed!!!"
