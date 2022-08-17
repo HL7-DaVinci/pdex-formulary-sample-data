@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require 'fhir_models'
-require_relative '../formulary'
-require_relative 'qhp_drug_tier'
-require_relative 'qhp_drug_tier_cost_sharing'
-require_relative 'drug_tier_extension_factory'
-
+require "date"
+require "fhir_models"
+require_relative "../formulary"
+require_relative "qhp_drug_tier"
+require_relative "qhp_drug_tier_cost_sharing"
+require_relative "drug_tier_extension_factory"
 
 # TODO DRUG Tiers pharmacy tiers
 
@@ -21,16 +21,17 @@ module Formulary
 
     def build(entries) # rubocop:disable Metrics/MethodLength
       name.strip!
-      
+
       FHIR::InsurancePlan.new(
         #id: id,
         id: FORMULARY_ID_PREFIX + plan.id,
         meta: meta,
         text: text,
         identifier: identifier,
-        status: 'active',
+        status: "active",
         name: name,
-        type: type
+        type: type,
+        period: period,
         #contact: contact,
         #plan: plans
       )
@@ -39,17 +40,17 @@ module Formulary
     private
 
     def meta
-        {
-          profile: [FORMULARY_PROFILE],
-          lastUpdated: plan.last_updated + "T00:00:00Z"
-        }
+      {
+        profile: [FORMULARY_PROFILE],
+        lastUpdated: plan.last_updated + "T00:00:00Z",
+      }
     end
 
     def text
-        {
-          status: 'generated',
-          div: %(<div xmlns="http://www.w3.org/1999/xhtml">#{name}</div>)
-        }
+      {
+        status: "generated",
+        div: %(<div xmlns="http://www.w3.org/1999/xhtml">#{name}</div>),
+      }
     end
 
     def identifier
@@ -57,7 +58,7 @@ module Formulary
     end
 
     def name
-        plan.marketing_name
+      plan.marketing_name
     end
 
     def type
@@ -66,12 +67,19 @@ module Formulary
           {
             system: FORMULARY_LIST_CODE_SYSTEM,
             code: FORMULARY_LIST_CODE_CODE,
-            display: FORMULARY_LIST_CODE_DISPLAY
-          }
-        ]
+            display: FORMULARY_LIST_CODE_DISPLAY,
+          },
+        ],
       }
     end
 
+    def period
+      current_year = Date.today.year
+      {
+        "start": "#{current_year}-01-01",
+        "end": "#{current_year}-12-31",
+      }
+    end
 
     #def benefit_costs(value)
     #    value.map { |cost| specific_cost_benefit(cost)}

@@ -96,10 +96,10 @@ module Formulary
     end
 
     def period
-      d = Date.today - 245
+      current_year = Date.today.year
       {
-        "start": d.to_s,
-        "end": (d + 365).to_s,
+        "start": "#{current_year}-01-01",
+        "end": "#{current_year}-12-31",
       }
     end
 
