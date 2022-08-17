@@ -12,6 +12,8 @@
 /output/
 /export/
 /bulk_export/
+/doseform.csv
+/csv_to_json.rb
 
 .DS_Store
 
