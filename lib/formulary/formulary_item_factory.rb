@@ -2,9 +2,10 @@
 
 require "fhir_models"
 require_relative "../formulary"
+require_relative "quantity_limit_detail_extension_factory"
 
 module Formulary
-  # Class to build FormularyDrug resources from a QHPPlanDrug
+  # Class to build FormularyItem (FHIR Basic) resources from a QHPPlanDrug
   class FormularyItemFactory
     attr_reader :plan, :plan_drug
 
@@ -13,7 +14,8 @@ module Formulary
       @plan_drug = plan_drug
     end
 
-    def build()
+    # Construct a FHIR Basic instance
+    def build
       FHIR::Basic.new(
         id: FORMULARY_ITEM_ID_PREFIX + plan.id + "-" + plan_drug.rxnorm_code,
         meta: meta,
@@ -21,7 +23,6 @@ module Formulary
         extension: extension,
         code: code,
         subject: subject,
-
       )
     end
 
@@ -42,16 +43,6 @@ module Formulary
     end
 
     def extension
-      pharmacy_list = Array.new
-      # Put all pharmacy types into an array
-      plan.tiers.each do |tier|
-        qhp_drug = QHPDrugTier.new(tier)
-        qhp_drug.cost_sharing.each do |cost_sharing|
-          if (pharmacy_list.include?(cost_sharing.pharmacy_type) == false)
-            pharmacy_list.push(cost_sharing.pharmacy_type)
-          end
-        end
-      end
       [
         formulary_reference_extension,
         availability_status_extension,
@@ -63,8 +54,7 @@ module Formulary
         step_therapy_extension,
         step_therapy_new_start_extension,
         quantity_limit_extension,
-      # TODO Qunatity limit details
-      #quantity_limit_detail_extension
+        quantity_limit_detail_extension,
       ].flatten.compact
     end
 
@@ -146,7 +136,7 @@ module Formulary
       }
     end
 
-    def drug_tier_extension # rubocop:disable Metrics/MethodLength
+    def drug_tier_extension
       {
         url: DRUG_TIER_ID_EXTENSION,
         valueCodeableConcept: {
@@ -211,6 +201,13 @@ module Formulary
         url: QUANTITY_LIMIT_EXTENSION,
         valueBoolean: plan_drug.quantity_limit?,
       }
+    end
+
+    def quantity_limit_detail_extension
+      if plan_drug.quantity_limit?
+        ext = QuantityLimitDetailExtensionFactory.new(plan_drug.name)
+        ext.build
+      end
     end
   end
 end
