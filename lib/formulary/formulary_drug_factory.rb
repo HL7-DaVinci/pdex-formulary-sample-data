@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "date"
 require "fhir_models"
 require_relative "../formulary"
 
@@ -14,7 +15,7 @@ module Formulary
 
     def build(id = nil)
       FHIR::MedicationKnowledge.new(
-        id: DRUG_ID_PREFIX + id,
+        id: "#{DRUG_ID_PREFIX}#{id}",
         code: code,
         status: "active",
         doseForm: dose_form,
@@ -51,15 +52,15 @@ module Formulary
     def text
       {
         status: "generated",
-        #div: '<div xmlns="http://www.w3.org/1999/xhtml"></div>'
         div: %(<div xmlns="http://www.w3.org/1999/xhtml">#{plan_drug.name}</div>),
       }
     end
 
     def meta
+      current_date = Date.today.to_s
       {
         profile: [FORMULARY_DRUG_PROFILE],
-        lastUpdated: "2021-08-31T10:03:10Z",
+        lastUpdated: "#{current_date}T10:03:10Z",
       }
     end
   end

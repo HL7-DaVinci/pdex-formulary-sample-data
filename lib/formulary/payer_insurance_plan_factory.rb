@@ -1,24 +1,21 @@
-# frozen_string_literal: true
-
 require "date"
 require "fhir_models"
 require_relative "../formulary"
+require_relative "qhp_drug_tier"
 
 module Formulary
   # Class to build PayerInsurancePlan resources from a QHPPlan
-  class PayerInsurancePlanFactory # rubocop:disable Metrics/ClassLength
-    attr_reader :plan, :id
+  class PayerInsurancePlanFactory
+    attr_reader :plan
 
-    def initialize(plan, id)
+    def initialize(plan)
       @plan = plan
-      @id = id
     end
 
-    def build(entries) # rubocop:disable Metrics/MethodLength
+    def build
       name.strip!
 
       FHIR::InsurancePlan.new(
-        #id: id,
         id: PAYER_PLAN_ID_PREFIX + plan.id,
         meta: meta,
         text: text,
@@ -57,8 +54,7 @@ module Formulary
 
     def name
       names = plan.marketing_name.split(/\W+/)
-      #plan.marketing_name
-      names[0] + " " + names[1]
+      "#{names[0]} #{names[1]}"
     end
 
     def type
@@ -113,18 +109,14 @@ module Formulary
     end
 
     def contact
-      valueMarketing = plan.marketing_url
-      valueSummary = plan.summary_url
-      valueFormulary = plan.formulary_url
-      valueEmail = plan.email_contact
-      return if valueMarketing.nil? and valueSummary.nil? and valueFormulary.nil? and valueEmail.nil?
-
-      [
+      contact_list = [
         marketing_contact,
         summary_contact,
         formulary_contact,
         email_contact,
-      ]
+      ].compact
+
+      return contact_list if !contact_list.empty?
     end
 
     def marketing_contact
@@ -150,7 +142,7 @@ module Formulary
         telecom: [
           {
             system: "url",
-            value: plan.marketing_url,
+            value: value,
           },
         ],
       }
@@ -179,7 +171,7 @@ module Formulary
         telecom: [
           {
             system: "url",
-            value: plan.summary_url,
+            value: value,
           },
         ],
       }
@@ -208,7 +200,7 @@ module Formulary
         telecom: [
           {
             system: "url",
-            value: plan.formulary_url,
+            value: value,
           },
         ],
       }
@@ -232,7 +224,7 @@ module Formulary
         telecom: [
           {
             system: "email",
-            value: plan.email_contact,
+            value: value,
           },
         ],
       }
@@ -290,33 +282,11 @@ module Formulary
     def plans
       [
         {
-          type: plan_type, #pharmacy_network_type(pharmacy_type),
+          type: plan_type,
           network: networks,
           specificCost: specific_costs,
-        #specificCost: pharmacy_list.map { |pharmacy_type| single_plan(pharmacy_type ) }#specific_costs(pharmacy_type)
         },
       ]
-      #pharmacy_list = Array.new
-
-      # Put all pharmacy types into an array
-      #plan.tiers.each do |tier|
-      #    qhp_drug = QHPDrugTier.new(tier)
-      #    qhp_drug.cost_sharing.each do |cost_sharing|
-      #        if(pharmacy_list.include?(cost_sharing.pharmacy_type) == false)
-      #            pharmacy_list.push(cost_sharing.pharmacy_type)
-      #        end
-      #    end
-      #end
-
-      #pharmacy_list.map { |pharmacy_type| single_plan(pharmacy_type ) }
-    end
-
-    def single_plan(pharmacy_type)
-      {
-        type: plan_type, #pharmacy_network_type(pharmacy_type),
-        network: networks,
-      #specificCost: specific_costs(pharmacy_type)
-      }
     end
 
     def plan_type
@@ -331,18 +301,7 @@ module Formulary
       }
     end
 
-    def pharmacy_network_type(pharmacy_type_code)
-      {
-        coding: [
-          {
-            system: PHARMACY_TYPE_SYSTEM,
-            code: pharmacy_type_code,
-            display: PHARMACY_TYPE_DISPLAY[pharmacy_type_code],
-          },
-        ],
-      }
-    end
-
+    # @return a list of networks [Array] or nil if no networks
     def networks
       networks = plan.network
       return if networks.nil? || networks.empty?
@@ -358,8 +317,8 @@ module Formulary
       }
     end
 
-    #Right
-    def specific_costs #(pharmacy_type)
+    # Constructs the list of cost sharing info per pharmacy type.
+    def specific_costs
       pharmacy_list = Array.new
       # Put all pharmacy types into an array
       plan.tiers.each do |tier|
@@ -372,21 +331,59 @@ module Formulary
       end
 
       pharmacy_list.map { |pharmacy_type| specific_cost(pharmacy_type) }
-      #plan.tiers.map { |tier| specific_cost(QHPDrugTier.new(tier), pharmacy_type)}
-
     end
 
-    def specific_cost(pharmacy_type) #(tier, pharmacy_type)
-      #return if tier.nil?
+    # Constructs a specific drug cost per pharmacy type
+    def specific_cost(pharmacy_type)
       {
         category: pharmacy_network_type(pharmacy_type),
         benefit: benefits(pharmacy_type),
-
-      #, #specific_cost_category(tier.name),
-      #benefit: specific_cost_benefits(tier.cost_sharing, pharmacy_type)
       }
     end
 
+    def pharmacy_network_type(pharmacy_type)
+      {
+        coding: [
+          {
+            system: PHARMACY_TYPE_SYSTEM,
+            code: pharmacy_type,
+            display: PHARMACY_TYPE_DISPLAY[pharmacy_type],
+          },
+        ],
+      }
+    end
+
+    # @return cost benefits [Array] per tier and pharmacy_type
+    def benefits(pharmacy_type)
+      plan.tiers.map { |tier| benefit_tier(QHPDrugTier.new(tier), pharmacy_type) }
+    end
+
+    # Benefit per tier in a given pharmacy type
+    def benefit_tier(tier, pharmacy_type)
+      current_cost = nil
+      tier.cost_sharing.each do |cost|
+        if cost.pharmacy_type != pharmacy_type
+          current_cost = cost
+        end
+      end
+
+      benefit_tier_cost(tier, current_cost)
+    end
+
+    # Cost sharing benefit of a given tier
+    def benefit_tier_cost(tier, cost)
+      return if tier.nil? || cost.nil?
+
+      {
+        type: specific_cost_category(tier.name),
+        cost: [
+          copay_cost(cost),
+          coinsurance_cost(cost),
+        ],
+      }
+    end
+
+    # @return the tier category details
     def specific_cost_category(value)
       return if value.nil?
 
@@ -401,101 +398,7 @@ module Formulary
       }
     end
 
-    def benefits(pharmacy_type)
-      #[
-      #  {
-      #    type: pharmacy_network_type(pharmacy_type)
-      #  }
-      #]
-      plan.tiers.map { |tier| benefit_tier(QHPDrugTier.new(tier), pharmacy_type) }
-    end
-
-    def benefit_tier(tier, pharmacy_type)
-      current_cost = nil
-      tier.cost_sharing.each do |cost|
-        if cost.pharmacy_type != pharmacy_type
-          current_cost = cost
-        end
-      end
-
-      benefit_tier_cost(tier, current_cost)
-      #tier.cost_sharing.map { |cost| benefit_tier_cost(tier, cost, pharmacy_type)}
-    end
-
-    def benefit_tier_cost(tier, cost)
-      return if tier.nil?
-      return if cost.nil?
-      #return if cost.pharmacy_type != pharmacy_type # Check to see if the current cost benefit is of the current pharmacy type
-
-      {
-        type: specific_cost_category(tier.name),
-        cost: [
-          copay_cost(cost),
-          coinsurance_cost(cost),
-        ],
-      #cost: costs(tier, pharmacy_type)
-      }
-
-      #return if cost.nil?
-      #return if cost.pharmacy_type != pharmacy_type # Check to see if the current cost benefit is of the current pharmacy type
-      #{
-      #    type: benefit_type,
-      #    cost: [
-      #        copay_cost(cost),
-      #        coinsurance_cost(cost)
-      #    ]
-      #benefit_costs(value)
-      #}
-    end
-
-    #def specific_cost_benefits(cost_sharing, pharmacy_type)
-    #    return if cost_sharing.nil?
-    #
-    #    cost_sharing.map { |cost| specific_cost_benefit(cost, pharmacy_type)}
-
-    #end
-    def costs(tier, pharmacy_type)
-      return if tier.nil?
-      return if tier.cost_sharing.nil?
-
-      tier.cost_sharing.map { |cost| cost(cost, pharmacy_type) }
-    end
-
-    #def cost(cost, pharmacy_type )
-    #  return if cost.nil?
-    #  return if cost.pharmacy_type != pharmacy_type # Check to see if the current cost benefit is of the current pharmacy type
-    #  {
-    #      copay_cost(cost)
-    #      #coinsurance_cost(cost)
-    #        #benefit_costs(value)
-    #    }
-    #end
-
-    def specific_cost_benefit(cost, pharmacy_type)
-      return if cost.nil?
-      return if cost.pharmacy_type != pharmacy_type # Check to see if the current cost benefit is of the current pharmacy type
-      {
-        type: benefit_type,
-        cost: [
-          copay_cost(cost),
-          coinsurance_cost(cost),
-        ],
-      #benefit_costs(value)
-      }
-    end
-
-    def benefit_type
-      {
-        coding: [
-          {
-            system: BENEFIT_TYPE_SYSTEM,
-            code: BENEFIT_TYPE_CODE,
-            display: BENEFIT_TYPE_DISPLAY,
-          },
-        ],
-      }
-    end
-
+    # @return copay details
     def copay_cost(cost)
       return if cost.nil?
       {
@@ -507,19 +410,6 @@ module Formulary
           system: COPAY_AMOUNT_SYSTEM,
           code: COPAY_AMOUNT_CODE,
         },
-      }
-    end
-
-    def copay_option(option)
-      return if option.nil?
-      {
-        coding: [
-          {
-            system: COPAY_OPTION_SYSTEM,
-            code: option.downcase,
-            display: COPAY_OPTION_DISPLAY[option.downcase],
-          },
-        ],
       }
     end
 
@@ -537,6 +427,30 @@ module Formulary
       }
     end
 
+    def cost_type(value)
+      {
+        coding: [
+          {
+            system: BENEFIT_COST_TYPE_SYSTEM,
+            code: value,
+          },
+        ],
+      }
+    end
+
+    def copay_option(option)
+      return if option.nil?
+      {
+        coding: [
+          {
+            system: COPAY_OPTION_SYSTEM,
+            code: option.downcase,
+            display: COPAY_OPTION_DISPLAY[option.downcase],
+          },
+        ],
+      }
+    end
+
     def coinsurance_option(option)
       return if option.nil?
       {
@@ -545,18 +459,6 @@ module Formulary
             system: COINSURANCE_OPTION_SYSTEM,
             code: option.downcase,
             display: COINSURANCE_OPTION_DISPLAY[option.downcase],
-          },
-        ],
-      }
-    end
-
-    def cost_type(value)
-      {
-        coding: [
-          {
-            system: BENEFIT_COST_TYPE_SYSTEM,
-            code: value,
-          #display: PHARMACY_TYPE_DISPLAY[value]
           },
         ],
       }

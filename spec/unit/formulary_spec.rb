@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-require_relative '../../lib/formulary/formulary_factory'
-require_relative '../../lib/formulary/qhp_drug_tier'
+require_relative "../../lib/formulary/formulary_factory"
+require_relative "../../lib/formulary/qhp_plan"
+require_relative "../../lib/formulary"
 
 RSpec.describe Formulary::FormularyFactory do
   let(:raw_plans) do
-    fixture_path = File.join(__dir__, '..', 'fixtures', 'qhp_plans.json')
+    fixture_path = File.join(__dir__, "..", "fixtures", "qhp_plans.json")
     JSON.parse(File.read(fixture_path), symbolize_names: true)
   end
 
@@ -15,61 +16,60 @@ RSpec.describe Formulary::FormularyFactory do
     Formulary::QHPPlan.new(raw_plan)
   end
 
-  #let(:tiers) do
-  #  plan.tiers.map { |tier| Formulary::QHPDrugTier.new(tier) }
-  #end
-
-  let(:id) { 'PLAN_ID' }
+  let(:id) { "#{Formulary::FORMULARY_ID_PREFIX}#{plan.id}" }
 
   let(:factory) do
-    Formulary::FormularyFactory.new(plan, id)
+    Formulary::FormularyFactory.new(plan)
   end
 
-  describe '.initialize' do
-    it 'creates a FormularyFactory instance' do
+  let(:resource) { factory.build }
+
+  describe ".initialize" do
+    it "creates a FormularyFactory instance" do
       expect(factory).to be_a(described_class)
     end
   end
 
-  describe '#build' do
-    it 'creates a FHIR InsurancePlan resource' do
+  describe "#build" do
+    it "creates a FHIR InsurancePlan resource" do
       expect(resource).to be_a(FHIR::InsurancePlan)
     end
 
-    it 'includes an id' do
+    it "creates a FHIR InsurancePlan resource with an id" do
       expect(resource.id).to eq(id)
     end
 
-    it 'includes the plan name' do
+    it "creates a FHIR InsurancePlan resource with a plan name" do
       expect(resource.name).to eq(plan.marketing_name)
       expect(resource.text.div).to include(plan.marketing_name)
     end
 
-    it 'includes the date' do
-      expect(resource.meta.lastUpdated).to eq(plan.last_updated)
+    it "creates a FHIR InsurancePlan resource with a date in meta.lastUpdated" do
+      expect(resource.meta.lastUpdated).to include(plan.last_updated)
     end
 
-    it 'includes the Payer Insurance Plan profile' do
+    it "includes the Payer Insurance Plan profile" do
       expect(resource.meta.profile.first).to eq(Formulary::FORMULARY_PROFILE)
     end
 
-    it 'includes the marketing url' do
-        expect(resource.contact.telecom.first.value).to eq(plan.marketing_url)
+    it "creates a FHIR InsurancePlan resource with a status" do
+      expect(resource.status).to be_truthy
     end
 
-    it 'includes the email contact' do
-        expect(resource.contact.telecom.second.value).to eq(plan.email_contact)
+    it "creates a FHIR InsurancePlan resource with a period field" do
+      expect(resource).to respond_to(:period)
+      expect(resource.period).to respond_to(:start)
+      expect(resource.period).to respond_to(:end)
+    end
+    it "creates a FHIR InsurancePlan resource with a type" do
+      expect(resource).to respond_to(:type)
     end
 
-    describe 'extensions' do
-
-      %w[
-        formulary_extension
-      ].each do |base_name|
-        let("#{base_name}_extension".to_sym) do
-          extension_url = Object.const_get("Formulary::#{base_name.upcase}_EXTENSION")
-          resource.extension.select { |ext| ext.url == extension_url }
-        end
+    describe "FHIR::InsurancePlan#type.coding" do
+      let(:coding) { resource.type.first.coding.first }
+      it "has a system field" do
+        expect(coding.system).to eq(Formulary::FORMULARY_LIST_CODE_SYSTEM)
+        expect(coding.code).to eq (Formulary::FORMULARY_LIST_CODE_CODE)
       end
     end
   end

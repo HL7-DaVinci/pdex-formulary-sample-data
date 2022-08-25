@@ -3,27 +3,20 @@
 require "date"
 require "fhir_models"
 require_relative "../formulary"
-require_relative "qhp_drug_tier"
-require_relative "qhp_drug_tier_cost_sharing"
-require_relative "drug_tier_extension_factory"
-
-# TODO DRUG Tiers pharmacy tiers
 
 module Formulary
   # Class to build Formulary resources from a QHPPlan
-  class FormularyFactory # rubocop:disable Metrics/ClassLength
-    attr_reader :plan, :id
+  class FormularyFactory
+    attr_reader :plan
 
-    def initialize(plan, id)
+    def initialize(plan)
       @plan = plan
-      @id = id
     end
 
-    def build(entries) # rubocop:disable Metrics/MethodLength
+    def build
       name.strip!
 
       FHIR::InsurancePlan.new(
-        #id: id,
         id: FORMULARY_ID_PREFIX + plan.id,
         meta: meta,
         text: text,
@@ -32,8 +25,6 @@ module Formulary
         name: name,
         type: type,
         period: period,
-        #contact: contact,
-        #plan: plans
       )
     end
 
@@ -57,6 +48,7 @@ module Formulary
       [{ value: FORMULARY_ID_PREFIX + plan.id }]
     end
 
+    # @return the plan marketing name [String]
     def name
       plan.marketing_name
     end
@@ -80,9 +72,5 @@ module Formulary
         "end": "#{current_year}-12-31",
       }
     end
-
-    #def benefit_costs(value)
-    #    value.map { |cost| specific_cost_benefit(cost)}
-    #end
   end
 end
