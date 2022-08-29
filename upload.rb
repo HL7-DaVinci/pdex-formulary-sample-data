@@ -19,10 +19,14 @@ CONFORMANCE_DEFINITIONS_URL = options.conformance_url || "https://build.fhir.org
 FAILED_UPLOAD = []
 
 def upload_conformance_resources
-  definitions_data = HTTParty.get(CONFORMANCE_DEFINITIONS_URL, verify: false)
   definitions_file = Tempfile.new
   begin
+    definitions_data = HTTParty.get(CONFORMANCE_DEFINITIONS_URL, verify: false)
     definitions_file.write(definitions_data)
+  rescue => e
+    p "Unable to upload conformance definitions."
+    p "Error#upload_conformance_resources: #{e.message}"
+    return
   ensure
     definitions_file.close
   end
@@ -54,25 +58,10 @@ def upload_sample_resources
     response = upload_resource(resource)
     FAILED_UPLOAD << resource unless response&.success?
     if index % 100 == 0
-      puts "#{FAILED_UPLOAD.count} out of #{index} attempted resources failed to be uploaded successfully."
+      puts "#{FAILED_UPLOAD.count} out of #{index + 1} attempted resources failed to be uploaded successfully."
     end
   end
 end
-
-# def upload_us_core_resources
-#   file_path = File.join(__dir__, "us-core", "*.json")
-#   filenames =
-#     Dir.glob(file_path)
-#       .partition { |filename| filename.include? "ValueSet" }
-#       .flatten
-#       .partition { |filename| filename.include? "CodeSystem" }
-#       .flatten
-#   filenames.each do |filename|
-#     resource = JSON.parse(File.read(filename), symbolize_names: true)
-#     response = upload_resource(resource)
-#     binding.pry unless response.success?
-#   end
-# end
 
 def upload_resource(resource)
   resource_type = resource[:resourceType]
@@ -84,12 +73,14 @@ def upload_resource(resource)
       headers: { 'Content-Type': "application/json" },
     )
   rescue => e
-    puts e.message
+    p "An exception occured when trying to load the resource #{resource[:resource_type]}/#{resource[:id]}."
+    p "Error#upload_resource: #{e.message}"
   end
 end
 
 def retry_failed_upload
-  while !FAILED_UPLOAD.empty?
+  n = FAILED_UPLOAD.size
+  while !FAILED_UPLOAD.empty? && n > 0
     puts "#{FAILED_UPLOAD.count} resource(s) failed to upload. Retrying..."
     failed_upload_copy = FAILED_UPLOAD.dup
     FAILED_UPLOAD.clear
@@ -97,12 +88,22 @@ def retry_failed_upload
       response = upload_resource(resource)
       FAILED_UPLOAD << resource unless response&.success?
     end
+    n -= 1
+  end
+  p "Ending the program ..."
+  if FAILED_UPLOAD.empty?
+    p "All resources were uploaded successfully."
+  else
+    p "#{FAILED_UPLOAD.count} resource(s) failed to upload"
   end
 end
 
-############## Running the upload methods #################
+# Runs all the upload methods
+def upload_all_resources
+  upload_conformance_resources
+  upload_sample_resources
+  retry_failed_upload
+end
 
-# upload_us_core_resources
-upload_conformance_resources
-upload_sample_resources
-retry_failed_upload
+############## Running the upload methods #################
+upload_all_resources
