@@ -11,6 +11,8 @@ end.parse!
 FHIR_SERVER_BASE = options.fhir_server || "https://davinci-drug-formulary-ri.logicahealth.org"
 
 ndouts = []
+
+FileUtils.rm_rf("export")
 FileUtils.mkdir_p("export/")
 Dir.glob("output/*/") do |typedir|
   puts "working on input directory: #{typedir}..."

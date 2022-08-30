@@ -13,8 +13,8 @@ FORMULARIES = []
 LOCATIONS = []
 NDOUTS = []
 
-# @param the resource directory name to search [String]
-# @return a list of resource file's names from the resource directory [Array [String] ]
+# @param resource_directory [String],  the directory name to search
+# @return [Array [String] ] a list of resource file's names from the resource directory
 def get_resource_json_files(resource_directory)
   file_path = File.join(__dir__, resource_directory, "*.json")
   file_names = Dir.glob(file_path)
@@ -39,8 +39,8 @@ def get_all_location_resources
 end
 
 # Get all Basic and MK resources linked to the given InsurancePlan
-# @param the plan id [String]
-# @param the output directory [String] where the ndjson file should be written
+# @param formulary_id [String], the plan id
+# @param output_directory [String], the directory where the ndjson file should be written
 def get_related_basic_and_medicationknowledge(formulary_id, output_directory)
   p "==============================================================="
   p "Getting all Basic and MedicationKnowledge related to Formulary with ID= #{formulary_id}..."
