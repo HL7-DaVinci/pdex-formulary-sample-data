@@ -57,9 +57,9 @@ module Formulary
       {
         coding: [
           {
-            system: FORMULARY_LIST_CODE_SYSTEM,
-            code: FORMULARY_LIST_CODE_CODE,
-            display: FORMULARY_LIST_CODE_DISPLAY,
+            system: FORMULARY_TYPE_SYSTEM,
+            code: FORMULARY_TYPE_CS_CODE,
+            display: FORMULARY_TYPE_CS_DISPLAY,
           },
         ],
       }

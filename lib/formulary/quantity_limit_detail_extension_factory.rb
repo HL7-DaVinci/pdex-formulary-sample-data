@@ -12,6 +12,7 @@ module Formulary
       @drug_name = drug_name
       set_rolling_extension
     end
+
     # Construct a quantityLimitDetail FHIR extension instance
     def build
       FHIR::Extension.new(
@@ -246,7 +247,7 @@ module Formulary
           repeat: {
             boundsDuration: {
               value: 365,
-              system: "http://unitsofmeasure.org",
+              system: UCUM_SYSTEM,
               code: "d",
             },
             count: 1,
@@ -265,7 +266,7 @@ module Formulary
           repeat: {
             boundsDuration: {
               value: 365,
-              system: "http://unitsofmeasure.org",
+              system: UCUM_SYSTEM,
               code: "d",
             },
             count: 2,

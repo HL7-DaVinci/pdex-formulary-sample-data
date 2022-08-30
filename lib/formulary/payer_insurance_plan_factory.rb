@@ -61,7 +61,7 @@ module Formulary
       {
         coding: [
           {
-            system: PAYER_PLAN_LIST_CODE_SYSTEM,
+            system: INSURANCE_PRODUCT_TYPE_SYSTEM,
             code: type_code,
             display: type_display,
           },
@@ -133,7 +133,7 @@ module Formulary
               display: CONTACT_PATINF_DISPLAY,
             },
             {
-              system: CONTACT_ENTITY_TYPE_SYSTEM,
+              system: PLAN_CONTACT_TYPE_CS,
               code: CONTACT_MARKETING_CODE,
               display: CONTACT_MARKETING_DISPLAY,
             },
@@ -162,7 +162,7 @@ module Formulary
               display: CONTACT_PATINF_DISPLAY,
             },
             {
-              system: CONTACT_ENTITY_TYPE_SYSTEM,
+              system: PLAN_CONTACT_TYPE_CS,
               code: CONTACT_SUMMARY_CODE,
               display: CONTACT_SUMMARY_DISPLAY,
             },
@@ -191,7 +191,7 @@ module Formulary
               display: CONTACT_PATINF_DISPLAY,
             },
             {
-              system: CONTACT_ENTITY_TYPE_SYSTEM,
+              system: PLAN_CONTACT_TYPE_CS,
               code: CONTACT_FORMULARY_CODE,
               display: CONTACT_FORMULARY_DISPLAY,
             },
@@ -240,7 +240,7 @@ module Formulary
               type: {
                 coding: [
                   {
-                    system: "http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PlanTypeCS",
+                    system: PLAN_TYPE_SYSTEM,
                     code: "drug",
                   },
                 ],
@@ -255,9 +255,9 @@ module Formulary
       {
         coding: [
           {
-            system: FORMULARY_LIST_CODE_SYSTEM,
-            code: FORMULARY_LIST_CODE_CODE,
-            display: FORMULARY_LIST_CODE_DISPLAY,
+            system: FORMULARY_TYPE_SYSTEM,
+            code: FORMULARY_TYPE_CS_CODE,
+            display: FORMULARY_TYPE_CS_DISPLAY,
           },
         ],
       }
@@ -420,7 +420,7 @@ module Formulary
         qualifiers: coinsurance_option(cost.coinsurance_option),
         value: {
           value: cost.coinsurance_rate * 100,
-          system: "http://unitsofmeasure.org",
+          system: UCUM_SYSTEM,
           code: "%",
 
         },
@@ -443,9 +443,9 @@ module Formulary
       {
         coding: [
           {
-            system: COPAY_OPTION_SYSTEM,
+            system: COST_SHARE_SYSTEM,
             code: option.downcase,
-            display: COPAY_OPTION_DISPLAY[option.downcase],
+            display: COST_SHARE_OPTION_DISPLAY[option.downcase],
           },
         ],
       }
@@ -456,9 +456,9 @@ module Formulary
       {
         coding: [
           {
-            system: COINSURANCE_OPTION_SYSTEM,
+            system: COST_SHARE_SYSTEM,
             code: option.downcase,
-            display: COINSURANCE_OPTION_DISPLAY[option.downcase],
+            display: COST_SHARE_OPTION_DISPLAY[option.downcase],
           },
         ],
       }

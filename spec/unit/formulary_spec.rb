@@ -68,8 +68,8 @@ RSpec.describe Formulary::FormularyFactory do
     describe "FHIR::InsurancePlan#type.coding" do
       let(:coding) { resource.type.first.coding.first }
       it "has a system field" do
-        expect(coding.system).to eq(Formulary::FORMULARY_LIST_CODE_SYSTEM)
-        expect(coding.code).to eq (Formulary::FORMULARY_LIST_CODE_CODE)
+        expect(coding.system).to eq(Formulary::FORMULARY_TYPE_SYSTEM)
+        expect(coding.code).to eq (Formulary::FORMULARY_TYPE_CS_CODE)
       end
     end
   end
