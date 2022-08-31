@@ -25,7 +25,7 @@ The application has four main functions:
 
 - __Generate ndjon files grouped by InsurancePlan__: this is handled by the [plan_specific_ndjson.rb](https://github.com/HL7-DaVinci/pdex-formulary-sample-data/blob/master/scripts/plan_specific_ndjson.rb) script, which generates formularies ndjson files classified by individual InsurancePlan. This is useful for plan specific __bulk export__ requests (e.g. `[base]/InsurancePlan/[id]/$export`).
 
-> Note: You can switch to `STU1.1.0` branch of this repo to generate STU1 Formulary sample data.
+> __Note__: You can switch to [STU1.1.0](https://github.com/HL7-DaVinci/pdex-formulary-sample-data/tree/STU1.1.0) branch of this repo to generate STU1 Formulary sample data.
 
 
 # Installing and Running
@@ -36,6 +36,7 @@ This is a Ruby application and currently, it can only be run on development mode
 You should have the following programs installed to run this application:
 - [Ruby](https://www.ruby-lang.org/)
 - [Bundler](https://bundler.io/)
+- [YARD](https://yardoc.org/)
 
 ## Installation
 
