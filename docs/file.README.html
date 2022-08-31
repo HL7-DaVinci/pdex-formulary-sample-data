@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.28
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="file_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'>
+<h1 id="label-QHP+to+FHIR+Formulary+Drugs+-28STU2-29">QHP to FHIR Formulary Drugs (STU2)</h1>
+
+<p>This project uses QHP data to create FHIR resources based on the <a href="https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/master/index.html">DaVinci US Drug Formulary Implementation Guide Draft STU2</a>. Currently, the following are created:</p>
+<ul><li>
+<p><strong><a href="https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/master/StructureDefinition-usdf-PayerInsurancePlan">PayerInsurancePlan</a></strong>: The PayerInsurancePlan profile of the FHIR R4 <a href="http://hl7.org/fhir/R4/insuranceplan.html">InsurancePlan</a> resource defines the top level package of health insurance coverage benefits that a payer offers.</p>
+</li><li>
+<p><strong><a href="https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/master/StructureDefinition-usdf-Formulary.html">Formulary</a></strong>: The Formulary profile of the FHIR R4 <a href="http://hl7.org/fhir/R4/insuranceplan.html">InsurancePlan</a> describes a prescription drug insurance offering comprised of drug benefits including a definition of drug tiers and their associated cost-sharing models and additional information about the plan, such as networks, a coverage area, contact information, etc.</p>
+</li><li>
+<p><strong><a href="https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/master/StructureDefinition-usdf-FormularyItem.html">FormularyItem</a></strong>: The FormularyItem profile of the FHIR R4 <a href="http://hl7.org/fhir/R4/basic.html">Basic</a> describes a drug&#39;s relationship to a drug plan, including drug tier, prior authorization requirements, and more. The set of FormuaryItem resrouces associated with a particular drug plan represents the drug plans formulary.</p>
+</li><li>
+<p><strong><a href="https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/master/StructureDefinition-usdf-FormularyDrug.html">FormularyDrug</a></strong>: The FormularyDrug profile of the FHIR R4 <a href="http://hl7.org/fhir/medicationknowledge.html">MedicationKnowledge</a> resource provides information about a prescribable drug which may be part of a formulary including its RxNorm code, synonyms, and optionally drug classification and alternatives.</p>
+</li></ul>
+
+<h2 id="label-Functionalities">Functionalities</h2>
+
+<p>The application has four main functions: - <strong>Generate formulary data samples</strong>: this is handled by the <a href="https://github.com/HL7-DaVinci/pdex-formulary-sample-data/blob/master/scripts/generate.rb">generate.rb</a> script, which generates conformant data samples for each profile listed above.</p>
+<ul><li>
+<p><strong>Populate a FHIR server with the data</strong>: this is handled by the <a href="https://github.com/HL7-DaVinci/pdex-formulary-sample-data/blob/master/scripts/upload.rb">upload.rb</a> script.</p>
+</li><li>
+<p><strong>Generate the ndjson files</strong>: this is handled by the <a href="https://github.com/HL7-DaVinci/pdex-formulary-sample-data/blob/master/scripts/convertNDJSON.rb">convertNDJSON.rb</a> script, which generates the ndjson files for each profile to be used for <strong>bulk export</strong> requests of all drug formulary data (e.g. <code>[base]/InsurancePlan/$export</code>).</p>
+</li><li>
+<p><strong>Generate ndjon files grouped by InsurancePlan</strong>: this is handled by the <a href="https://github.com/HL7-DaVinci/pdex-formulary-sample-data/blob/master/scripts/plan_specific_ndjson.rb">plan_specific_ndjson.rb</a> script, which generates formularies ndjson files classified by individual InsurancePlan. This is useful for plan specific <strong>bulk export</strong> requests (e.g. <code>[base]/InsurancePlan/[id]/$export</code>).</p>
+</li></ul>
+
+<blockquote>
+<p><strong>Note</strong>: You can switch to <a href="https://github.com/HL7-DaVinci/pdex-formulary-sample-data/tree/STU1.1.0">STU1.1.0</a> branch of this repo to generate STU1 Formulary sample data.</p>
+</blockquote>
+
+<h1 id="label-Installing+and+Running">Installing and Running</h1>
+
+<p>This is a Ruby application and currently, it can only be run on development mode.</p>
+
+<h2 id="label-Prerequisites">Prerequisites</h2>
+
+<p>You should have the following programs installed to run this application: - <a href="https://www.ruby-lang.org/">Ruby</a> - <a href="https://bundler.io/">Bundler</a> - <a href="https://yardoc.org/">YARD</a></p>
+
+<h2 id="label-Installation">Installation</h2>
+<ol><li>
+<p><strong>Clone this repository</strong> <code> git clone git@github.com:HL7-DaVinci/pdex-formulary-sample-data.git </code></p>
+</li><li>
+<p><strong>Change directory into the project directory and pull in the dependencies</strong> <code> cd pdex-formulary-sample-data bundle install </code></p>
+</li></ol>
+
+<h2 id="label-Running+Instructions">Running Instructions</h2>
+
+<p>A couple <a href="https://github.com/ruby/rake">Rake</a> tasks were created to easily run the scripts at the command line. You can run <code>rake -T</code> to see the list of tasks available.</p>
+
+<h3 id="label-Generate+Sample+Data">Generate Sample Data</h3>
+<ol><li>
+<p>Edit the properties file (<code>config.yml</code>) as needed. By default,the app will generate a max of <strong>3000</strong> drugs per formulary.</p>
+</li><li>
+<p>Run the <code>generate.rb</code> script <code> rake run_script:generate_data </code> Or</p>
+</li></ol>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_ruby'>ruby</span> <span class='id identifier rubyid_scripts'>scripts</span><span class='op'>/</span><span class='id identifier rubyid_generate'>generate</span><span class='period'>.</span><span class='id identifier rubyid_rb'>rb</span>
+</code></pre>
+
+<p>The generated files are placed in the <code>output/</code> folder.</p>
+
+<blockquote>
+<p><strong>Note</strong>: the <code>output</code> directory is not tracked by git.</p>
+</blockquote>
+
+<h3 id="label-Upload+Sample+Data+to+a+Server">Upload Sample Data to a Server</h3>
+
+<p>Run the <code>upload.rb</code> script to upload the sample data to a server. <code> rake run_script:upload_to_server </code> Or</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_ruby'>ruby</span> <span class='id identifier rubyid_scripts'>scripts</span><span class='op'>/</span><span class='id identifier rubyid_upload'>upload</span><span class='period'>.</span><span class='id identifier rubyid_rb'>rb</span>
+</code></pre>
+
+<p>By default, the FHIR server base URL to upload the data is set to <code>http://localhost:8080/fhir</code>. The script also upload the conformance definition resources (code systems, search parameters, structure definitions, and value sets ) to the server. The URL to download those conformance resources is also set to a default value (the download URL of the current version of the implementation guide).</p>
+
+<p>Command-line arguments may be provided to specify the server base URL and definitions URL to be used:</p>
+
+<pre class="code ruby"><code class="ruby">rake run_script:upload_to_server[http://exampleserver.com,http://download-definitions-url.json.zip]
+</code></pre>
+
+<p>Or</p>
+
+<pre class="code ruby"><code class="ruby">bundle exec ruby scripts/upload.rb -f http://exampleserver.com -c http://download-definitions-url.json.zip
+</code></pre>
+
+<p>Full usage info can be printed by passing the -h (help) option. <code> bundle exec ruby scripts/upload.rb -h </code></p>
+
+<h3 id="label-Generate+Bulk+Export+Files">Generate Bulk Export Files</h3>
+
+<p>Run the <code>convertNDJSON.rb</code> script to generate <code>ndjson</code> files for each profile using the sample data generated <a href="#generate-sample-data">above</a>.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_rake'>rake</span> <span class='label'>run_script:</span><span class='id identifier rubyid_generate_ndjson'><span class='object_link'><a href="top-level-namespace.html#generate_ndjson-instance_method" title="#generate_ndjson (method)">generate_ndjson</a></span></span>
+</code></pre>
+
+<p>Or</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_ruby'>ruby</span> <span class='id identifier rubyid_scripts'>scripts</span><span class='op'>/</span><span class='id identifier rubyid_convertNDJSON'>convertNDJSON</span><span class='period'>.</span><span class='id identifier rubyid_rb'>rb</span>
+</code></pre>
+
+<p>This will read all the files in the <code>output</code> directory and generate the new files in the <code>export</code> directory.</p>
+
+<blockquote>
+<p><strong>Note</strong>: The <code>export</code> directory is not tracked by git.</p>
+</blockquote>
+
+<p>To generate <code>ndjson</code> files grouping each insurance plan with their associated formulary data, run the <code>plan_specific_ndjson.rb</code> script:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_rake'>rake</span> <span class='label'>run_script:</span><span class='id identifier rubyid_plan_specific_ndjson'>plan_specific_ndjson</span>
+</code></pre>
+
+<p>Or</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_ruby'>ruby</span> <span class='id identifier rubyid_scripts'>scripts</span><span class='op'>/</span><span class='id identifier rubyid_plan_specific_ndjson'>plan_specific_ndjson</span><span class='period'>.</span><span class='id identifier rubyid_rb'>rb</span>
+</code></pre>
+
+<p>This will read all the files in the <code>output</code> directory and generate the new files in the <code>bulk_export</code> directory.</p>
+
+<blockquote>
+<p><strong>Note</strong>: The <code>bulk_export</code> directory is not tracked by git.</p>
+</blockquote>
+
+<p>The generated ndjson files can be copied to the appropriate directory/location on the server to be used as a response to <strong>bulk export</strong> requests.</p>
+
+<h1 id="label-Documentation">Documentation</h1>
+
+<p>The application code is documented with <a href="https://github.com/lsegal/yard#yard-yay-a-ruby-documentation-tool">YARD</a>. You can check the <a href="#stub">code documentation</a> to quickly get familiar with the code base.</p>
+
+<h2 id="label-Updating+the+Documentation">Updating the Documentation</h2>
+
+<p>The <a href="#stub">code documentation</a> is published to github pages and the <code>docs</code> directory of the <code>master</code> branch is used pull the latest generated YARD files.</p>
+
+<p>After any change has been made on the master branch, run the following commands (on the master branch) to update the documentation: <code> rake yard:build git commit -am &#39;Updated yard docs&#39; rake yard:publish </code></p>
+
+<h1 id="label-Contributions">Contributions</h1>
+
+<p>Contributions are welcome. Feel free to open an issue on this repo <a href="https://github.com/HL7-DaVinci/pdex-formulary-sample-data/issues">issue tracker</a> to report a bug, ask specific questions about this project, or propose a new feature/feature enhancement. Make sure to label your issue with the appropriate tag.</p>
+
+<h2 id="label-Outstanding+Tasks">Outstanding Tasks</h2>
+
+<p>Check <a href="https://github.com/HL7-DaVinci/pdex-formulary-sample-data/issues">Github issue tracker</a> for any outstanding tasks.</p>
+
+<h2 id="label-Submitting+Changes">Submitting Changes</h2>
+
+<p>Please submit a <a href="https://github.com/HL7-DaVinci/pdex-formulary-sample-data/pulls">pull request</a> with a clear description (can be a paragraph for bigger changes) of the changes you have made. It will be great if you include <a href="https://rspec.info/">RSpec</a> tests for your new code. We can always use more test coverage.</p>
+</div></div>
+
+      <div id="footer">
+  Generated on Wed Aug 31 19:14:18 2022 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.28 (ruby-2.7.3).
+</div>
+
+    </div>
+  </body>
+</html>

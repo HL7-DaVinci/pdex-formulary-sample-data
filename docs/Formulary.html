@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Module: Formulary
+  
+    &mdash; Documentation by YARD 0.9.28
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Formulary";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index (F)</a> &raquo;
+    
+    
+    <span class="title">Formulary</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Module: Formulary
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/formulary.rb<span class="defines">,<br />
+  lib/formulary/config.rb,<br /> lib/formulary/qhp_drug.rb,<br /> lib/formulary/qhp_plan.rb,<br /> lib/formulary/qhp_importer.rb,<br /> lib/formulary/qhp_drug_repo.rb,<br /> lib/formulary/qhp_drug_tier.rb,<br /> lib/formulary/qhp_plan_drug.rb,<br /> lib/formulary/qhp_plan_repo.rb,<br /> lib/formulary/formulary_factory.rb,<br /> lib/formulary/drug_list_generator.rb,<br /> lib/formulary/formulary_drug_factory.rb,<br /> lib/formulary/formulary_item_factory.rb,<br /> lib/formulary/qhp_drug_tier_cost_sharing.rb,<br /> lib/formulary/payer_insurance_plan_factory.rb,<br /> lib/formulary/quantity_limit_detail_extension_factory.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Build conformant FHIR resources for the DaVinci PDex US Drug Formulary</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Formulary/Config.html" title="Formulary::Config (class)">Config</a></span>, <span class='object_link'><a href="Formulary/DrugListGenerator.html" title="Formulary::DrugListGenerator (class)">DrugListGenerator</a></span>, <span class='object_link'><a href="Formulary/FormularyDrugFactory.html" title="Formulary::FormularyDrugFactory (class)">FormularyDrugFactory</a></span>, <span class='object_link'><a href="Formulary/FormularyFactory.html" title="Formulary::FormularyFactory (class)">FormularyFactory</a></span>, <span class='object_link'><a href="Formulary/FormularyItemFactory.html" title="Formulary::FormularyItemFactory (class)">FormularyItemFactory</a></span>, <span class='object_link'><a href="Formulary/PayerInsurancePlanFactory.html" title="Formulary::PayerInsurancePlanFactory (class)">PayerInsurancePlanFactory</a></span>, <span class='object_link'><a href="Formulary/QHPDrug.html" title="Formulary::QHPDrug (class)">QHPDrug</a></span>, <span class='object_link'><a href="Formulary/QHPDrugRepo.html" title="Formulary::QHPDrugRepo (class)">QHPDrugRepo</a></span>, <span class='object_link'><a href="Formulary/QHPDrugTier.html" title="Formulary::QHPDrugTier (class)">QHPDrugTier</a></span>, <span class='object_link'><a href="Formulary/QHPDrugTierCostSharing.html" title="Formulary::QHPDrugTierCostSharing (class)">QHPDrugTierCostSharing</a></span>, <span class='object_link'><a href="Formulary/QHPImporter.html" title="Formulary::QHPImporter (class)">QHPImporter</a></span>, <span class='object_link'><a href="Formulary/QHPPlan.html" title="Formulary::QHPPlan (class)">QHPPlan</a></span>, <span class='object_link'><a href="Formulary/QHPPlanDrug.html" title="Formulary::QHPPlanDrug (class)">QHPPlanDrug</a></span>, <span class='object_link'><a href="Formulary/QHPPlanRepo.html" title="Formulary::QHPPlanRepo (class)">QHPPlanRepo</a></span>, <span class='object_link'><a href="Formulary/QuantityLimitDetailExtensionFactory.html" title="Formulary::QuantityLimitDetailExtensionFactory (class)">QuantityLimitDetailExtensionFactory</a></span>
+    
+  
+</p>
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="PAYER_INSURANCE_PLAN_PROFILE-constant" class="">PAYER_INSURANCE_PLAN_PROFILE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Payer Insurance Plan profile&#39;s official URL</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PayerInsurancePlan</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="FORMULARY_PROFILE-constant" class="">FORMULARY_PROFILE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Formulary profile&#39;s official URL</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Formulary</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="FORMULARY_ITEM_PROFILE-constant" class="">FORMULARY_ITEM_PROFILE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Formulary Item profile&#39;s official URL</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyItem</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="FORMULARY_DRUG_PROFILE-constant" class="">FORMULARY_DRUG_PROFILE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Formulary Drug profile&#39;s official URL</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyDrug</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="DRUG_TIER_SYSTEM-constant" class="">DRUG_TIER_SYSTEM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Drug Tier CodeSystem</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="RXNORM_SYSTEM-constant" class="">RXNORM_SYSTEM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>rxnorm CodeSystem</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://www.nlm.nih.gov/research/umls/rxnorm</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="PHARMACY_TYPE_SYSTEM-constant" class="">PHARMACY_TYPE_SYSTEM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Pharmacy Benefit Type CodeSystem</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PharmacyBenefitTypeCS</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="COST_SHARE_SYSTEM-constant" class="">COST_SHARE_SYSTEM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Cost share option CodeSystem</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-CostShareOptionCS</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="FORMULARY_ITEM_SYSTEM-constant" class="">FORMULARY_ITEM_SYSTEM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Formulart Item CodeSystem</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-InsuranceItemTypeCS</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="INSURANCE_PRODUCT_TYPE_SYSTEM-constant" class="">INSURANCE_PRODUCT_TYPE_SYSTEM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Insurance product type CodeSystem</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/InsuranceProductTypeCS</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="FORMULARY_TYPE_SYSTEM-constant" class="">FORMULARY_TYPE_SYSTEM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Formulary type CodeSystem</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://terminology.hl7.org/CodeSystem/v3-ActCode</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="CONTACT_ENTITY_SYSTEM-constant" class="">CONTACT_ENTITY_SYSTEM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Contact entity type CodeSystem</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://terminology.hl7.org/CodeSystem/contactentity-type</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="PLAN_CONTACT_TYPE_CS-constant" class="">PLAN_CONTACT_TYPE_CS =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-PlanContactTypeCS</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="PLAN_TYPE_SYSTEM-constant" class="">PLAN_TYPE_SYSTEM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Insurance plan type CodeSystem</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://terminology.hl7.org/CodeSystem/insurance-plan-type</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="BENEFIT_COST_TYPE_SYSTEM-constant" class="">BENEFIT_COST_TYPE_SYSTEM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Benefit cost type CodeSystem</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-BenefitCostTypeCS</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="UCUM_SYSTEM-constant" class="">UCUM_SYSTEM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Unit form CodeSystem</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://unitsofmeasure.org</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="RELATED_MEDICATION_TYPE_SYSTEM-constant" class="">RELATED_MEDICATION_TYPE_SYSTEM =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-RelatedMedicationTypeCS</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="FORMULARY_REFERENCE_EXTENSION-constant" class="">FORMULARY_REFERENCE_EXTENSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyReference-extension</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="AVAILABILITY_STATUS_EXTENSION-constant" class="">AVAILABILITY_STATUS_EXTENSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityStatus-extension</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="AVAILABILITY_PERIOD_EXTENSION-constant" class="">AVAILABILITY_PERIOD_EXTENSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-AvailabilityPeriod-extension</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="PHARMACY_TYPE_EXTENSION-constant" class="">PHARMACY_TYPE_EXTENSION =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Pharmacy benefit type extension</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PharmacyBenefitType-extension</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="DRUG_TIER_ID_EXTENSION-constant" class="">DRUG_TIER_ID_EXTENSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="PRIOR_AUTH_EXTENSION-constant" class="">PRIOR_AUTH_EXTENSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="PRIOR_AUTH_NEW_START_EXTENSION-constant" class="">PRIOR_AUTH_NEW_START_EXTENSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorizationNewStartsOnly-extension</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="STEP_THERAPY_EXTENSION-constant" class="">STEP_THERAPY_EXTENSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="STEP_THERAPY_NEW_START_EXTENSION-constant" class="">STEP_THERAPY_NEW_START_EXTENSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimitNewStartsOnly-extension</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="QUANTITY_LIMIT_EXTENSION-constant" class="">QUANTITY_LIMIT_EXTENSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="QUANTITY_LIMIT_DETAIL_EXTENSION-constant" class="">QUANTITY_LIMIT_DETAIL_EXTENSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimitDetail-extension</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="QUANTITY_LIMIT_DETAIL_ROLLING_EXTENSION-constant" class="">QUANTITY_LIMIT_DETAIL_ROLLING_EXTENSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Rolling</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="QUANTITY_LIMIT_DETAIL_MAXIMUM_DAILY_EXTENSION-constant" class="">QUANTITY_LIMIT_DETAIL_MAXIMUM_DAILY_EXTENSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MaximumDaily</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="QUANTITY_LIMIT_DETAIL_DAYS_SUPPLY_EXTENSION-constant" class="">QUANTITY_LIMIT_DETAIL_DAYS_SUPPLY_EXTENSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DaysSupply</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="PAYER_PLAN_ID_PREFIX-constant" class="">PAYER_PLAN_ID_PREFIX =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>PayerPlan-</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="FORMULARY_ID_PREFIX-constant" class="">FORMULARY_ID_PREFIX =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Formulary-</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="FORMULARY_ITEM_ID_PREFIX-constant" class="">FORMULARY_ITEM_ID_PREFIX =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>FormularyItem-</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="DRUG_ID_PREFIX-constant" class="">DRUG_ID_PREFIX =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Drug-</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="FORMULARY_TYPE_CS_CODE-constant" class="">FORMULARY_TYPE_CS_CODE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Formulary type CodeSystem code</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>DRUGPOL</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="FORMULARY_TYPE_CS_DISPLAY-constant" class="">FORMULARY_TYPE_CS_DISPLAY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Formulary type CodeSystem display</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>drug policy</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="CONTACT_PATINF_CODE-constant" class="">CONTACT_PATINF_CODE =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>PATINF</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="CONTACT_PATINF_DISPLAY-constant" class="">CONTACT_PATINF_DISPLAY =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Patient</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="CONTACT_MARKETING_CODE-constant" class="">CONTACT_MARKETING_CODE =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>MARKETING</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="CONTACT_MARKETING_DISPLAY-constant" class="">CONTACT_MARKETING_DISPLAY =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Plan Marketing Information</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="CONTACT_SUMMARY_CODE-constant" class="">CONTACT_SUMMARY_CODE =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SUMMARY</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="CONTACT_SUMMARY_DISPLAY-constant" class="">CONTACT_SUMMARY_DISPLAY =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Plan Summary Information</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="CONTACT_FORMULARY_CODE-constant" class="">CONTACT_FORMULARY_CODE =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>FORMULARY</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="CONTACT_FORMULARY_DISPLAY-constant" class="">CONTACT_FORMULARY_DISPLAY =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Plan Formulary Information</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="PLAN_TYPE_CODE-constant" class="">PLAN_TYPE_CODE =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>drug</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="PLAN_TYPE_DISPLAY-constant" class="">PLAN_TYPE_DISPLAY =
+          
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Drug</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="COPAY_AMOUNT_CODE-constant" class="">COPAY_AMOUNT_CODE =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Copay amount unit</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>USD</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="COPAY_AMOUNT_SYSTEM-constant" class="">COPAY_AMOUNT_SYSTEM =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Copay amount unit CodeSystem</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>urn:iso:std:iso:4217</span><span class='tstring_end'>&quot;</span></span></pre></dd>
+      
+        <dt id="PHARMACY_TYPE_DISPLAY-constant" class="">PHARMACY_TYPE_DISPLAY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Pharmacy type CS code =&gt; display values</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1-month-in-retail</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1 month in network retail</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1-month-out-retail</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1 month out of network retail</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1-month-in-mail</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1 month in network mail order</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1-month-out-mail</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1 month out of network mail order</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>3-month-in-retail</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>3 month in network retail</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>3-month-out-retail</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>3 month out of network retail</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>3-month-in-mail</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>3 month in network mail order</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>3-month-out-mail</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>3 month out of network mail order</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+        <dt id="DRUG_TIER_DISPLAY-constant" class="">DRUG_TIER_DISPLAY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Drug tier CS code =&gt; display values</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>generic</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Generic</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>preferred-generic</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Preferred Generic</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>non-preferred-generic</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Non-preferred Generic</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>specialty</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Specialty</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>brand</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Brand</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>preferred-brand</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Preferred Brand</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>non-preferred-brand</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Non-preferred Brand</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>zero-cost-share-preventative</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Zero cost-share preventative</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>medical-service</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Medical Service</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+        <dt id="COST_SHARE_OPTION_DISPLAY-constant" class="">COST_SHARE_OPTION_DISPLAY =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>Codes qualifying the type of cost share amount (code =&gt; display)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='lbrace'>{</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>after-deductible</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>After Deductible</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>before-deductible</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Before Deductible</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>no-charge</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No Charge</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>no-charge-after-deductible</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No Charge After Deductible</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>charge</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Charge</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>coinsurance-not-applicable</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>	Coinsurance Not Applicable</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>copay-not-applicable</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>	Copay Not Applicable</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>deductible-waived</span><span class='tstring_end'>&quot;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Deductible Waived</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+<span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_freeze'>freeze</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+      <div id="footer">
+  Generated on Wed Aug 31 19:14:18 2022 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.28 (ruby-2.7.3).
+</div>
+
+    </div>
+  </body>
+</html>
