@@ -14,7 +14,7 @@ namespace :run_script do
   end
 
   desc "Generate bulk FHIR (ndjson) files"
-  task :generate_ndjon do
+  task :generate_ndjson do
     ruby "scripts/convertNDJSON.rb"
   end
 

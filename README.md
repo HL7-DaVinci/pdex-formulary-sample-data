@@ -103,7 +103,7 @@ bundle exec ruby scripts/upload.rb -h
 Run the `convertNDJSON.rb` script to generate `ndjson` files for each profile using the sample data generated [above](#generate-sample-data "Goto generate-sample-data").
 
 ```
-rake run_script:generate_ndjon
+rake run_script:generate_ndjson
 ```
 Or
 
