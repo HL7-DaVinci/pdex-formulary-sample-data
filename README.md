@@ -1,4 +1,4 @@
-# QHP to FHIR
+# QHP to FHIR Formulary Drugs (STU2)
 
 This project uses QHP data to create FHIR resources based on the [DaVinci US Drug Formulary Implementation Guide Draft STU2](https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/master/index.html). Currently, the following are created:
 
@@ -25,6 +25,7 @@ The application has four main functions:
 
 - __Generate ndjon files grouped by InsurancePlan__: this is handled by the [plan_specific_ndjson.rb](https://github.com/HL7-DaVinci/pdex-formulary-sample-data/blob/master/scripts/plan_specific_ndjson.rb) script, which generates formularies ndjson files classified by individual InsurancePlan. This is useful for plan specific __bulk export__ requests (e.g. `[base]/InsurancePlan/[id]/$export`).
 
+> Note: You can switch to `STU1.1.0` branch of this repo to generate STU1 Formulary sample data.
 ---
 # Installing and Running
 
@@ -48,10 +49,15 @@ bundle install
 ```
 ## Running Instructions
 
+A couple [Rake](https://github.com/ruby/rake) tasks were created to easily run the scripts at the command line. You can run `rake -T` to see the list of tasks available.
 ### Generate Sample Data
 
 1. Edit the properties file (`config.yml`) as needed. By default,the app will generate a max of __3000__ drugs per formulary.
-2. Run the `generate.rb` script on the command line
+2. Run the `generate.rb` script
+```
+rake run_script:generate_data
+```
+Or
 ```
 bundle exec ruby scripts/generate.rb
 ```
@@ -62,14 +68,21 @@ The generated files are placed in the `output/` folder.
 ### Upload Sample Data to a Server
 
 Run the `upload.rb` script to upload the sample data to a server.
-
+```
+rake run_script:upload_to_server
+```
+Or
 ```
 bundle exec ruby scripts/upload.rb
 ```
 By default, the FHIR server base URL to upload the data is set to `http://localhost:8080/fhir`. The script also upload the conformance definition resources (code systems, search parameters, structure definitions, and value sets ) to the server. The URL to download those conformance resources is also set to a default value (the download URL of the current version of the implementation guide).
 
-Command-line arguments may be provided to specify the server base URL and definitions URL to be used.
+Command-line arguments may be provided to specify the server base URL and definitions URL to be used:
 
+```bash
+rake run_script:upload_to_server[http://exampleserver.com,http://download-definitions-url.json.zip]
+```
+Or
 ```
 bundle exec ruby scripts/upload.rb -f http://exampleserver.com -c http://download-definitions-url.json.zip
 ```
@@ -84,6 +97,11 @@ bundle exec ruby scripts/upload.rb -h
 Run the `convertNDJSON.rb` script to generate `ndjson` files for each profile using the sample data generated [above](#generate-sample-data "Goto generate-sample-data").
 
 ```
+rake run_script:generate_ndjon
+```
+Or
+
+```
 bundle exec ruby scripts/convertNDJSON.rb
 ```
 
@@ -94,6 +112,11 @@ This will read all the files in the `output` directory and generate the new file
 To generate `ndjson` files grouping each insurance plan with their associated formulary data, run the `plan_specific_ndjson.rb` script:
 
 ```
+rake run_script:plan_specific_ndjson
+```
+Or
+
+```
 bundle exec ruby scripts/plan_specific_ndjson.rb
 ```
 This will read all the files in the `output` directory and generate the new files in the `bulk_export` directory.
@@ -101,3 +124,30 @@ This will read all the files in the `output` directory and generate the new file
 > The `bulk_export` directory is not tracked by git.
 
 The generated ndjson files can be copied to the appropriate directory/location on the server to be used as a response to __bulk export__ requests.
+
+# Documentation
+
+The application code is documented with [YARD](https://github.com/lsegal/yard#yard-yay-a-ruby-documentation-tool). You can check the [code documentation](#stub) to quickly get familiar with the code base.
+
+## Updating the Documentation
+
+The [code documentation](#stub) is published to github pages and the `docs` directory of the `master` branch is used pull the latest generated YARD files.
+
+After any change has been made on the master branch, run the following commands (on the master branch) to update the documentation:
+```
+rake yard:build
+git commit -am 'Updated yard docs'
+rake yard:publish
+```
+
+# Contributions
+
+Contributions are welcome. Feel free to open an issue on this repo [issue tracker](https://github.com/HL7-DaVinci/pdex-formulary-sample-data/issues) to report a bug, ask specific questions about this project, or propose a new feature/feature enhancement. Make sure to label your issue with the appropriate tag.
+
+## Outstanding Tasks
+
+Check [Github issue tracker](https://github.com/HL7-DaVinci/pdex-formulary-sample-data/issues) for any outstanding tasks.
+
+## Submitting Changes
+
+Please submit a [pull request](https://github.com/HL7-DaVinci/pdex-formulary-sample-data/pulls) with a clear description (can be a paragraph for bigger changes) of the changes you have made. It will be great if you include [RSpec](https://rspec.info/) tests for your new code. We can always use more test coverage.
