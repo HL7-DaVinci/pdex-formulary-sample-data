@@ -1241,12 +1241,6 @@
       <pre class="lines">
 
 
-81
-82
-83
-84
-85
-86
 87
 88
 89
@@ -1259,10 +1253,16 @@
 96
 97
 98
-99</pre>
+99
+100
+101
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'scripts/upload.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'scripts/upload.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_retry_failed_upload'>retry_failed_upload</span>
   <span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="#FAILED_UPLOAD-constant" title="FAILED_UPLOAD (constant)">FAILED_UPLOAD</a></span></span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span>
@@ -1276,11 +1276,11 @@
     <span class='kw'>end</span>
     <span class='id identifier rubyid_n'>n</span> <span class='op'>-=</span> <span class='int'>1</span>
   <span class='kw'>end</span>
-  <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Ending the program ...</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Ending the program ...</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>if</span> <span class='const'><span class='object_link'><a href="#FAILED_UPLOAD-constant" title="FAILED_UPLOAD (constant)">FAILED_UPLOAD</a></span></span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
-    <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>All resources were uploaded successfully.</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>All resources were uploaded successfully.</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>else</span>
-    <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="#FAILED_UPLOAD-constant" title="FAILED_UPLOAD (constant)">FAILED_UPLOAD</a></span></span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span><span class='embexpr_end'>}</span><span class='tstring_content'> resource(s) failed to upload</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'><span class='object_link'><a href="#FAILED_UPLOAD-constant" title="FAILED_UPLOAD (constant)">FAILED_UPLOAD</a></span></span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span><span class='embexpr_end'>}</span><span class='tstring_content'> resource(s) failed to upload</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1314,14 +1314,14 @@
       <pre class="lines">
 
 
-102
-103
-104
-105
-106</pre>
+108
+109
+110
+111
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'scripts/upload.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'scripts/upload.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_upload_all_resources'>upload_all_resources</span>
   <span class='id identifier rubyid_upload_conformance_resources'><span class='object_link'><a href="#upload_conformance_resources-instance_method" title="#upload_conformance_resources (method)">upload_conformance_resources</a></span></span>
@@ -1374,7 +1374,12 @@
 44
 45
 46
-47</pre>
+47
+48
+49
+50
+51
+52</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'scripts/upload.rb', line 21</span>
@@ -1385,26 +1390,31 @@
     <span class='id identifier rubyid_definitions_data'>definitions_data</span> <span class='op'>=</span> <span class='const'>HTTParty</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#CONFORMANCE_DEFINITIONS_URL-constant" title="CONFORMANCE_DEFINITIONS_URL (constant)">CONFORMANCE_DEFINITIONS_URL</a></span></span><span class='comma'>,</span> <span class='label'>verify:</span> <span class='kw'>false</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_definitions_file'>definitions_file</span><span class='period'>.</span><span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='id identifier rubyid_definitions_data'>definitions_data</span><span class='rparen'>)</span>
   <span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
-    <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Unable to upload conformance definitions.</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Error#upload_conformance_resources: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Unable to upload conformance definitions.</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Error#upload_conformance_resources: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
     <span class='kw'>return</span>
   <span class='kw'>ensure</span>
     <span class='id identifier rubyid_definitions_file'>definitions_file</span><span class='period'>.</span><span class='id identifier rubyid_close'>close</span>
   <span class='kw'>end</span>
 
-  <span class='const'>Zip</span><span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_definitions_file'>definitions_file</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_zip_file'>zip_file</span><span class='op'>|</span>
-    <span class='id identifier rubyid_conf_resources'>conf_resources</span> <span class='op'>=</span> <span class='id identifier rubyid_zip_file'>zip_file</span><span class='period'>.</span><span class='id identifier rubyid_entries'>entries</span>
-      <span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_entry'>entry</span><span class='op'>|</span> <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_end_with?'>end_with?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.json</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
-      <span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_entry'>entry</span><span class='op'>|</span> <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_start_with?'>start_with?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ImplementationGuide</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
-    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Uploading </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_conf_resources'>conf_resources</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span><span class='embexpr_end'>}</span><span class='tstring_content'> conformance resources...</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_conf_resources'>conf_resources</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_entry'>entry</span><span class='op'>|</span>
-      <span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_get_input_stream'>get_input_stream</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='comma'>,</span> <span class='label'>symbolize_names:</span> <span class='kw'>true</span><span class='rparen'>)</span>
-      <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_upload_resource'><span class='object_link'><a href="#upload_resource-instance_method" title="#upload_resource (method)">upload_resource</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_resource'>resource</span><span class='rparen'>)</span>
-      <span class='const'><span class='object_link'><a href="#FAILED_UPLOAD-constant" title="FAILED_UPLOAD (constant)">FAILED_UPLOAD</a></span></span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_resource'>resource</span> <span class='kw'>unless</span> <span class='id identifier rubyid_response'>response</span><span class='op'>&amp;.</span><span class='id identifier rubyid_success?'>success?</span>
+  <span class='kw'>begin</span>
+    <span class='const'>Zip</span><span class='op'>::</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_definitions_file'>definitions_file</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_zip_file'>zip_file</span><span class='op'>|</span>
+      <span class='id identifier rubyid_conf_resources'>conf_resources</span> <span class='op'>=</span> <span class='id identifier rubyid_zip_file'>zip_file</span><span class='period'>.</span><span class='id identifier rubyid_entries'>entries</span>
+        <span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_entry'>entry</span><span class='op'>|</span> <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_end_with?'>end_with?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.json</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+        <span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_entry'>entry</span><span class='op'>|</span> <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_start_with?'>start_with?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ImplementationGuide</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+      <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Uploading </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_conf_resources'>conf_resources</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span><span class='embexpr_end'>}</span><span class='tstring_content'> conformance resources...</span><span class='tstring_end'>&quot;</span></span>
+      <span class='id identifier rubyid_conf_resources'>conf_resources</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_entry'>entry</span><span class='op'>|</span>
+        <span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_get_input_stream'>get_input_stream</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='comma'>,</span> <span class='label'>symbolize_names:</span> <span class='kw'>true</span><span class='rparen'>)</span>
+        <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_upload_resource'><span class='object_link'><a href="#upload_resource-instance_method" title="#upload_resource (method)">upload_resource</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_resource'>resource</span><span class='rparen'>)</span>
+        <span class='const'><span class='object_link'><a href="#FAILED_UPLOAD-constant" title="FAILED_UPLOAD (constant)">FAILED_UPLOAD</a></span></span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_resource'>resource</span> <span class='kw'>unless</span> <span class='id identifier rubyid_response'>response</span><span class='op'>&amp;.</span><span class='id identifier rubyid_success?'>success?</span>
+      <span class='kw'>end</span>
     <span class='kw'>end</span>
+  <span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Error#upload_conformance_resources: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Please provide a valid conformance URL</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>ensure</span>
+    <span class='id identifier rubyid_definitions_file'>definitions_file</span><span class='period'>.</span><span class='id identifier rubyid_unlink'>unlink</span>
   <span class='kw'>end</span>
-<span class='kw'>ensure</span>
-  <span class='id identifier rubyid_definitions_file'>definitions_file</span><span class='period'>.</span><span class='id identifier rubyid_unlink'>unlink</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1426,11 +1436,6 @@
       <pre class="lines">
 
 
-66
-67
-68
-69
-70
 71
 72
 73
@@ -1439,10 +1444,16 @@
 76
 77
 78
-79</pre>
+79
+80
+81
+82
+83
+84
+85</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'scripts/upload.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'scripts/upload.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_upload_resource'>upload_resource</span><span class='lparen'>(</span><span class='id identifier rubyid_resource'>resource</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_resource_type'>resource_type</span> <span class='op'>=</span> <span class='id identifier rubyid_resource'>resource</span><span class='lbracket'>[</span><span class='symbol'>:resourceType</span><span class='rbracket'>]</span>
@@ -1454,8 +1465,9 @@
       <span class='label'>headers:</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Content-Type</span><span class='label_end'>&#39;:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>application/json</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span>
     <span class='rparen'>)</span>
   <span class='kw'>rescue</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
-    <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>An exception occured when trying to load the resource </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_resource'>resource</span><span class='lbracket'>[</span><span class='symbol'>:resource_type</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_resource'>resource</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span>
-    <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Error#upload_resource: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>An exception occured when trying to load the resource </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_resource'>resource</span><span class='lbracket'>[</span><span class='symbol'>:resource_type</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_resource'>resource</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='embexpr_end'>}</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Error#upload_resource: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>return</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1478,11 +1490,6 @@
       <pre class="lines">
 
 
-49
-50
-51
-52
-53
 54
 55
 56
@@ -1493,10 +1500,15 @@
 61
 62
 63
-64</pre>
+64
+65
+66
+67
+68
+69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'scripts/upload.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'scripts/upload.rb', line 54</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_upload_sample_resources'>upload_sample_resources</span>
   <span class='id identifier rubyid_location_file_path'>location_file_path</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid___dir__'>__dir__</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>location_resources</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>*.json</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -1524,7 +1536,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Aug 29 23:59:34 2022 by
+  Generated on Wed Aug 31 03:03:21 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-2.7.3).
 </div>

@@ -2,16 +2,16 @@
 
 This project uses QHP data to create FHIR resources based on the [DaVinci US Drug Formulary Implementation Guide Draft STU2](https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/master/index.html). Currently, the following are created:
 
-- __[PayerInsurancePlan](https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/master/StructureDefinition-usdf-PayerInsurancePlan)__\
+- __[PayerInsurancePlan](https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/master/StructureDefinition-usdf-PayerInsurancePlan)__:
 The PayerInsurancePlan profile of the FHIR R4 [InsurancePlan](http://hl7.org/fhir/R4/insuranceplan.html) resource defines the top level package of health insurance coverage benefits that a payer offers.
 
-- __[Formulary](https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/master/StructureDefinition-usdf-Formulary.html)__\
+- __[Formulary](https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/master/StructureDefinition-usdf-Formulary.html)__:
 The Formulary profile of the FHIR R4 [InsurancePlan](http://hl7.org/fhir/R4/insuranceplan.html) describes a prescription drug insurance offering comprised of drug benefits including a definition of drug tiers and their associated cost-sharing models and additional information about the plan, such as networks, a coverage area, contact information, etc.
 
-- __[FormularyItem](https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/master/StructureDefinition-usdf-FormularyItem.html)__\
+- __[FormularyItem](https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/master/StructureDefinition-usdf-FormularyItem.html)__:
 The FormularyItem profile of the FHIR R4 [Basic](http://hl7.org/fhir/R4/basic.html) describes a drug's relationship to a drug plan, including drug tier, prior authorization requirements, and more. The set of FormuaryItem resrouces associated with a particular drug plan represents the drug plans formulary.
 
-- __[FormularyDrug](https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/master/StructureDefinition-usdf-FormularyDrug.html)__\
+- __[FormularyDrug](https://build.fhir.org/ig/HL7/davinci-pdex-formulary/branches/master/StructureDefinition-usdf-FormularyDrug.html)__:
 The FormularyDrug profile of the FHIR R4 [MedicationKnowledge](http://hl7.org/fhir/medicationknowledge.html) resource provides information about a prescribable drug which may be part of a formulary including its RxNorm code, synonyms, and optionally drug classification and alternatives.
 
 ## Functionalities
@@ -26,7 +26,8 @@ The application has four main functions:
 - __Generate ndjon files grouped by InsurancePlan__: this is handled by the [plan_specific_ndjson.rb](https://github.com/HL7-DaVinci/pdex-formulary-sample-data/blob/master/scripts/plan_specific_ndjson.rb) script, which generates formularies ndjson files classified by individual InsurancePlan. This is useful for plan specific __bulk export__ requests (e.g. `[base]/InsurancePlan/[id]/$export`).
 
 > Note: You can switch to `STU1.1.0` branch of this repo to generate STU1 Formulary sample data.
----
+
+
 # Installing and Running
 
 This is a Ruby application and currently, it can only be run on development mode.
@@ -47,9 +48,11 @@ git clone git@github.com:HL7-DaVinci/pdex-formulary-sample-data.git
 cd pdex-formulary-sample-data
 bundle install
 ```
+
 ## Running Instructions
 
 A couple [Rake](https://github.com/ruby/rake) tasks were created to easily run the scripts at the command line. You can run `rake -T` to see the list of tasks available.
+
 ### Generate Sample Data
 
 1. Edit the properties file (`config.yml`) as needed. By default,the app will generate a max of __3000__ drugs per formulary.
@@ -58,12 +61,13 @@ A couple [Rake](https://github.com/ruby/rake) tasks were created to easily run t
 rake run_script:generate_data
 ```
 Or
+
 ```
 bundle exec ruby scripts/generate.rb
 ```
 
 The generated files are placed in the `output/` folder.
-> the `output` directory is not tracked by git.
+> __Note__: the `output` directory is not tracked by git.
 
 ### Upload Sample Data to a Server
 
@@ -72,6 +76,7 @@ Run the `upload.rb` script to upload the sample data to a server.
 rake run_script:upload_to_server
 ```
 Or
+
 ```
 bundle exec ruby scripts/upload.rb
 ```
@@ -79,10 +84,11 @@ By default, the FHIR server base URL to upload the data is set to `http://localh
 
 Command-line arguments may be provided to specify the server base URL and definitions URL to be used:
 
-```bash
+```
 rake run_script:upload_to_server[http://exampleserver.com,http://download-definitions-url.json.zip]
 ```
 Or
+
 ```
 bundle exec ruby scripts/upload.rb -f http://exampleserver.com -c http://download-definitions-url.json.zip
 ```
@@ -107,7 +113,7 @@ bundle exec ruby scripts/convertNDJSON.rb
 
 This will read all the files in the `output` directory and generate the new files in the `export` directory.
 
-> The `export` directory is not tracked by git.
+> __Note__: The `export` directory is not tracked by git.
 
 To generate `ndjson` files grouping each insurance plan with their associated formulary data, run the `plan_specific_ndjson.rb` script:
 
@@ -121,7 +127,7 @@ bundle exec ruby scripts/plan_specific_ndjson.rb
 ```
 This will read all the files in the `output` directory and generate the new files in the `bulk_export` directory.
 
-> The `bulk_export` directory is not tracked by git.
+> __Note__: The `bulk_export` directory is not tracked by git.
 
 The generated ndjson files can be copied to the appropriate directory/location on the server to be used as a response to __bulk export__ requests.
 
