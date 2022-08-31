@@ -24,26 +24,31 @@ def upload_conformance_resources
     definitions_data = HTTParty.get(CONFORMANCE_DEFINITIONS_URL, verify: false)
     definitions_file.write(definitions_data)
   rescue => e
-    p "Unable to upload conformance definitions."
-    p "Error#upload_conformance_resources: #{e.message}"
+    puts "Unable to upload conformance definitions."
+    puts "Error#upload_conformance_resources: #{e.message}"
     return
   ensure
     definitions_file.close
   end
 
-  Zip::File.open(definitions_file.path) do |zip_file|
-    conf_resources = zip_file.entries
-      .select { |entry| entry.name.end_with? ".json" }
-      .reject { |entry| entry.name.start_with? "ImplementationGuide" }
-    puts "Uploading #{conf_resources.count} conformance resources..."
-    conf_resources.each do |entry|
-      resource = JSON.parse(entry.get_input_stream.read, symbolize_names: true)
-      response = upload_resource(resource)
-      FAILED_UPLOAD << resource unless response&.success?
+  begin
+    Zip::File.open(definitions_file.path) do |zip_file|
+      conf_resources = zip_file.entries
+        .select { |entry| entry.name.end_with? ".json" }
+        .reject { |entry| entry.name.start_with? "ImplementationGuide" }
+      puts "Uploading #{conf_resources.count} conformance resources..."
+      conf_resources.each do |entry|
+        resource = JSON.parse(entry.get_input_stream.read, symbolize_names: true)
+        response = upload_resource(resource)
+        FAILED_UPLOAD << resource unless response&.success?
+      end
     end
+  rescue => e
+    puts "Error#upload_conformance_resources: #{e.message}"
+    puts "Please provide a valid conformance URL"
+  ensure
+    definitions_file.unlink
   end
-ensure
-  definitions_file.unlink
 end
 
 def upload_sample_resources
@@ -73,8 +78,9 @@ def upload_resource(resource)
       headers: { 'Content-Type': "application/json" },
     )
   rescue => e
-    p "An exception occured when trying to load the resource #{resource[:resource_type]}/#{resource[:id]}."
-    p "Error#upload_resource: #{e.message}"
+    puts "An exception occured when trying to load the resource #{resource[:resource_type]}/#{resource[:id]}."
+    puts "Error#upload_resource: #{e.message}"
+    return
   end
 end
 
@@ -90,11 +96,11 @@ def retry_failed_upload
     end
     n -= 1
   end
-  p "Ending the program ..."
+  puts "Ending the program ..."
   if FAILED_UPLOAD.empty?
-    p "All resources were uploaded successfully."
+    puts "All resources were uploaded successfully."
   else
-    p "#{FAILED_UPLOAD.count} resource(s) failed to upload"
+    puts "#{FAILED_UPLOAD.count} resource(s) failed to upload"
   end
 end
 
