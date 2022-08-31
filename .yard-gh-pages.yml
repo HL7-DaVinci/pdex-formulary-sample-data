@@ -1,3 +1,0 @@
-source_branch: 'master'
-source_directory: 'docs'
-destination_branch: 'gh-pages'
