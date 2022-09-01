@@ -107,7 +107,7 @@
 
 <h3 id="label-Generate+Sample+Data">Generate Sample Data</h3>
 <ol><li>
-<p>Edit the properties file (<code>config.yml</code>) as needed. By default,the app will generate a max of <strong>3000</strong> drugs per formulary.</p>
+<p>Edit the properties file (<code>config.yml</code>) as needed. By default,the app will generate a max of <strong>1000</strong> drugs per formulary.</p>
 </li><li>
 <p>Run the <code>generate.rb</code> script <code> rake run_script:generate_data </code> Or</p>
 </li></ol>
@@ -180,13 +180,24 @@
 
 <h1 id="label-Documentation">Documentation</h1>
 
-<p>The application code is documented with <a href="https://github.com/lsegal/yard#yard-yay-a-ruby-documentation-tool">YARD</a>. You can check the <a href="#stub">code documentation</a> to quickly get familiar with the code base.</p>
+<p>The application code is documented with <a href="https://github.com/lsegal/yard#yard-yay-a-ruby-documentation-tool">YARD</a>. You can check the <a href="https://hl7-davinci.github.io/pdex-formulary-sample-data/">code documentation</a> to quickly get familiar with the code base.</p>
+
+<blockquote>
+<blockquote>
+<p><strong>P.S.</strong> Contributors, we will be super grateful if you document your new code. This will greatly improve the documentation of this app.</p>
+</blockquote>
+</blockquote>
+
+<p>Run the following command to (re)generate the documentation files:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_rake'>rake</span> <span class='label'>yard:</span><span class='id identifier rubyid_build'>build</span>
+</code></pre>
 
 <h2 id="label-Updating+the+Documentation">Updating the Documentation</h2>
 
-<p>The <a href="#stub">code documentation</a> is published to github pages and the <code>docs</code> directory of the <code>master</code> branch is used pull the latest generated YARD files.</p>
+<p>The <a href="https://hl7-davinci.github.io/pdex-formulary-sample-data/">code documentation</a> is published to github pages and the <code>doc</code> directory of the <code>master</code> branch is used pull the latest generated YARD files.</p>
 
-<p>After any change has been made on the master branch, run the following commands (on the master branch) to update the documentation: <code> rake yard:build git commit -am &#39;Updated yard docs&#39; rake yard:publish </code></p>
+<p>There&#39;s a github workflow configured to automatically deploy the documentation to github page with any changes on the <code>master</code> branch.</p>
 
 <h1 id="label-Contributions">Contributions</h1>
 
@@ -202,7 +213,7 @@
 </div></div>
 
       <div id="footer">
-  Generated on Wed Aug 31 20:13:38 2022 by
+  Generated on Wed Aug 31 23:53:20 2022 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.28 (ruby-2.7.3).
 </div>
