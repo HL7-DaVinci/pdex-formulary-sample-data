@@ -56,7 +56,7 @@ A couple [Rake](https://github.com/ruby/rake) tasks were created to easily run t
 
 ### Generate Sample Data
 
-1. Edit the properties file (`config.yml`) as needed. By default,the app will generate a max of __3000__ drugs per formulary.
+1. Edit the properties file (`config.yml`) as needed. By default,the app will generate a max of __1000__ drugs per formulary.
 2. Run the `generate.rb` script
 ```
 rake run_script:generate_data
@@ -134,19 +134,20 @@ The generated ndjson files can be copied to the appropriate directory/location o
 
 # Documentation
 
-The application code is documented with [YARD](https://github.com/lsegal/yard#yard-yay-a-ruby-documentation-tool). You can check the [code documentation](#stub) to quickly get familiar with the code base.
+The application code is documented with [YARD](https://github.com/lsegal/yard#yard-yay-a-ruby-documentation-tool). You can check the [code documentation](https://hl7-davinci.github.io/pdex-formulary-sample-data/) to quickly get familiar with the code base.
+>> __P.S.__ Contributors, we will be super grateful if you document your new code. This will greatly improve the documentation of this app.
 
-## Updating the Documentation
 
-The [code documentation](#stub) is published to github pages and the `docs` directory of the `master` branch is used pull the latest generated YARD files.
+Run the following command to (re)generate the documentation files:
 
-After any change has been made on the master branch, run the following commands (on the master branch) to update the documentation:
 ```
 rake yard:build
-git commit -am 'Updated yard docs'
-rake yard:publish
 ```
+## Updating the Documentation
 
+The [code documentation](https://hl7-davinci.github.io/pdex-formulary-sample-data/) is published to github pages and the `doc` directory of the `master` branch is used pull the latest generated YARD files.
+
+There's a github workflow configured to automatically deploy the documentation to github page with any changes on the `master` branch.
 # Contributions
 
 Contributions are welcome. Feel free to open an issue on this repo [issue tracker](https://github.com/HL7-DaVinci/pdex-formulary-sample-data/issues) to report a bug, ask specific questions about this project, or propose a new feature/feature enhancement. Make sure to label your issue with the appropriate tag.

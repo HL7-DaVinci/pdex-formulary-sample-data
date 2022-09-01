@@ -6,4 +6,4 @@ drug_urls:
   - https://provider.carefirst.com/carefirst-resources/machine-readable/Drugs_3.json
   - https://provider.carefirst.com/carefirst-resources/machine-readable/Drugs_4.json
   - https://provider.carefirst.com/carefirst-resources/machine-readable/Drugs_5.json
-max_drugs_per_plan: 3000
+max_drugs_per_plan: 1000
