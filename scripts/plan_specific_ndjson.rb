@@ -16,7 +16,7 @@ NDOUTS = []
 # @param resource_directory [String],  the directory name to search
 # @return [Array [String] ] a list of resource file's names from the resource directory
 def get_resource_json_files(resource_directory)
-  file_path = File.join(__dir__, resource_directory, "*.json")
+  file_path = File.join(resource_directory, "*.json")
   file_names = Dir.glob(file_path)
 end
 
