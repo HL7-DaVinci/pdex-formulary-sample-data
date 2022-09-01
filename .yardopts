@@ -1,1 +1,1 @@
---private -m markdown -o docs/ lib/**/*.rb scripts/**/*.rb
+--private -m markdown -o doc/ lib/**/*.rb scripts/**/*.rb
