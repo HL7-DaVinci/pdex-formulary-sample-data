@@ -52,8 +52,8 @@ def upload_conformance_resources
 end
 
 def upload_sample_resources
-  location_file_path = File.join(__dir__, "location_resources", "*.json")
-  file_path = File.join(__dir__, "output", "**/*.json")
+  location_file_path = File.join("location_resources", "*.json")
+  file_path = File.join("output", "**/*.json")
   filenames = Dir.glob([file_path, location_file_path])
   # .partition { |filename| filename.include? "InsurancePlan" }
   # .flatten
