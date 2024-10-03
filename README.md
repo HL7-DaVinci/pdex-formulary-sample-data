@@ -27,6 +27,8 @@ The application has four main functions:
 
 > __Note__: You can switch to [STU1.1.0](https://github.com/HL7-DaVinci/pdex-formulary-sample-data/tree/STU1.1.0) branch of this repo to generate STU1 Formulary sample data.
 
+# Foundry
+Explore it yourself wiht [HL7 FHIR Foundry](https://foundry.hl7.org/products/dbaf5b72-df4c-47b6-b245-1ec61d877d6e).
 
 # Installing and Running
 
